@@ -10,11 +10,11 @@ html {
 
 body {
   margin: 0;
-  /* background: #4d4d4d; */ 
+  background: #4d4d4d;
 }
 
 .slide-in-left-enter {
-  transform: translateX(-100%); 
+  transform: translateX(-100%);
 }
 
 .slide-in-left-enter-active {
