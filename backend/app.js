@@ -7,6 +7,7 @@ const usersRoutes = require('./routes/users-routes');
 const HttpError = require('./models/http-error');
 
 const app = express();
+app.use(express.static('public')); // the React app will be bundled and placed in the public folder
 
 app.use(bodyParser.json());
 
@@ -21,13 +22,19 @@ app.use((req, res, next) => {
   next();
 });
 
+
 app.use('/api/places', placesRoutes);
 app.use('/api/users', usersRoutes);
 
-app.use((req, res, next) => {
-  const error = new HttpError('Could not find this route.', 404);
-  throw error;
+app.get('*', function(req, res) {
+  res.sendFile(__dirname + '/public/index.html');
 });
+
+// app.use((req, res, next) => {
+//   const error = new HttpError('Could not find this route.', 404);
+//   throw error;
+// });
+
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
@@ -37,12 +44,18 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
+
+
+
 mongoose
   .connect(
     'mongodb+srv://gabriel:mern@cluster0-2r7ns.mongodb.net/mern?retryWrites=true&w=majority'
       )
   .then(() => {
-    app.listen(5000);
+    const port = process.env.PORT;
+    app.listen(port, () => {
+      console.log(`Listening on port ${port}`);
+  });
   })
   .catch(err => {
     console.log(err);
