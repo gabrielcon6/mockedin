@@ -71,7 +71,7 @@ const createPlace = async (req, res, next) => {
     );
   }
 
-  const { title, description, address, creator } = req.body;
+  const { title, description, address } = req.body;
 
   // let coordinates;
   // try {
@@ -90,12 +90,12 @@ const createPlace = async (req, res, next) => {
     },
     image:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Empire_State_Building_%28aerial_view%29.jpg/400px-Empire_State_Building_%28aerial_view%29.jpg', // => File Upload module, will be replaced with real image url
-    creator
+    creator: req.userData.userId
   });
 
   let user;
   try {
-    user = await User.findById(creator);
+    user = await User.findById(req.userData.userId);
   } catch (err) {
     const error = new HttpError(
       'Creating place failed, please try again.',
@@ -152,10 +152,7 @@ const updatePlace = async (req, res, next) => {
   }
 
   if (place.creator.toString() !== req.userData.userId) {
-    const error = new HttpError(
-      'You are not allowed to edit this place.',
-      401
-    );
+    const error = new HttpError('You are not allowed to edit this place.', 401);
     return next(error);
   }
 
