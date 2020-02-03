@@ -1,11 +1,10 @@
-// const fs = require('fs');
-const uuid = require('uuid/v4');
+const fs = require('fs');
 
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 
 const HttpError = require('../models/http-error');
-const getCoordsForAddress = require('../util/location');
+// const getCoordsForAddress = require('../util/location');
 const Place = require('../models/place');
 const User = require('../models/user');
 
@@ -88,8 +87,7 @@ const createPlace = async (req, res, next) => {
       lat: 40.7484405,
       lng: -73.9878584
     },
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Empire_State_Building_%28aerial_view%29.jpg/400px-Empire_State_Building_%28aerial_view%29.jpg', // => File Upload module, will be replaced with real image url
+    image: req.file.path,
     creator: req.userData.userId
   });
 
@@ -199,7 +197,7 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
-  // const imagePath = place.image;
+  const imagePath = place.image;
 
   try {
     const sess = await mongoose.startSession();
@@ -216,9 +214,9 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
-  // fs.unlink(imagePath, err => {
-  //   console.log(err);
-  // });
+  fs.unlink(imagePath, err => {
+    console.log(err);
+  });
 
   res.status(200).json({ message: 'Deleted place.' });
 };
