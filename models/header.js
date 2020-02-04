@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const headerSchema = new Schema({
   name: { type: String },
-  photo: { type: String },
+  image: { type: String },
   jobTitle: { type: String },
   about: { type: String },
   adminComments: { type: String },

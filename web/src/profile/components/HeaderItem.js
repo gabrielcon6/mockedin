@@ -66,7 +66,7 @@ const HeaderItem = props => {
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
             <img
-              src={`/${props.photo}`}
+              src={`/${props.image}`}
               alt={props.title}
             />
           </div>

@@ -6,9 +6,12 @@ import Button from '../../shared/components/FormElements/Button';
 import Card from '../../shared/components/UIElements/Card';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import ImageUpload from '../../shared/components/FormElements/ImageUpload';
+
 import {
-  VALIDATOR_REQUIRE,
-  VALIDATOR_MINLENGTH
+  VALIDATOR_REQUIRE
+  // ,
+  // VALIDATOR_MINLENGTH
 } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -35,6 +38,10 @@ const UpdateHeader = () => {
       about: {
         value: '',
         isValid: false
+      },
+      image: {
+        value: null,
+        isValid: false
       }
     },
     false
@@ -60,6 +67,10 @@ const UpdateHeader = () => {
             about: {
               value: responseData.header.about,
               isValid: true
+            },
+            image: {
+              value: responseData.header.image,
+              isValid: true
             }
           },
           true
@@ -72,23 +83,39 @@ const UpdateHeader = () => {
 
   const headerUpdateSubmitHandler = async event => {
     event.preventDefault();
-    try {
-      await sendRequest(
-        `/api/header/${headerId}`,
-        'PATCH',
-        JSON.stringify({
-          name: formState.inputs.name.value,
-          jobTitle: formState.inputs.jobTitle.value,
-          about: formState.inputs.about.value
-        }),
-        {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + auth.token
-        }
-      );
-      history.push('/' + auth.userId + '/header');
-    } catch (err) {}
-  };
+  //   try {
+  //     await sendRequest(
+  //       `/api/header/${headerId}`,
+  //       'PATCH',
+  //       JSON.stringify({
+  //         name: formState.inputs.name.value,
+  //         jobTitle: formState.inputs.jobTitle.value,
+  //         about: formState.inputs.about.value
+  //       }),
+  //       {
+  //         'Content-Type': 'application/json',
+  //         Authorization: 'Bearer ' + auth.token
+  //       }
+  //     );
+  //     history.push('/' + auth.userId + '/header');
+  //   } catch (err) {}
+  // };
+
+  try {
+    const formData = new FormData();
+    formData.append('name', formState.inputs.name.value);
+    formData.append('image', formState.inputs.image.value);
+    formData.append('jobTitle', formState.inputs.jobTitle.value);
+    formData.append('about', formState.inputs.about.value);
+    await sendRequest(
+      `/api/header/${headerId}`,
+      'PATCH', 
+      formData, {
+      Authorization: 'Bearer ' + auth.token
+    });
+    history.push('/' + auth.userId + '/header');
+  } catch (err) {}
+};
 
   if (isLoading) {
     return (
@@ -123,6 +150,12 @@ const UpdateHeader = () => {
             onInput={inputHandler}
             initialValue={loadedHeader.name}
             initialValid={true}
+          />
+          <ImageUpload
+            id="image"
+            onInput={inputHandler}
+            initialValue={loadedHeader.image}
+            errorText="Please provide a photo."
           />
           <Input
             id="jobTitle"

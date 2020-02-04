@@ -67,15 +67,14 @@ const createHeader = async (req, res, next) => {
     );
   }
 
-  const { name, jobTitle, about, adminComments } = req.body;
+  const { name, jobTitle, about } = req.body;
 
   const createdHeader = new Header({
     name,
-        // photo: req.file.path,
-    photo: "TBA",
+    image: req.file.path,
     jobTitle,
     about,
-    adminComments,
+    adminComments: '*to be reviewed*',
     isOk: false,
     creator: req.userData.userId
   });
@@ -156,6 +155,8 @@ const updateHeader = async (req, res, next) => {
   header.name = name;
   header.jobTitle = jobTitle;
   header.about = about;
+  header.image = req.file.path;
+
   // header.adminComments = adminComments;
 
   try {
@@ -198,7 +199,7 @@ const deleteHeader = async (req, res, next) => {
     return next(error);
   }
 
-  // const imagePath = header.image;
+  const imagePath = header.image;
 
   try {
     const sess = await mongoose.startSession();
@@ -215,9 +216,9 @@ const deleteHeader = async (req, res, next) => {
     return next(error);
   }
 
-  // fs.unlink(imagePath, err => {
-  //   console.log(err);
-  // });
+  fs.unlink(imagePath, err => {
+    console.log(err);
+  });
 
   res.status(200).json({ message: 'Deleted header.' });
 };

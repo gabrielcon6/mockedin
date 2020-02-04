@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 
 const headerRoutes = require('./routes/header-routes');
 const usersRoutes = require('./routes/users-routes');
-const HttpError = require('./models/http-error');
 
 const app = express();
 app.use(express.static('public')); // the React app will be bundled and placed in the public folder

@@ -5,7 +5,7 @@ import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
-// import ImageUpload from '../../shared/components/FormElements/ImageUpload';
+import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import {
   VALIDATOR_REQUIRE
   // ,
@@ -33,7 +33,7 @@ const NewHeader = () => {
         value: '',
         isValid: false
       },
-      adminComments: {
+      image: {
         value: null,
         isValid: false
       }
@@ -46,36 +46,36 @@ const NewHeader = () => {
   const headerSubmitHandler = async event => {
     event.preventDefault();
     //BELOW IS FOR WHEN WE HAVE THE IMAGE UPLOAD FULLY WORKING:
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append('name', formState.inputs.name.value);
-  //     formData.append('jobTitle', formState.inputs.jobTitle.value);
-  //     formData.append('about', formState.inputs.about.value);
-  //     formData.append('adminComments', formState.inputs.adminComments.value);
-  //     await sendRequest('/api/header', 'POST', formData, {
-  //       Authorization: 'Bearer ' + auth.token
-  //     });
-  //     history.push('/');
-  //   } catch (err) {}
-  // };
-  try {
-    await sendRequest(
-      '/api/header',
-      'POST',
-      JSON.stringify({
-        name: formState.inputs.name.value,
-        jobTitle: formState.inputs.jobTitle.value,
-        about: formState.inputs.about.value,
-        adminComments: formState.inputs.adminComments.value,
-      }),
-      { 
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + auth.token
-     }
-    );
-    history.push('/');
-  } catch (err) {}
-};
+    try {
+      const formData = new FormData();
+      formData.append('name', formState.inputs.name.value);
+      formData.append('image', formState.inputs.image.value);
+      formData.append('jobTitle', formState.inputs.jobTitle.value);
+      formData.append('about', formState.inputs.about.value);
+      await sendRequest('/api/header', 'POST', formData, {
+        Authorization: 'Bearer ' + auth.token
+      });
+      history.push('/');
+    } catch (err) {}
+  };
+//   try {
+//     await sendRequest(
+//       '/api/header',
+//       'POST',
+//       JSON.stringify({
+//         name: formState.inputs.name.value,
+//         jobTitle: formState.inputs.jobTitle.value,
+//         about: formState.inputs.about.value,
+//         adminComments: formState.inputs.adminComments.value,
+//       }),
+//       { 
+//       'Content-Type': 'application/json',
+//       Authorization: 'Bearer ' + auth.token
+//      }
+//     );
+//     history.push('/');
+//   } catch (err) {}
+// };
 
   return (
     <React.Fragment>
@@ -91,12 +91,17 @@ const NewHeader = () => {
           errorText="Please enter your name to be displayed."
           onInput={inputHandler}
         />
+        <ImageUpload
+          id="image"
+          onInput={inputHandler}
+          errorText="Please provide a photo."
+        />
         <Input
           id="jobTitle"
           element="textarea"
           label="Job Title"
           validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid Job Title (at least 5 characters)."
+          errorText="Please enter a valid Job Title."
           onInput={inputHandler}
         />
         <Input
@@ -107,14 +112,14 @@ const NewHeader = () => {
           errorText="Please enter something about yourself."
           onInput={inputHandler}
         />
-        <Input
+        {/* <Input
           id="adminComments"
           element="input"
           label="Comment"
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Comment by the recruiter."
           onInput={inputHandler}
-        />
+        /> */}
         {/* <Button type="submit" disabled={!formState.isValid}> */}
         <Button type="submit" >
           ADD HEADER

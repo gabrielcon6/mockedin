@@ -24,7 +24,7 @@ const HeaderList = props => {
           key={header.id}
           id={header.id}
           name={header.name}
-          photo={header.photo}
+          image={header.image}
           jobTitle={header.jobTitle}
           about={header.about}
           adminComments={header.adminComments}
