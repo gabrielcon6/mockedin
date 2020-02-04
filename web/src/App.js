@@ -7,13 +7,13 @@ import {
 } from 'react-router-dom';
 
 import Users from './user/pages/Users';
-import NewPlace from './places/pages/NewPlace';
-import UserPlaces from './places/pages/UserPlaces';
-import UpdatePlace from './places/pages/UpdatePlace';
+import UserPage from './profile/pages/UserPage';
+import UpdateHeader from './profile/pages/UpdateHeader';
 import Auth from './user/pages/Auth';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
+import NewHeader from './profile/pages/NewHeader';
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -26,14 +26,15 @@ const App = () => {
         <Route path="/" exact>
           <Users />
         </Route>
-        <Route path="/:userId/places" exact>
-          <UserPlaces />
+        <Route path="/:userId/profile" exact>
+          {/* <UserPlaces /> */}
+          <UserPage />
         </Route>
-        <Route path="/places/new" exact>
-          <NewPlace />
+        <Route path="/header/new" exact>
+          <NewHeader />
         </Route>
-        <Route path="/places/:placeId">
-          <UpdatePlace />
+        <Route path="/header/:headerId">
+          <UpdateHeader />
         </Route>
         <Redirect to="/" />
       </Switch>
@@ -44,8 +45,8 @@ const App = () => {
         <Route path="/" exact>
           <Users />
         </Route>
-        <Route path="/:userId/places" exact>
-          <UserPlaces />
+        <Route path="/:userId/page" exact>
+          <UserPage />
         </Route>
         <Route path="/auth">
           <Auth />

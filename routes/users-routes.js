@@ -10,7 +10,7 @@ router.get('/', usersController.getUsers);
 
 router.post(
   '/signup',
-  fileUpload.single('image'),
+  // fileUpload.single('image'),
   [
     check('name')
       .not()
@@ -18,7 +18,7 @@ router.post(
     check('email')
       .normalizeEmail()
       .isEmail(),
-    check('password').isLength({ min: 6 })
+    check('password').isLength({ min: 5 })
   ],
   usersController.signup
 );

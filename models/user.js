@@ -6,9 +6,12 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true, minlength: 6 },
-  image: { type: String, required: true },
-  places: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Place' }]
+  password: { type: String, minlength: 5 },
+  isAdmin: { type: Boolean, required: true },
+  header: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Header' }]
+  // education: { type: mongoose.Types.ObjectId, ref: 'Education' },
+  // experience: { type: mongoose.Types.ObjectId, ref: 'Experience' },
+  // others: [{ type: mongoose.Types.ObjectId, ref: 'Other' }]
 });
 
 userSchema.plugin(uniqueValidator);
