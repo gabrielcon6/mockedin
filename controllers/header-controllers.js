@@ -35,9 +35,19 @@ const getHeaderById = async (req, res, next) => {
 const getHeaderByUserId = async (req, res, next) => {
   const userId = req.params.uid;
 
+  // let userWithHeader;
+  // try {
+  //   userWithHeader = await User.findById(userId).populate('header');
+  // } catch (err) {
+  //   const error = new HttpError(
+  //     'Fetching places failed, please try again later.',
+  //     500
+  //   );
+  //   return next(error);
+  // }
   let userWithHeader;
   try {
-    userWithHeader = await User.findById(userId).populate('header');
+    userWithHeader = await Header.find( { creator: userId } );
   } catch (err) {
     const error = new HttpError(
       'Fetching places failed, please try again later.',
@@ -46,17 +56,22 @@ const getHeaderByUserId = async (req, res, next) => {
     return next(error);
   }
 
-  if (!userWithHeader || userWithHeader.header.length === 0) {
+  // if (!userWithHeader || userWithHeader.header.length === 0) {
+  if (!userWithHeader) {
     return next(
       new HttpError('Could not find places for the provided user id.', 404)
     );
   }
 
   res.json({
-    header: userWithHeader.header.map(header =>
-      header.toObject({ getters: true })
-    )
+    // header: userWithHeader.header.map(header =>
+    //   header.toObject({ getters: true })
+    // )
+
+    header: userWithHeader
+    
   });
+  console.log(userWithHeader);
 };
 
 const createHeader = async (req, res, next) => {
@@ -101,8 +116,8 @@ const createHeader = async (req, res, next) => {
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await createdHeader.save({ session: sess });
-    user.header.push(createdHeader);
-    await user.save({ session: sess });
+    // user.header.push(createdHeader);
+    // await user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(

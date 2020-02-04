@@ -63,8 +63,8 @@ const signup = async (req, res, next) => {
     name,
     email,
     password: hashedPassword,
-    isAdmin: false,
-    header: []
+    isAdmin: false
+    // header: []
   });
 
   try {
