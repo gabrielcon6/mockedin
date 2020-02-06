@@ -64,7 +64,8 @@ const signup = async (req, res, next) => {
     email,
     password: hashedPassword,
     isAdmin: false,
-    other: []
+    others: [],
+    experiences: []
   });
 
   try {

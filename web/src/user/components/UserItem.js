@@ -16,7 +16,7 @@ const UserItem = props => {
           <div className="user-item__info">
             <h2>{props.name}</h2>
             <h3>
-              Aspiring Developer
+              The Dev
             </h3>
           </div>
         </Link>

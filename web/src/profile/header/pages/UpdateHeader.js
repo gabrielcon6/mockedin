@@ -1,22 +1,22 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import Input from '../../shared/components/FormElements/Input';
-import Button from '../../shared/components/FormElements/Button';
-import Card from '../../shared/components/UIElements/Card';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
-import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-import ImageUpload from '../../shared/components/FormElements/ImageUpload';
+import Input from '../../../shared/components/FormElements/Input';
+import Button from '../../../shared/components/FormElements/Button';
+import Card from '../../../shared/components/UIElements/Card';
+import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner';
+import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
+import ImageUpload from '../../../shared/components/FormElements/ImageUpload';
 
 import {
   VALIDATOR_REQUIRE
   // ,
   // VALIDATOR_MINLENGTH
-} from '../../shared/util/validators';
-import { useForm } from '../../shared/hooks/form-hook';
-import { useHttpClient } from '../../shared/hooks/http-hook';
-import { AuthContext } from '../../shared/context/auth-context';
-import '../../places/pages/PlaceForm.css';
+} from '../../../shared/util/validators';
+import { useForm } from '../../../shared/hooks/form-hook';
+import { useHttpClient } from '../../../shared/hooks/http-hook';
+import { AuthContext } from '../../../shared/context/auth-context';
+import '../../../places/pages/PlaceForm.css';
 
 const UpdateHeader = () => {
   const auth = useContext(AuthContext);

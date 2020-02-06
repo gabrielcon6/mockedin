@@ -21,7 +21,12 @@ const NavLinks = props => {
       )}
       {auth.isLoggedIn && (
         <li>
-          <NavLink to="/header/new">ADD HEADER (provisório)</NavLink>
+          <NavLink to="/header/new">ADD HEADER (provisory)</NavLink>
+        </li>
+      )}
+      {auth.isLoggedIn && (
+        <li>
+          <NavLink to="/experiences/new">ADD EXPERIENCE (provisory)</NavLink>
         </li>
       )}
       {!auth.isLoggedIn && (

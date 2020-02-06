@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import Moment from 'react-moment';
 
 import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
@@ -7,9 +8,9 @@ import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
-import '../../places/components/PlaceItem.css';
+import '../../../places/components/PlaceItem.css';
 
-const HeaderItem = props => {
+const ExperienceItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -22,11 +23,11 @@ const HeaderItem = props => {
     setShowConfirmModal(false);
   };
 
-  const confirmDeleteHandler = async () => {
+  const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        `/api/header/${props.id}`,
+        `/api/experiences/${props.id}`,
         'DELETE',
         null,
         {
@@ -37,13 +38,15 @@ const HeaderItem = props => {
     } catch (err) {}
   };
 
+  // let endDate = Moment(`${props.endDate}`).format("MMMM D, YYYY");
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <Modal
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
-        header="Are you sure?"
+        experience="Are you sure?"
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
@@ -57,27 +60,30 @@ const HeaderItem = props => {
         }
       >
         <p>
-          Do you want to proceed and delete this header? Please note that it
+          Do you want to proceed and delete this experience? Please note that it
           can't be undone thereafter.
         </p>
       </Modal>
       <li className="place-item">
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
-          <div className="place-item__image">
-            <img
-              src={`/${props.image}`}
-              alt={props.title}
-            />
-          </div>
           <div className="place-item__info">
-            <h2>Name: {props.name}</h2>
-            <h3>Job Title: {props.jobTitle}</h3>
-            <p>About: {props.about}</p>
+            <h1>Experiences</h1>
+            <h2>Title: {props.title}</h2>
+            <h3>Company: {props.company}</h3>
+            <p>Start Date: &nbsp;	
+              <Moment format="MMMM YYYY">
+                  {props.startDate}
+              </Moment> |
+            End Date: &nbsp;	
+              <Moment format="MMMM YYYY">
+                  {props.endDate}
+              </Moment>
+            </p>
           </div>
           <div className="place-item__actions">
             {auth.userId === props.creatorId && (
-              <Button to={`/header/${props.id}`}>EDIT</Button>
+              <Button to={`/experience/${props.id}`}>EDIT</Button>
             )}
 
             {auth.userId === props.creatorId && (
@@ -93,4 +99,4 @@ const HeaderItem = props => {
   );
 };
 
-export default HeaderItem;
+export default ExperienceItem;

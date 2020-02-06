@@ -2,7 +2,8 @@ import React from 'react';
 
 import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
-import '../../places/components/PlaceList.css';
+import '../../../places/components/PlaceList.css';
+
 import HeaderItem from './HeaderItem';
 
 const HeaderList = props => {

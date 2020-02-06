@@ -7,7 +7,7 @@ import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
-import '../../places/components/PlaceItem.css';
+import '../../../places/components/PlaceItem.css';
 
 const HeaderItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -22,7 +22,7 @@ const HeaderItem = props => {
     setShowConfirmModal(false);
   };
 
-  const confirmDeleteHandler = async () => {
+  const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
@@ -50,7 +50,7 @@ const HeaderItem = props => {
             <Button inverse onClick={cancelDeleteHandler}>
               CANCEL
             </Button>
-            <Button danger onClick={confirmDeleteHandler}>
+            <Button danger onClick={confirmDeleteHandler} type={`header`}>
               DELETE
             </Button>
           </React.Fragment>
@@ -64,12 +64,10 @@ const HeaderItem = props => {
       <li className="place-item">
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
+          {props.image && 
           <div className="place-item__image">
-            <img
-              src={`/${props.image}`}
-              alt={props.title}
-            />
-          </div>
+            <img src={`/${props.image}`} alt={props.title}/>
+          </div>}
           <div className="place-item__info">
             <h2>Name: {props.name}</h2>
             <h3>Job Title: {props.jobTitle}</h3>

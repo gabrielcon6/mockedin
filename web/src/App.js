@@ -7,13 +7,14 @@ import {
 } from 'react-router-dom';
 
 import Users from './user/pages/Users';
-import UserPage from './profile/pages/UserPage';
-import UpdateHeader from './profile/pages/UpdateHeader';
+import ProfilePage from './profile/pages/ProfilePage';
+import UpdateHeader from './profile/header/pages/UpdateHeader';
 import Auth from './user/pages/Auth';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
-import NewHeader from './profile/pages/NewHeader';
+import NewHeader from './profile/header/pages/NewHeader';
+import NewExperience from './profile/experience/pages/NewExperience';
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -27,7 +28,7 @@ const App = () => {
           <Users />
         </Route>
         <Route path="/:userId/profile" exact>
-          <UserPage />
+          <ProfilePage />
         </Route>
         {/* HEADERS */}
         <Route path="/header/new" exact>
@@ -36,12 +37,12 @@ const App = () => {
         <Route path="/header/:headerId">
           <UpdateHeader />
         </Route>
-        {/* EXPERIENCES */}
-        <Route path="/experience/new" exact>
-          {/* <NewExperience /> */}
+        EXPERIENCES
+        <Route path="/experiences/new" exact>
+          <NewExperience />
         </Route>
         <Route path="/experience/:experienceId">
-          {/* <UpdateExperience /> */}
+          <updateExperience />
         </Route>
 
         <Redirect to="/" />
@@ -54,7 +55,7 @@ const App = () => {
           <Users />
         </Route>
         <Route path="/:userId/page" exact>
-          <UserPage />
+          <ProfilePage />
         </Route>
         <Route path="/auth">
           <Auth />

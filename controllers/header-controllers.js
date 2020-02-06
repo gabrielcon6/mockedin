@@ -72,7 +72,7 @@ const getHeaderByUserId = async (req, res, next) => {
     header: userWithHeader
     
   });
-  console.log(userWithHeader);
+  // console.log(userWithHeader);
 };
 
 const createHeader = async (req, res, next) => {
@@ -87,7 +87,7 @@ const createHeader = async (req, res, next) => {
   // console.log(name);
 
   const createdHeader = new Header({
-    // id: uuid(), 
+    id: uuid(), 
     name,
     image: req.file.path,
     jobTitle,
@@ -173,7 +173,7 @@ const updateHeader = async (req, res, next) => {
   header.name = name;
   header.jobTitle = jobTitle;
   header.about = about;
-  header.image = req.file.path;
+  // header.image = req.file.path;
 
   // header.adminComments = adminComments;
 
