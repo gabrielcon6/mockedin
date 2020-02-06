@@ -1,4 +1,5 @@
 const fs = require('fs');
+const uuid = require('uuid/v4');
 
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
@@ -83,8 +84,10 @@ const createHeader = async (req, res, next) => {
   }
 
   const { name, jobTitle, about } = req.body;
+  // console.log(name);
 
   const createdHeader = new Header({
+    // id: uuid(), 
     name,
     image: req.file.path,
     jobTitle,
@@ -192,7 +195,7 @@ const deleteHeader = async (req, res, next) => {
 
   let header;
   try {
-    header = await Header.findById(headerId).populate('creator');
+    header = await Header.findById(headerId);
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not delete header.',
@@ -206,9 +209,9 @@ const deleteHeader = async (req, res, next) => {
     return next(error);
   }
 
-  if (header.creator.id !== req.userData.userId) {
+  if (header.creator.toString() !== req.userData.userId) {
     const error = new HttpError(
-      'You are not allowed to delete this header.',
+      `You are not allowed to delete this header.${header.creator.toString()} // ${req.userData.userId}`,
       401
     );
     return next(error);
@@ -220,8 +223,8 @@ const deleteHeader = async (req, res, next) => {
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await header.remove({ session: sess });
-    header.creator.header.pull(header); //HEADER OR HEADERS????
-    await header.creator.save({ session: sess });
+    // header.creator.header.pull(header); //HEADER OR HEADERS????
+    // await header.creator.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
@@ -236,6 +239,7 @@ const deleteHeader = async (req, res, next) => {
   });
 
   res.status(200).json({ message: 'Deleted header.' });
+
 };
 
 exports.getHeaderById = getHeaderById;

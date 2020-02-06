@@ -19,7 +19,7 @@ const Header = () => {
           `/api/header/user/${userId}`
         );
         setLoadedHeader(responseData.header);
-        console.log(responseData.header);
+        console.log(responseData.header[0]._id);
       } catch (err) {}
     };
     fetchHeader();
@@ -30,7 +30,6 @@ const Header = () => {
       prevHeader.filter(header => header.id !== deletedHeaderId)
     );
   };
-
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />

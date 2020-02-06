@@ -16,13 +16,12 @@ const HeaderList = props => {
       </div>
     );
   }
-
   return (
     <ul className="place-list">
       {props.items.map(header => (
         <HeaderItem
-          key={header.id}
-          id={header.id}
+          key={header._id}
+          id={header._id}
           name={header.name}
           image={header.image}
           jobTitle={header.jobTitle}

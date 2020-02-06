@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import Card from '../../shared/components/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
 import Modal from '../../shared/components/UIElements/Modal';
-import Map from '../../shared/components/UIElements/Map';
+// import Map from '../../shared/components/UIElements/Map';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../../shared/context/auth-context';
@@ -13,12 +13,12 @@ import './PlaceItem.css';
 const PlaceItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
-  const [showMap, setShowMap] = useState(false);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  // const [showMap, setShowMap] = useState(false);
+  // const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-  const openMapHandler = () => setShowMap(true);
+  // const openMapHandler = () => setShowMap(true);
 
-  const closeMapHandler = () => setShowMap(false);
+  // const closeMapHandler = () => setShowMap(false);
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
@@ -46,18 +46,18 @@ const PlaceItem = props => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <Modal
+      {/* <Modal
         show={showMap}
         onCancel={closeMapHandler}
         header={props.address}
         contentClass="place-item__modal-content"
         footerClass="place-item__modal-actions"
         footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
-      >
-        <div className="map-container">
+      > */}
+        {/* <div className="map-container">
           <Map center={props.coordinates} zoom={16} />
-        </div>
-      </Modal>
+        </div> */}
+      {/* </Modal> */}
       <Modal
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
@@ -94,9 +94,9 @@ const PlaceItem = props => {
             <p>{props.description}</p>
           </div>
           <div className="place-item__actions">
-            <Button inverse onClick={openMapHandler}>
+            {/* <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
-            </Button>
+            </Button> */}
             {auth.userId === props.creatorId && (
               <Button to={`/places/${props.id}`}>EDIT</Button>
             )}
