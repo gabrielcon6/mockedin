@@ -27,15 +27,23 @@ const App = () => {
           <Users />
         </Route>
         <Route path="/:userId/profile" exact>
-          {/* <UserPlaces /> */}
           <UserPage />
         </Route>
+        {/* HEADERS */}
         <Route path="/header/new" exact>
           <NewHeader />
         </Route>
         <Route path="/header/:headerId">
           <UpdateHeader />
         </Route>
+        {/* EXPERIENCES */}
+        <Route path="/experience/new" exact>
+          {/* <NewExperience /> */}
+        </Route>
+        <Route path="/experience/:experienceId">
+          {/* <UpdateExperience /> */}
+        </Route>
+
         <Redirect to="/" />
       </Switch>
     );
