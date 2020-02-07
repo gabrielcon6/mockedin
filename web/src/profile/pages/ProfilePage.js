@@ -4,7 +4,9 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import HeaderPage from '../header/pages/HeaderPage';
-import ExperiencePage from '../experience/pages/ExperiencePage';
+import ExperiencePage from '../experiences/pages/ExperiencePage';
+import EducationPage from '../education/pages/EducationPage';
+import OtherPage from '../others/pages/OtherPage';
 
 const ProfilePage = (props) => {
 
@@ -25,6 +27,12 @@ const ProfilePage = (props) => {
       )}
       {!isLoading && (
         <ExperiencePage userId={props.id}/>
+      )}
+      {!isLoading && (
+        <EducationPage userId={props.id}/>
+      )}
+      {!isLoading && (
+        <OtherPage userId={props.id}/>
       )}
     </React.Fragment>
   );

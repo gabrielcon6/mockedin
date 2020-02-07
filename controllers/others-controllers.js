@@ -81,12 +81,12 @@ const createOther = async (req, res, next) => {
     );
   }
 
-  const { title, company, startDate, endDate } = req.body;
+  const { type, title, startDate, endDate } = req.body;
 
   const createdOther = new Other({
     id: uuid(), 
+    type,
     title,
-    company,
     startDate,
     endDate,
     description: '*to be reviewed*',
@@ -148,7 +148,7 @@ const updateOther = async (req, res, next) => {
     );
   }
 
-  const { title, company, startDate, endDate } = req.body;
+  const { type, title, startDate, endDate } = req.body;
   const otherId = req.params.oid;
   console.log('82482348932984723894798327942', otherId);
 
@@ -168,8 +168,8 @@ const updateOther = async (req, res, next) => {
     return next(error);
   }
 
+  other.type = type;
   other.title = title;
-  other.company = company;
   other.startDate = startDate;
   other.endDate = endDate;
 

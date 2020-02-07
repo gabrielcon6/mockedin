@@ -8,14 +8,18 @@ import {
 
 import Users from './user/pages/Users';
 import ProfilePage from './profile/pages/ProfilePage';
-import UpdateHeader from './profile/header/pages/UpdateHeader';
 import Auth from './user/pages/Auth';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
 import NewHeader from './profile/header/pages/NewHeader';
-import NewExperience from './profile/experience/pages/NewExperience';
-import UpdateExperience from './profile/experience/pages/UpdateExperience';
+import UpdateHeader from './profile/header/pages/UpdateHeader';
+import NewExperience from './profile/experiences/pages/NewExperience';
+import UpdateExperience from './profile/experiences/pages/UpdateExperience';
+import NewEducation from './profile/education/pages/NewEducation';
+import UpdateEducation from './profile/education/pages/UpdateEducation';
+import NewOther from './profile/others/pages/NewOther';
+import UpdateOther from './profile/others/pages/UpdateOther';
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -44,6 +48,20 @@ const App = () => {
         </Route>
         <Route path="/experience/:experienceId">
           <UpdateExperience />
+        </Route>
+        {/* EDUCATION */}
+        <Route path="/education/new" exact>
+          <NewEducation />
+        </Route>
+        <Route path="/education/:educationId">
+          <UpdateEducation />
+        </Route>
+        {/* OTHERS */}
+        <Route path="/others/new" exact>
+          <NewOther />
+        </Route>
+        <Route path="/others/:otherId">
+          <UpdateOther />
         </Route>
 
         <Redirect to="/" />

@@ -110,18 +110,21 @@ const createEducation = async (req, res, next) => {
     return next(error);
   }
 
-  console.log('line 116', user);
+//   console.log('line 113', createdEducation);
 
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await createdEducation.save({ session: sess });
+    console.log('line 119', user.education);
     user.education.push(createdEducation);
+    console.log('line 121', user);
+
     await user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
-      'Creating place failed, please try again.',
+      'Creating place2 failed, please try again.',
       500
     );
     return next(error);
