@@ -119,8 +119,8 @@ const createExperience = async (req, res, next) => {
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await createdExperience.save({ session: sess });
-    // user.experience.push(createdExperience);
-    // await user.save({ session: sess });
+    user.experience.push(createdExperience);
+    await user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
