@@ -13,4 +13,4 @@ const otherSchema = new Schema({
   creator: { type: mongoose.Types.ObjectId, required: true, ref: 'Other' }
 });
 
-module.exports = mongoose.model('Other', educationSchema);
+module.exports = mongoose.model('Other', otherSchema);

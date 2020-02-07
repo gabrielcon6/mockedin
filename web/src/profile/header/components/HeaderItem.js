@@ -22,11 +22,13 @@ const HeaderItem = props => {
     setShowConfirmModal(false);
   };
 
+  let headerId = props.id;
+
   const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        `/api/header/${props.id}`,
+        `/api/header/${headerId}`,
         'DELETE',
         null,
         {
@@ -50,7 +52,7 @@ const HeaderItem = props => {
             <Button inverse onClick={cancelDeleteHandler}>
               CANCEL
             </Button>
-            <Button danger onClick={confirmDeleteHandler} type={`header`}>
+            <Button danger onClick={confirmDeleteHandler}>
               DELETE
             </Button>
           </React.Fragment>

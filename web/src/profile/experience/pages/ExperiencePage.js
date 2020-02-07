@@ -26,8 +26,8 @@ const ExperiencePage = () => {
       }, [sendRequest, userId]);
     
       const experienceDeletedHandler = deletedExperienceId => {
-        setLoadedExperience(prevExperience =>
-          prevExperience.filter(experience => experience.id !== deletedExperienceId)
+        setLoadedExperience(prevExperiences =>
+          prevExperiences.filter(experience => experience.id !== deletedExperienceId)
         );
       };
       return (

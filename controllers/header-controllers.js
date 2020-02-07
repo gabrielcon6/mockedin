@@ -192,7 +192,7 @@ const updateHeader = async (req, res, next) => {
 
 const deleteHeader = async (req, res, next) => {
   const headerId = req.params.hid;
-
+  console.log('hahah',headerId)
   let header;
   try {
     header = await Header.findById(headerId);

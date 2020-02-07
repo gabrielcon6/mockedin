@@ -23,18 +23,20 @@ const ExperienceItem = props => {
     setShowConfirmModal(false);
   };
 
+  const experienceId = props.id;
+  console.log('ahhhahahahah', experienceId)
   const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        `/api/experiences/${props.id}`,
+        `/api/experiences/${experienceId}`,
         'DELETE',
         null,
         {
           Authorization: 'Bearer ' + auth.token
         }
       );
-      props.onDelete(props.id);
+      props.onDelete();
     } catch (err) {}
   };
 

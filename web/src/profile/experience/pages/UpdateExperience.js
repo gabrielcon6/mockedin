@@ -6,40 +6,35 @@ import Button from '../../../shared/components/FormElements/Button';
 import Card from '../../../shared/components/UIElements/Card';
 import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
-import ImageUpload from '../../../shared/components/FormElements/ImageUpload';
 
-import {
-  VALIDATOR_REQUIRE
-  // ,
-  // VALIDATOR_MINLENGTH
-} from '../../../shared/util/validators';
+import { VALIDATOR_REQUIRE } from '../../../shared/util/validators';
 import { useForm } from '../../../shared/hooks/form-hook';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import { AuthContext } from '../../../shared/context/auth-context';
-import '../../places/pages/PlaceForm.css';
+import '../../../places/pages/PlaceForm.css';
 
-const UpdateHeader = () => {
+const UpdateExperience = () => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [loadedHeader, setLoadedHeader] = useState();
-  const headerId = useParams().headerId;
+  const [loadedExperience, setLoadedExperience] = useState();
+  const experienceId = useParams().experienceId;
   const history = useHistory();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
-      name: {
+      title: {
         value: '',
         isValid: false
       },
-      jobTitle: {
+      company: {
         value: '',
         isValid: false
       },
-      about: {
+      startDate: {
         value: '',
         isValid: false
       },
-      image: {
+      endDate: {
         value: null,
         isValid: false
       }
@@ -48,28 +43,28 @@ const UpdateHeader = () => {
   );
 
   useEffect(() => {
-    const fetchHeader = async () => {
+    const fetchExperience = async () => {
       try {
         const responseData = await sendRequest(
-          `/api/header/${headerId}`
+          `/api/experiences/${experienceId}`
         );
-        setLoadedHeader(responseData.header);
+        setLoadedExperience(responseData.experience);
         setFormData(
           {
-            name: {
-              value: responseData.header.name,
+            title: {
+              value: responseData.experiences.name,
               isValid: true
             },
-            jobTitle: {
-              value: responseData.header.jobTitle,
+            company: {
+              value: responseData.experiences.jobTitle,
               isValid: true
             },
-            about: {
-              value: responseData.header.about,
+            startDate: {
+              value: responseData.experiences.about,
               isValid: true
             },
-            image: {
-              value: responseData.header.image,
+            endDate: {
+              value: responseData.experiences.image,
               isValid: true
             }
           },
@@ -78,44 +73,29 @@ const UpdateHeader = () => {
 
       } catch (err) {}
     };
-    fetchHeader();
-  }, [sendRequest, headerId, setFormData]);
+    fetchExperience();
+  }, [sendRequest, experienceId, setFormData]);
 
-  const headerUpdateSubmitHandler = async event => {
+  const experienceUpdateSubmitHandler = async event => {
     event.preventDefault();
-  //   try {
-  //     await sendRequest(
-  //       `/api/header/${headerId}`,
-  //       'PATCH',
-  //       JSON.stringify({
-  //         name: formState.inputs.name.value,
-  //         jobTitle: formState.inputs.jobTitle.value,
-  //         about: formState.inputs.about.value
-  //       }),
-  //       {
-  //         'Content-Type': 'application/json',
-  //         Authorization: 'Bearer ' + auth.token
-  //       }
-  //     );
-  //     history.push('/' + auth.userId + '/header');
-  //   } catch (err) {}
-  // };
-
-  try {
-    const formData = new FormData();
-    formData.append('name', formState.inputs.name.value);
-    formData.append('image', formState.inputs.image.value);
-    formData.append('jobTitle', formState.inputs.jobTitle.value);
-    formData.append('about', formState.inputs.about.value);
-    await sendRequest(
-      `/api/header/${headerId}`,
-      'PATCH', 
-      formData, {
-      Authorization: 'Bearer ' + auth.token
-    });
-    history.push('/' + auth.userId + '/header');
-  } catch (err) {}
-};
+    try {
+      await sendRequest(
+        `/api/experiences/${experienceId}`,
+        'PATCH',
+        JSON.stringify({
+          title: formState.inputs.title.value,
+          company: formState.inputs.company.value,
+          startDate: formState.inputs.startDate.value,
+          endDate: formState.inputs.endDate.value
+        }),
+        {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.token
+        }
+      );
+      history.push('/' + auth.userId + '/experiences');
+    } catch (err) {}
+  };
 
   if (isLoading) {
     return (
@@ -125,11 +105,11 @@ const UpdateHeader = () => {
     );
   }
 
-  if (!loadedHeader && !error) {
+  if (!loadedExperience && !error) {
     return (
       <div className="center">
         <Card>
-          <h2>Could not find header!</h2>
+          <h2>Could not find experience!</h2>
         </Card>
       </div>
     );
@@ -138,47 +118,54 @@ const UpdateHeader = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      {!isLoading && loadedHeader && (
-        <form className="place-form" onSubmit={headerUpdateSubmitHandler}>
+      {!isLoading && loadedExperience && (
+        <form className="place-form" onSubmit={experienceUpdateSubmitHandler}>
           <Input
-            id="name"
+            id="title"
             element="input"
             type="text"
-            label="Name"
+            label="Title"
             validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter your name."
+            errorText="Please enter your title."
             onInput={inputHandler}
-            initialValue={loadedHeader.name}
-            initialValid={true}
-          />
-          <ImageUpload
-            id="image"
-            onInput={inputHandler}
-            initialValue={loadedHeader.image}
-            errorText="Please provide a photo."
-          />
-          <Input
-            id="jobTitle"
-            element="textarea"
-            label="Job Title"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter your job title."
-            onInput={inputHandler}
-            initialValue={loadedHeader.jobTitle}
+            initialValue={loadedExperience.title}
             initialValid={true}
           />
           <Input
-            id="about"
-            element="textarea"
-            label="About"
+            id="company"
+            element="input"
+            type="text"
+            label="Company"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter the name of the company."
+            onInput={inputHandler}
+            initialValue={loadedExperience.company}
+            initialValid={true}
+          />
+          <Input
+            id="startDate"
+            element="input"
+            type="date"
+            label="Start Date"
             validators={[VALIDATOR_REQUIRE()]}
             errorText="Please enter your about text."
             onInput={inputHandler}
-            initialValue={loadedHeader.about}
+            initialValue={loadedExperience.startDate}
+            initialValid={true}
+          />
+          <Input
+            id="endDate"
+            element="input"
+            type="date"
+            label="End Date"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter your about text."
+            onInput={inputHandler}
+            initialValue={loadedExperience.endDate}
             initialValid={true}
           />
           <Button type="submit" disabled={!formState.isValid}>
-            UPDATE HEADER
+            UPDATE Experience
           </Button>
         </form>
       )}
@@ -186,4 +173,4 @@ const UpdateHeader = () => {
   );
 };
 
-export default UpdateHeader;
+export default UpdateExperience;

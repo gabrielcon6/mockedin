@@ -15,6 +15,7 @@ import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
 import NewHeader from './profile/header/pages/NewHeader';
 import NewExperience from './profile/experience/pages/NewExperience';
+import UpdateExperience from './profile/experience/pages/UpdateExperience';
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -37,12 +38,12 @@ const App = () => {
         <Route path="/header/:headerId">
           <UpdateHeader />
         </Route>
-        EXPERIENCES
+        {/* EXPERIENCES */}
         <Route path="/experiences/new" exact>
           <NewExperience />
         </Route>
         <Route path="/experience/:experienceId">
-          <updateExperience />
+          <UpdateExperience />
         </Route>
 
         <Redirect to="/" />
