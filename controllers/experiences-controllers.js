@@ -35,11 +35,9 @@ const getExperienceById = async (req, res, next) => {
 
 const getExperienceByUserId = async (req, res, next) => {
   const userId = req.params.uid;
-  console.log('%%%%%%%%%user', userId)
   let userWithExperience;
   try {
     userWithExperience = await User.findById(userId).populate('experiences');
-    console.log('%%%%%%%%%', userWithExperience)
   } catch (err) {
     const error = new HttpError(
       'Fetching experiences failed, please try again later.',
@@ -73,7 +71,6 @@ const getExperienceByUserId = async (req, res, next) => {
     experience: userWithExperience
     
   });
-  console.log(userWithExperience);
 };
 
 const createExperience = async (req, res, next) => {
@@ -113,13 +110,13 @@ const createExperience = async (req, res, next) => {
     return next(error);
   }
 
-  console.log(user);
+  console.log('line 116', user);
 
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await createdExperience.save({ session: sess });
-    user.experience.push(createdExperience);
+    user.experiences.push(createdExperience);
     await user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
