@@ -17,7 +17,6 @@ const ExperienceList = props => {
     );
   }
 
-  console.log(props.items);
   return (
     <ul className="place-list">
       {props.items.map(experience => (

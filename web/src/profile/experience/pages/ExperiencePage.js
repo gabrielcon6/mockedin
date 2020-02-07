@@ -19,7 +19,6 @@ const ExperiencePage = () => {
               `/api/experiences/user/${userId}`
             );
             setLoadedExperience(responseData.experience.experiences);
-            console.log('response data',responseData.experience.experiences);
           } catch (err) {}
         };
         fetchExperience();

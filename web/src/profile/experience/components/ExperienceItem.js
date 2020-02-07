@@ -24,7 +24,7 @@ const ExperienceItem = props => {
   };
 
   const experienceId = props.id;
-  console.log('ahhhahahahah', experienceId)
+
   const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);
     try {
