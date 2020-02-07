@@ -27,10 +27,11 @@ const EducationList = props => {
           <EducationItem
             key={education._id}
             id={education._id}
-            name={education.name}
-            image={education.image}
-            jobTitle={education.jobTitle}
-            about={education.about}
+            school={education.school}
+            degree={education.degree}
+            startDate={education.startDate}
+            endDate={education.endDate}
+            description={education.description}
             adminComments={education.adminComments}
             isOk={education.isOk}
             creatorId={education.creator}

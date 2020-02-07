@@ -71,9 +71,10 @@ const EducationItem = props => {
             <img src={`/${props.image}`} alt={props.title}/>
           </div>}
           <div className="place-item__info">
-            <h2>Name: {props.name}</h2>
-            <h3>Job Title: {props.jobTitle}</h3>
-            <p>About: {props.about}</p>
+            <h2>School: {props.school}</h2>
+            <h3>Degree: {props.degree}</h3>
+            <p>{props.startDate} - {props.endDate}</p>
+            <p>{props.description}</p>
           </div>
           <div className="place-item__actions">
             {auth.userId === props.creatorId && (

@@ -1,4 +1,3 @@
-const fs = require('fs');
 const uuid = require('uuid/v4');
 
 const { validationResult } = require('express-validator');
@@ -110,29 +109,24 @@ const createEducation = async (req, res, next) => {
     return next(error);
   }
 
-//   console.log('line 113', createdEducation);
-
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await createdEducation.save({ session: sess });
-    console.log('line 119', user.education);
     user.education.push(createdEducation);
-    console.log('line 121', user);
-
     await user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
-      'Creating place2 failed, please try again.',
+      'Creating place education, please try again.',
       500
     );
     return next(error);
   }
 
-  //BELOW IS IF WE WANT TO CREATE Education MANUALLY VIA POSTMAN
+  //BELOW IS IF WE WANT TO CREATE Other MANUALLY VIA POSTMAN
   // try {
-  //   await createdEducation.save();
+  //   await createdOther.save();
   // } catch (err) {
   //   const error = new HttpError(
   //     'Signing up failed, please try again later.',
@@ -153,7 +147,6 @@ const updateEducation = async (req, res, next) => {
 
   const { school, degree, startDate, endDate } = req.body;
   const educationId = req.params.exid;
-  console.log('82482348932984723894798327942', educationId);
 
   let education;
   try {
@@ -194,11 +187,9 @@ const updateEducation = async (req, res, next) => {
 const deleteEducation = async (req, res, next) => {
   const educationId = req.params.exid;
 
-  console.log('line 194', educationId)
   let education;
   try {
     education = await Education.findById(educationId);
-    console.log('line 198', education)
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not delete education.',
