@@ -8,11 +8,9 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, minlength: 5 },
   isAdmin: { type: Boolean, required: true },
-  other: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Other' }]
-  // header: { type: mongoose.Types.ObjectId, ref: 'Header' }
-  // header: [{ type: mongoose.Types.ObjectId, default: {}, ref: 'Header' }]
-  // education: { type: mongoose.Types.ObjectId, ref: 'Education' },
-  // experience: { type: mongoose.Types.ObjectId, ref: 'Experience' },
+  experiences: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Experience' }],
+  education: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Education' }],
+  others: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Other' }]
 });
 
 userSchema.plugin(uniqueValidator);

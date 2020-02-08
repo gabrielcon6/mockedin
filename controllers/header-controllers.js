@@ -72,7 +72,7 @@ const getHeaderByUserId = async (req, res, next) => {
     header: userWithHeader
     
   });
-  console.log(userWithHeader);
+  // console.log(userWithHeader);
 };
 
 const createHeader = async (req, res, next) => {
@@ -83,14 +83,15 @@ const createHeader = async (req, res, next) => {
     );
   }
 
-  const { name, jobTitle, about } = req.body;
+  const { name, jobTitle, location, about } = req.body;
   // console.log(name);
 
   const createdHeader = new Header({
-    // id: uuid(), 
+    id: uuid(), 
     name,
     image: req.file.path,
     jobTitle,
+    location,
     about,
     adminComments: '*to be reviewed*',
     isOk: false,
@@ -151,7 +152,7 @@ const updateHeader = async (req, res, next) => {
     );
   }
 
-  const { name, jobTitle, about } = req.body;
+  const { name, jobTitle, location, about } = req.body;
   const headerId = req.params.hid;
 
   let header;
@@ -172,8 +173,9 @@ const updateHeader = async (req, res, next) => {
 
   header.name = name;
   header.jobTitle = jobTitle;
+  header.location = location;
   header.about = about;
-  header.image = req.file.path;
+  // header.image = req.file.path;
 
   // header.adminComments = adminComments;
 
@@ -192,7 +194,7 @@ const updateHeader = async (req, res, next) => {
 
 const deleteHeader = async (req, res, next) => {
   const headerId = req.params.hid;
-
+  console.log('hahah',headerId)
   let header;
   try {
     header = await Header.findById(headerId);

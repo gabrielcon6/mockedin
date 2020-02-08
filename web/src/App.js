@@ -7,13 +7,19 @@ import {
 } from 'react-router-dom';
 
 import Users from './user/pages/Users';
-import UserPage from './profile/pages/UserPage';
-import UpdateHeader from './profile/pages/UpdateHeader';
+import ProfilePage from './profile/pages/ProfilePage';
 import Auth from './user/pages/Auth';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
-import NewHeader from './profile/pages/NewHeader';
+import NewHeader from './profile/header/pages/NewHeader';
+import UpdateHeader from './profile/header/pages/UpdateHeader';
+import NewExperience from './profile/experiences/pages/NewExperience';
+import UpdateExperience from './profile/experiences/pages/UpdateExperience';
+import NewEducation from './profile/education/pages/NewEducation';
+import UpdateEducation from './profile/education/pages/UpdateEducation';
+import NewOther from './profile/others/pages/NewOther';
+import UpdateOther from './profile/others/pages/UpdateOther';
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -27,7 +33,7 @@ const App = () => {
           <Users />
         </Route>
         <Route path="/:userId/profile" exact>
-          <UserPage />
+          <ProfilePage />
         </Route>
         {/* HEADERS */}
         <Route path="/header/new" exact>
@@ -37,11 +43,25 @@ const App = () => {
           <UpdateHeader />
         </Route>
         {/* EXPERIENCES */}
-        <Route path="/experience/new" exact>
-          {/* <NewExperience /> */}
+        <Route path="/experiences/new" exact>
+          <NewExperience />
         </Route>
         <Route path="/experience/:experienceId">
-          {/* <UpdateExperience /> */}
+          <UpdateExperience />
+        </Route>
+        {/* EDUCATION */}
+        <Route path="/education/new" exact>
+          <NewEducation />
+        </Route>
+        <Route path="/education/:educationId">
+          <UpdateEducation />
+        </Route>
+        {/* OTHERS */}
+        <Route path="/others/new" exact>
+          <NewOther />
+        </Route>
+        <Route path="/others/:otherId">
+          <UpdateOther />
         </Route>
 
         <Redirect to="/" />
@@ -54,7 +74,7 @@ const App = () => {
           <Users />
         </Route>
         <Route path="/:userId/page" exact>
-          <UserPage />
+          <ProfilePage />
         </Route>
         <Route path="/auth">
           <Auth />

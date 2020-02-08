@@ -7,6 +7,9 @@ const mongoose = require('mongoose');
 
 const headerRoutes = require('./routes/header-routes');
 const usersRoutes = require('./routes/users-routes');
+const experiencesRoutes = require('./routes/experiences-routes');
+const educationRoutes = require('./routes/education-routes');
+const othersRoutes = require('./routes/others-routes');
 
 const app = express();
 app.use(express.static('public')); // the React app will be bundled and placed in the public folder
@@ -28,6 +31,9 @@ app.use((req, res, next) => {
 
 app.use('/api/header', headerRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/experiences', experiencesRoutes);
+app.use('/api/education', educationRoutes);
+app.use('/api/others', othersRoutes);
 
 app.get('*', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
@@ -54,6 +60,11 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
+  // .connect(
+  //   'mongodb://localhost:27017/database'
+
+  //   // `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-2r7ns.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+  // )
   .connect(
     process.env.DB_URL, {useNewUrlParser: true}
   )
