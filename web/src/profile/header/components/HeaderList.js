@@ -26,6 +26,7 @@ const HeaderList = props => {
           name={header.name}
           image={header.image}
           jobTitle={header.jobTitle}
+          location={header.location}
           about={header.about}
           adminComments={header.adminComments}
           isOk={header.isOk}

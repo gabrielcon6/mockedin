@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng
+} from "react-places-autocomplete";
 
 import Input from '../../../shared/components/FormElements/Input';
 import Button from '../../../shared/components/FormElements/Button';
 import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner';
 import ImageUpload from '../../../shared/components/FormElements/ImageUpload';
-import {
-  VALIDATOR_REQUIRE
-  // ,
-  // VALIDATOR_MINLENGTH
-} from '../../../shared/util/validators';
+import { VALIDATOR_REQUIRE } from '../../../shared/util/validators';
 import { useForm } from '../../../shared/hooks/form-hook';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import { AuthContext } from '../../../shared/context/auth-context';
@@ -19,6 +19,12 @@ import '../../../places/pages/PlaceForm.css';
 const NewHeader = () => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [address, setAddress] = React.useState("");
+  const [coordinates, setCoordinates] = React.useState({
+    lat: null,
+    lng: null
+  });
+  
   const [formState, inputHandler] = useForm(
     {
       name: {
@@ -27,6 +33,10 @@ const NewHeader = () => {
       },
       jobTitle: {
         value: '',
+        isValid: false
+      },
+      location: {
+        value: address,
         isValid: false
       },
       about: {
@@ -41,16 +51,22 @@ const NewHeader = () => {
     false
   );
 
+  const handleSelect = async value => {
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(latLng);
+  };
+
   const history = useHistory();
 
-  const headerSubmitHandler = async event => {
-    event.preventDefault();
-    //BELOW IS FOR WHEN WE HAVE THE IMAGE UPLOAD FULLY WORKING:
+  const headerSubmitHandler = async (event, value) => {
     try {
       const formData = new FormData();
       formData.append('name', formState.inputs.name.value);
       formData.append('image', formState.inputs.image.value);
       formData.append('jobTitle', formState.inputs.jobTitle.value);
+      formData.append('location', address);
       formData.append('about', formState.inputs.about.value);
       await sendRequest('/api/header', 'POST', formData, {
         Authorization: 'Bearer ' + auth.token
@@ -58,24 +74,6 @@ const NewHeader = () => {
       history.push('/');
     } catch (err) {}
   };
-//   try {
-//     await sendRequest(
-//       '/api/header',
-//       'POST',
-//       JSON.stringify({
-//         name: formState.inputs.name.value,
-//         jobTitle: formState.inputs.jobTitle.value,
-//         about: formState.inputs.about.value,
-//         adminComments: formState.inputs.adminComments.value,
-//       }),
-//       { 
-//       'Content-Type': 'application/json',
-//       Authorization: 'Bearer ' + auth.token
-//      }
-//     );
-//     history.push('/');
-//   } catch (err) {}
-// };
 
   return (
     <React.Fragment>
@@ -104,6 +102,36 @@ const NewHeader = () => {
           errorText="Please enter a valid Job Title."
           onInput={inputHandler}
         />
+        <div>
+        <PlacesAutocomplete
+          value={address}
+          onChange={setAddress}
+          onSelect={handleSelect}
+        >
+          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+            <div>
+              <h2>Location</h2>
+              <input {...getInputProps({ placeholder: "Type address" }) } />
+              
+              <div>
+                {loading ? <div>...loading</div> : null}
+
+                {suggestions.map(suggestion => {
+                  const style = {
+                    backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                  };
+
+                  return (
+                    <div {...getSuggestionItemProps(suggestion, { style })}>
+                      {suggestion.description}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </PlacesAutocomplete>
+        </div>
         <Input
           id="about"
           element="input"
@@ -112,6 +140,7 @@ const NewHeader = () => {
           errorText="Please enter something about yourself."
           onInput={inputHandler}
         />
+
         {/* <Input
           id="adminComments"
           element="input"

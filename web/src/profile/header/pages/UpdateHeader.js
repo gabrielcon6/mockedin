@@ -35,6 +35,10 @@ const UpdateHeader = () => {
         value: '',
         isValid: false
       },
+      location: {
+        value: '',
+        isValid: false
+      },
       about: {
         value: '',
         isValid: false
@@ -62,6 +66,10 @@ const UpdateHeader = () => {
             },
             jobTitle: {
               value: responseData.header.jobTitle,
+              isValid: true
+            },
+            location: {
+              value: responseData.header.location,
               isValid: true
             },
             about: {
@@ -106,6 +114,7 @@ const UpdateHeader = () => {
     formData.append('name', formState.inputs.name.value);
     formData.append('image', formState.inputs.image.value);
     formData.append('jobTitle', formState.inputs.jobTitle.value);
+    formData.append('location', formState.inputs.location.value);
     formData.append('about', formState.inputs.about.value);
     await sendRequest(
       `/api/header/${headerId}`,
@@ -165,6 +174,16 @@ const UpdateHeader = () => {
             errorText="Please enter your job title."
             onInput={inputHandler}
             initialValue={loadedHeader.jobTitle}
+            initialValid={true}
+          />
+          <Input
+            id="location"
+            element="textarea"
+            label="Location"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter your location."
+            onInput={inputHandler}
+            initialValue={loadedHeader.location}
             initialValid={true}
           />
           <Input

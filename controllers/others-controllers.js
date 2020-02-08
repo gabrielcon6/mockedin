@@ -218,9 +218,10 @@ const deleteOther = async (req, res, next) => {
   }
 
   try {
+    await other.remove();
+    console.log('line 222', other.creator.others);
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    await other.remove({ session: sess });
     other.creator.others.pull(other); //other OR othersS????
     await other.creator.save({ session: sess });
     await sess.commitTransaction();
