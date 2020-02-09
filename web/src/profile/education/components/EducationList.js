@@ -8,7 +8,6 @@ import EducationItem from './EducationItem';
 
 
 const EducationList = props => {
-  console.log(props.items.education);
 
   if (props.items.education.length === 0) {
     return (

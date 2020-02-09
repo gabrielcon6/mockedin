@@ -73,7 +73,9 @@ const HeaderItem = props => {
           <div className="place-item__info">
             <h2>Name: {props.name}</h2>
             <h3>Job Title: {props.jobTitle}</h3>
-            <p>About: {props.about}</p>
+            <h4>Location: {props.location}</h4>
+            <h3>About</h3>
+            <p>{props.about}</p>
           </div>
           <div className="place-item__actions">
             {auth.userId === props.creatorId && (

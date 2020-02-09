@@ -7,6 +7,7 @@ const headerSchema = new Schema({
   name: { type: String },
   image: { type: String },
   jobTitle: { type: String },
+  location: { type: String },
   about: { type: String },
   adminComments: { type: String },
   isOk: { type: Boolean },
