@@ -25,13 +25,24 @@ const App = () => {
   const { token, login, logout, userId, isAdmin } = useAuth();
 
   let routes;
-
-  if (token) {
+  if (token && isAdmin) {
     routes = (
       <Switch>
         <Route path="/" exact>
           <Users />
         </Route>
+        <Route path="/:userId/profile" exact>
+          <ProfilePage />
+        </Route>
+
+        <Redirect to="/" />
+      </Switch>
+    );
+  }
+
+  else if (token && !isAdmin) {
+    routes = (
+      <Switch>
         <Route path="/:userId/profile" exact>
           <ProfilePage />
         </Route>
@@ -67,7 +78,9 @@ const App = () => {
         <Redirect to="/" />
       </Switch>
     );
-  } else {
+  } 
+  
+  else {
     routes = (
       <Switch>
         <Route path="/:userId/page" exact>
