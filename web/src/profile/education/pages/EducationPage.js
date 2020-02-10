@@ -6,7 +6,7 @@ import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import EducationList from '../components/EducationList';
 
-const EducationPage = () => {
+const EducationPage = (props) => {
     const [loadedEducation, setLoadedEducation] = useState();
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
   
@@ -38,7 +38,7 @@ const EducationPage = () => {
             </div>
           )}
           {!isLoading && loadedEducation && (
-            <EducationList items={loadedEducation} onDeleteEducation={educationDeletedHandler} />
+            <EducationList userId={userId} items={loadedEducation} onDeleteEducation={educationDeletedHandler} />
           )}
         </React.Fragment>
       );
