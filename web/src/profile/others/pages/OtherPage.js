@@ -6,7 +6,7 @@ import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import OtherList from '../components/OtherList';
 
-const OtherPage = () => {
+const OtherPage = (props) => {
     const [loadedOther, setLoadedOther] = useState();
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
   
@@ -38,7 +38,7 @@ const OtherPage = () => {
             </div>
           )}
           {!isLoading && loadedOther && (
-            <OtherList items={loadedOther} onDeleteOther={otherDeletedHandler} />
+            <OtherList userId={userId} items={loadedOther} onDeleteOther={otherDeletedHandler} />
           )}
         </React.Fragment>
       );
