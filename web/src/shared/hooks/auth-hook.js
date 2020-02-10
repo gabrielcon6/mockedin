@@ -1,5 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 
+import { AuthContext } from '../../shared/context/auth-context';
+
 let logoutTimer;
 
 export const useAuth = () => {
@@ -8,8 +10,8 @@ export const useAuth = () => {
   const [userId, setUserId] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const login = useCallback((uid, token2, isAdmin, expirationDate) => {
-    setToken(token2);
+  const login = useCallback((uid, token, isAdmin, expirationDate) => {
+    setToken(token);
     setUserId(uid);
     setIsAdmin(isAdmin);
     
@@ -51,8 +53,9 @@ export const useAuth = () => {
       new Date(storedData.expiration) > new Date()
     ) {
       login(storedData.userId, storedData.token, storedData.isAdmin, new Date(storedData.expiration));
+      console.log('line 54 auth-hook is admin', storedData.isAdmin)
     }
   }, [login]);
 
-  return { token, login, logout, userId };
+  return { token, login, logout, userId, isAdmin };
 };
