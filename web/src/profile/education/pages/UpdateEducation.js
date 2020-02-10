@@ -37,7 +37,12 @@ const UpdateEducation = () => {
       endDate: {
         value: null,
         isValid: false
+      },
+      description: {
+        value: null,
+        isValid: false
       }
+  
     },
     false
   );
@@ -66,6 +71,10 @@ const UpdateEducation = () => {
             endDate: {
               value: responseData.education.image,
               isValid: true
+            },
+            description: {
+              value: responseData.education.description,
+              isValid: true
             }
           },
           true
@@ -86,7 +95,8 @@ const UpdateEducation = () => {
           school: formState.inputs.school.value,
           degree: formState.inputs.degree.value,
           startDate: formState.inputs.startDate.value,
-          endDate: formState.inputs.endDate.value
+          endDate: formState.inputs.endDate.value,
+          description: formState.inputs.description.value
         }),
         {
           'Content-Type': 'application/json',
@@ -162,6 +172,17 @@ const UpdateEducation = () => {
             errorText="Please enter your about text."
             onInput={inputHandler}
             initialValue={loadedEducation.endDate}
+            initialValid={true}
+          />
+           <Input
+            id="description"
+            element="textarea"
+            type="text"
+            label="Description"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter your about text."
+            onInput={inputHandler}
+            initialValue={loadedEducation.description}
             initialValid={true}
           />
           <Button type="submit" disabled={!formState.isValid}>

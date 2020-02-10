@@ -31,6 +31,10 @@ const NewEducation = () => {
       endDate: {
         value: null,
         isValid: false
+      },
+      description: {
+        value: null,
+        isValid: false
       }
     },
     false
@@ -49,6 +53,7 @@ const NewEducation = () => {
         degree: formState.inputs.degree.value,
         startDate: formState.inputs.startDate.value,
         endDate: formState.inputs.endDate.value,
+        description: formState.inputs.description.value,
       }),
       { 
       'Content-Type': 'application/json',
@@ -100,6 +105,16 @@ const NewEducation = () => {
           errorText="Comment by the recruiter."
           onInput={inputHandler}
         />
+           <Input
+          id="description"
+          element="textarea"
+          type="text"
+          label="Description"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Comment by the recruiter."
+          onInput={inputHandler}
+        />
+      
         <Button type="submit" >
           ADD Education
         </Button>

@@ -6,6 +6,7 @@ import Button from '../../../shared/components/FormElements/Button';
 import '../../../places/components/PlaceList.css';
 import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
 import EducationItem from './EducationItem';
+import { Link } from 'react-router-dom';
 
 
 const EducationList = props => {
@@ -24,10 +25,10 @@ const EducationList = props => {
     <React.Fragment>
        <CardMockedin  className="cardMocke">
      <div className='card-title__experience'>
-               <div className='card-title__experience__position'>
-               <h4 >Education</h4>
-               </div> 
-               <FaPlus className='plus-icon-size'/> 
+        <div className='card-title__experience__position'>
+          <h4 >Education</h4>
+        </div> 
+        <Link to="/education/new"><FaPlus className='plus-icon-size'/></Link>
        </div>
         {props.items.education.map(education => (
           <EducationItem

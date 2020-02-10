@@ -24,16 +24,16 @@ const NavLinks = props => {
           <NavLink to="/header/new">+ HEADER</NavLink>
         </li>
       )}
-      {auth.isLoggedIn && (
+      {/* {auth.isLoggedIn && (
         <li>
           <NavLink to="/experiences/new">+ EXPERIENCE</NavLink>
         </li>
-      )}
-      {auth.isLoggedIn && (
+      )} */}
+      {/* {auth.isLoggedIn && (
         <li>
           <NavLink to="/education/new">+ EDUCATION </NavLink>
         </li>
-      )}
+      )} */}
       {auth.isLoggedIn && (
         <li>
           <NavLink to="/others/new">+ OTHER </NavLink>

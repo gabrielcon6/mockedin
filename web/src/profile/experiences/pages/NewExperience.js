@@ -107,7 +107,7 @@ const NewExperience = () => {
          <Input
           id="description"
           element="textarea"
-          type="description"
+          type="text"
           label="description"
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Comment by the recruiter."

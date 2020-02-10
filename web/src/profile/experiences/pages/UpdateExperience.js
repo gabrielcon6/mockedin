@@ -37,6 +37,10 @@ const UpdateExperience = () => {
       endDate: {
         value: null,
         isValid: false
+      },
+      description:{
+        value: null,
+        isValid: false
       }
     },
     false
@@ -93,6 +97,7 @@ const UpdateExperience = () => {
           endDate: formState.inputs.endDate.value,
           description:formState.inputs.description.value,
         }),
+        
         {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + auth.token

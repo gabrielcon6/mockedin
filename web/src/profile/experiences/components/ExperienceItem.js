@@ -99,7 +99,7 @@ const ExperienceItem = props => {
             <p className='card-items-description'>{props.description}</p>
             </div>
           </div>
-        {/* <div className="place-item__actions">
+        <div className="place-item__actions">
             {auth.userId === props.creatorId && (
           <Button to={`/experience/${props.id}`}>EDIT</Button>
           )}
@@ -109,7 +109,7 @@ const ExperienceItem = props => {
           DELETE
           </Button>
         )}
-          </div> */}
+          </div>
          </div>
         </div>
       </div>

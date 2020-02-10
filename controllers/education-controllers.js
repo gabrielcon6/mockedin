@@ -67,14 +67,14 @@ const createEducation = async (req, res, next) => {
       new HttpError('Invalid inputs passed, please check your data.', 422)
     );
   }
-  const { school, degree, startDate, endDate } = req.body;
+  const { school, degree, startDate, endDate, description } = req.body;
   const createdEducation = new Education({
     id: uuid(), 
     school,
     degree,
     startDate,
     endDate,
-    description: '*to be reviewed*',
+    description: description ,
     adminComments: 'great!',
     isOk: false,
     creator: req.userData.userId
@@ -127,7 +127,7 @@ const updateEducation = async (req, res, next) => {
       new HttpError('Invalid inputs passed, please check your data.', 422)
     );
   }
-  const { school, degree, startDate, endDate } = req.body;
+  const { school, degree, startDate, endDate, description } = req.body;
   const educationId = req.params.exid;
   let education;
   try {
@@ -147,6 +147,7 @@ const updateEducation = async (req, res, next) => {
   education.degree = degree;
   education.startDate = startDate;
   education.endDate = endDate;
+  education.description = description;
   // education.adminComments = adminComments;
   try {
     await education.save();

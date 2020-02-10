@@ -81,7 +81,7 @@ const createExperience = async (req, res, next) => {
     );
   }
 
-  const { title, company, startDate, endDate } = req.body;
+  const { title, company, startDate, endDate, description } = req.body;
 
   const createdExperience = new Experience({
     id: uuid(), 
@@ -89,7 +89,7 @@ const createExperience = async (req, res, next) => {
     company,
     startDate,
     endDate,
-    description: '*to be reviewed*',
+    description: description,
     isOk: false,
     creator: req.userData.userId
   });
@@ -148,7 +148,7 @@ const updateExperience = async (req, res, next) => {
     );
   }
 
-  const { title, company, startDate, endDate } = req.body;
+  const { title, company, startDate, endDate, description } = req.body;
   const experienceId = req.params.exid;
   console.log('82482348932984723894798327942', experienceId);
 
@@ -172,6 +172,7 @@ const updateExperience = async (req, res, next) => {
   experience.company = company;
   experience.startDate = startDate;
   experience.endDate = endDate;
+  experience.description = description;
 
   // experience.adminComments = adminComments;
 
@@ -190,7 +191,7 @@ const updateExperience = async (req, res, next) => {
 
 const deleteExperience = async (req, res, next) => {
   const experienceId = req.params.exid;
-
+  
   console.log('line 194', experienceId)
   let experience;
   try {
@@ -198,7 +199,7 @@ const deleteExperience = async (req, res, next) => {
     console.log('line 198', experience)
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not delete experience.',
+      'line 202 Something went wrong, could not delete experience.',
       500
     );
     return next(error);
@@ -227,7 +228,7 @@ const deleteExperience = async (req, res, next) => {
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not delete experience.',
+      'line 231 Something went wrong, could not delete experience. But works',
       500
     );
     return next(error);

@@ -6,6 +6,7 @@ import '../../../places/components/PlaceList.css';
 import ExperienceItem from './ExperienceItem';
 import '../../../places/components/Experience.scss'
 import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const ExperienceList = props => {
   if (props.items.length === 0) {
@@ -22,10 +23,10 @@ const ExperienceList = props => {
   return (
     <CardMockedin  className="cardMocke">
      <div className='card-title__experience'>
-               <div className='card-title__experience__position'>
-               <h4 >Experience</h4>
-               </div> 
-               <FaPlus className='plus-icon-size'/> 
+      <div className='card-title__experience__position'>
+        <h4 >Experience</h4>
+      </div> 
+      <Link to="/experiences/new"><FaPlus className='plus-icon-size'/> </Link>       
        </div>
       {props.items.map(experience => (
         <ExperienceItem
