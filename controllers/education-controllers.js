@@ -128,7 +128,7 @@ const updateEducation = async (req, res, next) => {
     );
   }
   const { school, degree, startDate, endDate, description } = req.body;
-  const educationId = req.params.exid;
+  const educationId = req.params.edid;
   let education;
   try {
     education = await Education.findById(educationId);
@@ -163,13 +163,13 @@ const updateEducation = async (req, res, next) => {
 
 
 const deleteEducation = async (req, res, next) => {
-  const educationId = req.params.exid;
+  const educationId = req.params.edid;
   let education;
   try {
     education = await Education.findById(educationId);
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not delete education.',
+      '172 - Something went wrong, could not delete education.',
       500
     );
     return next(error);
@@ -186,15 +186,15 @@ const deleteEducation = async (req, res, next) => {
     return next(error);
   }
   try {
+    await education.remove();
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    await education.remove({ session: sess });
     education.creator.education.pull(education); 
     await education.creator.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not delete education.',
+      '197 - Something went wrong, could not delete education.',
       500
     );
     return next(error);
