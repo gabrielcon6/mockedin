@@ -222,7 +222,6 @@ const deleteExperience = async (req, res, next) => {
     await experience.remove();
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    console.log('line 224', experience.creator.experiences);
     experience.creator.experiences.pull(experience); //experience OR ExperiencesS????
     await experience.creator.save({ session: sess });
     await sess.commitTransaction();

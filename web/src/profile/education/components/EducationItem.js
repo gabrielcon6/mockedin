@@ -87,7 +87,7 @@ const EducationItem = props => {
                 <p className='card-items__date '>{props.startDate} - {props.endDate}</p>
                 <p>{props.description}</p>
           </div>
-          {/* <div className="place-item__actions">
+          <div className="place-item__actions">
             {auth.userId === props.creatorId && (
               <Button to={`/education/${props.id}`}>EDIT</Button>
             )}
@@ -97,7 +97,7 @@ const EducationItem = props => {
                 DELETE
               </Button>
             )}
-          </div> */}
+          </div>
           </div>
         </div>
       </div>
