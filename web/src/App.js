@@ -32,7 +32,7 @@ const App = () => {
           <Users />
         </Route>
         <Route path="/:userId/profile" exact>
-          <ProfilePage />
+          <ProfilePage userId={userId}/>
         </Route>
 
         <Redirect to="/" />
@@ -44,7 +44,7 @@ const App = () => {
     routes = (
       <Switch>
         <Route path="/:userId/profile" exact>
-          <ProfilePage />
+          <ProfilePage userId={userId}/>
         </Route>
         {/* HEADERS */}
         <Route path="/header/new" exact>
