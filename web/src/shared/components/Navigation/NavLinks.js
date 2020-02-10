@@ -51,6 +51,9 @@ const NavLinks = props => {
           <button onClick={auth.logout}>LOGOUT</button>
         </li>
       )}
+        <li>
+          <NavLink to="/image">IMAGE UPLOAD (PROVISORY)</NavLink>
+        </li>
     </ul>
   );
 };
