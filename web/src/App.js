@@ -22,7 +22,7 @@ import NewOther from './profile/others/pages/NewOther';
 import UpdateOther from './profile/others/pages/UpdateOther';
 
 const App = () => {
-  const { token, login, logout, userId } = useAuth();
+  const { token, login, logout, userId, isAdmin } = useAuth();
 
   let routes;
 
@@ -87,6 +87,7 @@ const App = () => {
         isLoggedIn: !!token,
         token: token,
         userId: userId,
+        isAdmin: isAdmin,
         login: login,
         logout: logout
       }}
