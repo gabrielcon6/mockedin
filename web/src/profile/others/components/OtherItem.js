@@ -9,6 +9,9 @@ import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import '../../../places/components/PlaceItem.css';
+import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import '../../../places/components/Experience.scss'
 
 const OtherItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -66,14 +69,25 @@ const OtherItem = props => {
           can't be undone thereafter.
         </p>
       </Modal>
-      <li className="place-item">
-        <Card className="place-item__content">
+      <div className='card-items'>
+          <div className='card-items__icon-experience'>
+          <FaRegBuilding className='icont-element' />
+        </div> 
+        <div className="sub__card">
+        <div className="job-description">
+        <span className='edit-job' >
+        <p className='card-items__job-title'>{props.title}</p>
+        {auth.userId === props.creatorId && (
+              <Link to={`/other/${props.id}`}>
+                <FaPencilAlt className='edit-job-icon'/>
+              </Link>
+            )}
+        </span>
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__info">
-            <h1>Others</h1>
-            <h2>Title: {props.title}</h2>
-            <h3>Company: {props.company}</h3>
-            <p>Start Date: &nbsp;	
+            <p className='card-items__title'>Title: {props.title}</p>
+            <p className='card-items__title'>Company: {props.company}</p>
+            {/* <p className='card-items__date '>Start Date: &nbsp;	
               <Moment format="MMMM YYYY">
                   {props.startDate}
               </Moment> |
@@ -81,7 +95,10 @@ const OtherItem = props => {
               <Moment format="MMMM YYYY">
                   {props.endDate}
               </Moment>
-            </p>
+            </p> */}
+            <div className='card-items-description'>
+              <p className='card-items-description'>{props.description}</p>
+            </div>
           </div>
           <div className="place-item__actions">
             {auth.userId === props.creatorId && (
@@ -93,9 +110,10 @@ const OtherItem = props => {
                 DELETE
               </Button>
             )}
-          </div>
-        </Card>
-      </li>
+            </div>
+            </div>
+        </div>
+      </div>
     </React.Fragment>
 
   );

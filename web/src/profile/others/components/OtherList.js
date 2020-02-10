@@ -1,9 +1,13 @@
 import React from 'react';
 
+
+import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
 import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
 import '../../../places/components/PlaceList.css';
 import OtherItem from './OtherItem';
+import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const OtherList = props => {
   if (props.items.length === 0) {
@@ -18,7 +22,13 @@ const OtherList = props => {
   }
 
   return (
-    <ul className="place-list">
+    <CardMockedin className="cardMocke">
+    <div className='card-title__experience'>
+      <div className='card-title__experience__position'>
+        <h4 >Accomplishments</h4>
+      </div> 
+      <Link to="/others/new"><FaPlus className='plus-icon-size'/> </Link>       
+       </div>
       {props.items.map(other => (
         <OtherItem
           key={other._id}
@@ -33,7 +43,7 @@ const OtherList = props => {
           onDelete={props.onDeleteOther}
         />
       ))}
-    </ul>
+    </CardMockedin>
   );
 };
 
