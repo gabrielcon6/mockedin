@@ -198,7 +198,7 @@ const deleteOther = async (req, res, next) => {
     console.log('line 198', other)
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not delete other.',
+      '201 - Something went wrong, could not delete other.',
       500
     );
     return next(error);
@@ -219,7 +219,6 @@ const deleteOther = async (req, res, next) => {
 
   try {
     await other.remove();
-    console.log('line 222', other.creator.others);
     const sess = await mongoose.startSession();
     sess.startTransaction();
     other.creator.others.pull(other); //other OR othersS????
@@ -227,7 +226,7 @@ const deleteOther = async (req, res, next) => {
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not delete other.',
+      '229 - Something went wrong, could not delete other.',
       500
     );
     return next(error);
