@@ -70,9 +70,6 @@ const App = () => {
   } else {
     routes = (
       <Switch>
-        <Route path="/" exact>
-          <Users />
-        </Route>
         <Route path="/:userId/page" exact>
           <ProfilePage />
         </Route>
