@@ -9,14 +9,14 @@ const NavLinks = props => {
 
   return (
     <ul className="nav-links">
-      {AuthContext.isLoggedIn && (
+      {auth.isAdmin && (
         <li>
           <NavLink to="/" exact>
-                ALL USERS
+                SEARCH USERS
           </NavLink>
         </li>
       )}
-      {auth.isLoggedIn && (
+      {auth.isLoggedIn && !auth.isAdmin  && (
         <li>
           <NavLink to={`/${auth.userId}/profile`}>MY PROFILE</NavLink>
         </li>
