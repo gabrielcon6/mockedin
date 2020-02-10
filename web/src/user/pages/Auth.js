@@ -74,7 +74,7 @@ const Auth = () => {
             'Content-Type': 'application/json'
           }
         );
-        auth.login(responseData.userId, responseData.token);
+        auth.login(responseData.userId, responseData.token, responseData.isAdmin);
       } catch (err) {}
     } else {
       try {
@@ -91,7 +91,7 @@ const Auth = () => {
           }
         );
 
-        auth.login(responseData.userId, responseData.token);
+        auth.login(responseData.userId, responseData.token, responseData.isAdmin);
       } catch (err) {}
     }
   };
@@ -130,7 +130,7 @@ const Auth = () => {
             type="password"
             label="Password"
             validators={[VALIDATOR_MINLENGTH(6)]}
-            errorText="Please enter a valid password, at least 5 characters."
+            errorText="Please enter a valid password, at least 6 characters."
             onInput={inputHandler}
           />
           <Button type="submit" disabled={!formState.isValid}>
