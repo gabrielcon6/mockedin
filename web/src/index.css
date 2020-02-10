@@ -41,3 +41,9 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.cardMocke{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}

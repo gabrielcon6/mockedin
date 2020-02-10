@@ -66,6 +66,10 @@ const UpdateExperience = () => {
             endDate: {
               value: responseData.experiences.image,
               isValid: true
+            },
+            description: {
+              value: responseData.experiences.description,
+              isValid: true
             }
           },
           true
@@ -86,7 +90,8 @@ const UpdateExperience = () => {
           title: formState.inputs.title.value,
           company: formState.inputs.company.value,
           startDate: formState.inputs.startDate.value,
-          endDate: formState.inputs.endDate.value
+          endDate: formState.inputs.endDate.value,
+          description:formState.inputs.description.value,
         }),
         {
           'Content-Type': 'application/json',
@@ -162,6 +167,17 @@ const UpdateExperience = () => {
             errorText="Please enter your about text."
             onInput={inputHandler}
             initialValue={loadedExperience.endDate}
+            initialValid={true}
+          />
+           <Input
+            id="description"
+            element="textarea"
+            type="text"
+            label="description"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter your title."
+            onInput={inputHandler}
+            initialValue={loadedExperience.description}
             initialValid={true}
           />
           <Button type="submit" disabled={!formState.isValid}>

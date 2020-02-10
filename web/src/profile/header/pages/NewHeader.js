@@ -131,7 +131,7 @@ const NewHeader = () => {
         </div>
         <Input
           id="about"
-          element="input"
+          element="textarea"
           label="About"
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter something about yourself."

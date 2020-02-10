@@ -8,7 +8,10 @@ import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
-import '../../../places/components/PlaceItem.css';
+// import '../../../places/components/PlaceItem.css';
+import '../../../places/components/Experience.scss'
+import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const ExperienceItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -66,36 +69,50 @@ const ExperienceItem = props => {
           can't be undone thereafter.
         </p>
       </Modal>
-      <li className="place-item">
-        <Card className="place-item__content">
+      <div className='card-items'>
+          <div className='card-items__icon-experience'>
+          <FaRegBuilding className='icont-element' />
+        </div> 
+        <div className="sub__card">
+        <div className="job-description">
+          <span className='edit-job' >
+            <p className='card-items__job-title'>{props.title}</p>
+              {auth.userId === props.creatorId && (
+                <Link to={`/experience/${props.id}`}> 
+                  <FaPencilAlt className='edit-job-icon'/>
+                </Link>
+            )}
+          </span>
           {isLoading && <LoadingSpinner asOverlay />}
-          <div className="place-item__info">
-            <h1>Experiences</h1>
-            <h2>Title: {props.title}</h2>
-            <h3>Company: {props.company}</h3>
-            <p>Start Date: &nbsp;	
-              <Moment format="MMMM YYYY">
-                  {props.startDate}
-              </Moment> |
+            <div className="place-item__info">
+            <p className='card-items__title'>{props.company}</p>
+            <p className='card-items__date '>Start Date: &nbsp;	
+          <Moment format="MMMM YYYY">
+              {props.startDate}
+          </Moment> |
             End Date: &nbsp;	
-              <Moment format="MMMM YYYY">
-                  {props.endDate}
-              </Moment>
+          <Moment format="MMMM YYYY">
+            {props.endDate}
+          </Moment>
             </p>
+            <div className='card-items-description'>
+            <p className='card-items-description'>{props.description}</p>
+            </div>
           </div>
-          <div className="place-item__actions">
+        {/* <div className="place-item__actions">
             {auth.userId === props.creatorId && (
-              <Button to={`/experience/${props.id}`}>EDIT</Button>
-            )}
+          <Button to={`/experience/${props.id}`}>EDIT</Button>
+          )}
 
-            {auth.userId === props.creatorId && (
-              <Button danger onClick={showDeleteWarningHandler}>
-                DELETE
-              </Button>
-            )}
-          </div>
-        </Card>
-      </li>
+          {auth.userId === props.creatorId && (
+        <Button danger onClick={showDeleteWarningHandler}>
+          DELETE
+          </Button>
+        )}
+          </div> */}
+         </div>
+        </div>
+      </div>
     </React.Fragment>
 
   );

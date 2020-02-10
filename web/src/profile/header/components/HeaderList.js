@@ -3,7 +3,7 @@ import React from 'react';
 import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
 import '../../../places/components/PlaceList.css';
-
+import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
 import HeaderItem from './HeaderItem';
 
 const HeaderList = props => {
@@ -18,7 +18,7 @@ const HeaderList = props => {
     );
   }
   return (
-    <ul className="place-list">
+    <CardMockedin className="cardMocke">
       {props.items.map(header => (
         <HeaderItem
           key={header._id}
@@ -34,7 +34,7 @@ const HeaderList = props => {
           onDelete={props.onDeleteHeader}
         />
       ))}
-    </ul>
+    </CardMockedin>
   );
 };
 

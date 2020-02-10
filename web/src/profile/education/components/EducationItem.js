@@ -7,6 +7,8 @@ import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
+import { FaRegBuilding, FaPencilAlt,FaUniversity} from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import '../../../places/components/PlaceItem.css';
 
 const EducationItem = props => {
@@ -63,20 +65,29 @@ const EducationItem = props => {
           can't be undone thereafter.
         </p>
       </Modal>
-      <li className="place-item">
-        <Card className="place-item__content">
-          {isLoading && <LoadingSpinner asOverlay />}
+      <div className='card-items'>
+        <div className='card-items__icon-experience'>
+          <FaUniversity className='icont-element' />
+        </div> 
+        <div className="sub__card">
+        <div className="job-description">
+          <span className='edit-job' >
+          {/* {isLoading && <LoadingSpinner asOverlay />}
           {props.image && 
           <div className="place-item__image">
             <img src={`/${props.image}`} alt={props.title}/>
-          </div>}
+          </div>} */}
+              <p className='card-items__job-title'>School: {props.school}</p>
+              {auth.userId === props.creatorId && (
+              <Link to={`/education/${props.id}`}><FaPencilAlt/></Link>
+            )}
+          </span>
           <div className="place-item__info">
-            <h2>School: {props.school}</h2>
-            <h3>Degree: {props.degree}</h3>
-            <p>{props.startDate} - {props.endDate}</p>
-            <p>{props.description}</p>
+                <p className='card-items__title'>Degree: {props.degree}</p>
+                <p className='card-items__date '>{props.startDate} - {props.endDate}</p>
+                <p>{props.description}</p>
           </div>
-          <div className="place-item__actions">
+          {/* <div className="place-item__actions">
             {auth.userId === props.creatorId && (
               <Button to={`/education/${props.id}`}>EDIT</Button>
             )}
@@ -86,9 +97,10 @@ const EducationItem = props => {
                 DELETE
               </Button>
             )}
+          </div> */}
           </div>
-        </Card>
-      </li>
+        </div>
+      </div>
     </React.Fragment>
 
   );

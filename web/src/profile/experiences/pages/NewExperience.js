@@ -31,6 +31,10 @@ const NewExperience = () => {
       endDate: {
         value: null,
         isValid: false
+      },
+      description: {
+        value: null,
+        isValid: false
       }
     },
     false
@@ -49,6 +53,7 @@ const NewExperience = () => {
         company: formState.inputs.company.value,
         startDate: formState.inputs.startDate.value,
         endDate: formState.inputs.endDate.value,
+        description: formState.inputs.description.value,
       }),
       { 
       'Content-Type': 'application/json',
@@ -95,6 +100,15 @@ const NewExperience = () => {
           element="input"
           type="date"
           label="End Date"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Comment by the recruiter."
+          onInput={inputHandler}
+        />
+         <Input
+          id="description"
+          element="textarea"
+          type="description"
+          label="description"
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Comment by the recruiter."
           onInput={inputHandler}

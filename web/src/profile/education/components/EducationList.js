@@ -1,9 +1,10 @@
 import React from 'react';
 
+import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
 import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
 import '../../../places/components/PlaceList.css';
-
+import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
 import EducationItem from './EducationItem';
 
 
@@ -21,7 +22,13 @@ const EducationList = props => {
   }
   return (
     <React.Fragment>
-      <ul className="place-list">
+       <CardMockedin  className="cardMocke">
+     <div className='card-title__experience'>
+               <div className='card-title__experience__position'>
+               <h4 >Education</h4>
+               </div> 
+               <FaPlus className='plus-icon-size'/> 
+       </div>
         {props.items.education.map(education => (
           <EducationItem
             key={education._id}
@@ -37,7 +44,7 @@ const EducationList = props => {
             onDelete={props.onDeleteEducation}
           />
         ))}
-      </ul>
+      </CardMockedin>
       </React.Fragment>
   );
 };

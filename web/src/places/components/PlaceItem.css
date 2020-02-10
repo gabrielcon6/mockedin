@@ -1,4 +1,4 @@
-.place-item {
+/* .place-item {
   margin: 1rem 0;
 }
 
@@ -51,7 +51,7 @@
 .map-container {
   height: 15rem;
   width: 100%;
-}
+} */
 
 @media (min-width: 768px) {
   .place-item__image {
