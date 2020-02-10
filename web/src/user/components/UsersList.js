@@ -17,7 +17,7 @@ const UsersList = props => {
 
   return (
     <ul className="users-list">
-      {props.items.map(user => (
+      {props.items.map(user => ( !user.isAdmin &&
         <UserItem
           key={user.id}
           id={user.id}
