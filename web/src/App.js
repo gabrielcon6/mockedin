@@ -20,9 +20,6 @@ import NewEducation from './profile/education/pages/NewEducation';
 import UpdateEducation from './profile/education/pages/UpdateEducation';
 import NewOther from './profile/others/pages/NewOther';
 import UpdateOther from './profile/others/pages/UpdateOther';
-import FileUpload from './profile/image/FileUpload';
-import FileDescriptionEdit from './profile/image/FileDescriptionEdit';
-import NewFileUpload from './profile/image/NewFileUpload';
 
 const App = () => {
   const { token, login, logout, userId, isAdmin } = useAuth();
