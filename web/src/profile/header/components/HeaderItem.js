@@ -83,7 +83,7 @@ const HeaderItem = props => {
             {isLoading && <LoadingSpinner asOverlay />}
             {props.image && 
             <div className="card-avatar">
-            <img src={`/${props.image}`} className="avatar" alt={props.title}/>
+            <img src={`${props.image}`} className="avatar" alt={props.title}/>
             </div>
           }
           <div className='card-content__subcontainer'>

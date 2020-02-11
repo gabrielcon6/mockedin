@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const HttpError = require('../models/http-error');
 const Header = require('../models/header');
 const User = require('../models/user');
+const multer = require("multer");
+const AWS = require("aws-sdk");
 
 const getHeaderById = async (req, res, next) => {
   const headerId = req.params.hid;
@@ -86,10 +88,36 @@ const createHeader = async (req, res, next) => {
   const { name, jobTitle, location, about } = req.body;
   // console.log(name);
 
+
+
+  //************************** */
+
+  const file = req.file;
+  const s3FileURL = "https://s3-ap-southeast-2.amazonaws.com/mockedin-images/"
+
+  const s3bucket = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: "ap-southeast-2"
+  });
+
+  const params = {
+    Bucket: "mockedin-images",
+    Key: file.originalname,
+    Body: file.buffer,
+    ContentType: file.mimetype,
+    ACL: "public-read"
+  };
+
+  // let createdHeader;
+
+
+
   const createdHeader = new Header({
     id: uuid(), 
     name,
-    image: req.file.path,
+    fileLink: s3FileURL + file.originalname,
+    s3_key: params.Key,
     jobTitle,
     location,
     about,
@@ -97,6 +125,12 @@ const createHeader = async (req, res, next) => {
     isOk: false,
     creator: req.userData.userId
   });
+
+  console.log('line 136 HEADER', s3FileURL + file.originalname)
+  //************************** */
+
+
+
 
   let user;
   try {
@@ -117,6 +151,14 @@ const createHeader = async (req, res, next) => {
   console.log(user);
 
   try {
+    s3bucket.upload(params, function(err, data) {
+      if (err) {
+        res.status(500).json({ error: true, Message: err });
+      } else {
+        // res.send({ data });
+        console.log('HELLLOOOOOO 117', data)
+      }
+    });
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await createdHeader.save({ session: sess });
@@ -125,22 +167,11 @@ const createHeader = async (req, res, next) => {
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
-      'Creating place failed, please try again.',
+      'Creating header failed, please try again.',
       500
     );
     return next(error);
   }
-
-  //BELOW IS IF WE WANT TO CREATE HEADER MANUALLY VIA POSTMAN
-  // try {
-  //   await createdHeader.save();
-  // } catch (err) {
-  //   const error = new HttpError(
-  //     'Signing up failed, please try again later.',
-  //     500
-  //   );
-  //   return next(error);
-  // }
   res.status(201).json({ header: createdHeader });
 };
 
