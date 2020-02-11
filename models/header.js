@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 
 const headerSchema = new Schema({
   name: { type: String },
-  image: { type: String },
+  fileLink: { type: String },
+  s3_key: { type: String },
   jobTitle: { type: String },
   location: { type: String },
   about: { type: String },

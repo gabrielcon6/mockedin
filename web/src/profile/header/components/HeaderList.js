@@ -31,7 +31,7 @@ const HeaderList = props => {
           key={header._id}
           id={header._id}
           name={header.name}
-          image={header.image}
+          image={header.fileLink}
           jobTitle={header.jobTitle}
           location={header.location}
           about={header.about}

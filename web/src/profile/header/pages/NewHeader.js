@@ -40,7 +40,7 @@ const NewHeader = () => {
         value: '',
         isValid: false
       },
-      image: {
+      file: {
         value: null,
         isValid: false
       }
@@ -61,7 +61,7 @@ const NewHeader = () => {
     try {
       const formData = new FormData();
       formData.append('name', formState.inputs.name.value);
-      formData.append('image', formState.inputs.image.value);
+      formData.append('file', formState.inputs.file.value);
       formData.append('jobTitle', formState.inputs.jobTitle.value);
       formData.append('location', address);
       formData.append('about', formState.inputs.about.value);
@@ -87,7 +87,7 @@ const NewHeader = () => {
           onInput={inputHandler}
         />
         <ImageUpload
-          id="image"
+          id="file"
           onInput={inputHandler}
           errorText="Please provide a photo."
         />

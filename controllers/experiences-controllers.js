@@ -38,7 +38,6 @@ const getExperienceByUserId = async (req, res, next) => {
   let userWithExperience;
   try {
     userWithExperience = await User.findById(userId).populate({path: 'experiences', options: { sort: { 'startDate': 'desc' } }});
-    console.log('line41', userWithExperience )
   } catch (err) {
     const error = new HttpError(
       'Fetching experiences failed, please try again later.',
@@ -111,8 +110,6 @@ const createExperience = async (req, res, next) => {
     return next(error);
   }
 
-  console.log('line 116', user);
-
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
@@ -151,7 +148,6 @@ const updateExperience = async (req, res, next) => {
 
   const { title, company, startDate, endDate, description } = req.body;
   const experienceId = req.params.exid;
-  console.log('82482348932984723894798327942', experienceId);
 
   let experience;
   try {
@@ -193,11 +189,9 @@ const updateExperience = async (req, res, next) => {
 const deleteExperience = async (req, res, next) => {
   const experienceId = req.params.exid;
   
-  console.log('line 194', experienceId)
   let experience;
   try {
     experience = await Experience.findById(experienceId);
-    console.log('line 198', experience)
   } catch (err) {
     const error = new HttpError(
       'line 202 Something went wrong, could not delete experience.',
