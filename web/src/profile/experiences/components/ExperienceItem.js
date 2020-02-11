@@ -10,7 +10,7 @@ import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 // import '../../../places/components/PlaceItem.css';
 import '../../../places/components/Experience.scss'
-import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
+import { FaRegBuilding, FaPlus,FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const ExperienceItem = props => {
@@ -78,10 +78,15 @@ const ExperienceItem = props => {
           <span className='edit-job' >
             <p className='card-items__job-title'>{props.title}</p>
               {auth.userId === props.creatorId && (
-                <Link to={`/experience/${props.id}`}> 
-                  <FaPencilAlt className='edit-job-icon'/>
-                </Link>
-            )}
+                <div >
+                  <Link to={`/experience/${props.id}`}> 
+                    <FaPencilAlt className='edit-job-icon'/>
+                  </Link>
+                  <Link danger className='edit-job-icon' onClick={showDeleteWarningHandler}>
+                    <FaTrash/>
+                  </Link>
+                </div>
+                )}
           </span>
           {isLoading && <LoadingSpinner asOverlay />}
             <div className="place-item__info">
@@ -98,17 +103,13 @@ const ExperienceItem = props => {
             <div className='card-items-description'>
             <p className='card-items-description'>{props.description}</p>
             </div>
+            
           </div>
         <div className="place-item__actions">
-            {auth.userId === props.creatorId && (
+            {/* {auth.userId === props.creatorId && (
           <Button to={`/experience/${props.id}`}>EDIT</Button>
-          )}
+          )} */}
 
-          {auth.userId === props.creatorId && (
-        <Button danger onClick={showDeleteWarningHandler}>
-          DELETE
-          </Button>
-        )}
           </div>
          </div>
         </div>

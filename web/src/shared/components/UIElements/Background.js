@@ -17,9 +17,9 @@ export default class Background extends React.Component{
             		}
             	}}
               style={{
-                width: '100%',
-                height:'100%',
-                // position: 'fixed',
+                  width: '100%',
+                  height:'100%',
+                  // position: 'fixed',
               }}
             >
             </Particles>

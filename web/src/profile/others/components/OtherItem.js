@@ -9,7 +9,7 @@ import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import '../../../places/components/PlaceItem.css';
-import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
+import { FaTrophy, FaPlus,FaPencilAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import '../../../places/components/Experience.scss'
 
@@ -71,7 +71,7 @@ const OtherItem = props => {
       </Modal>
       <div className='card-items'>
           <div className='card-items__icon-experience'>
-          <FaRegBuilding className='icont-element' />
+          <FaTrophy className='icont-element' />
         </div> 
         <div className="sub__card">
         <div className="job-description">
@@ -101,9 +101,9 @@ const OtherItem = props => {
             </div>
           </div>
           <div className="place-item__actions">
-            {auth.userId === props.creatorId && (
+            {/* {auth.userId === props.creatorId && (
               <Button to={`/other/${props.id}`}>EDIT</Button>
-            )}
+            )} */}
 
             {auth.userId === props.creatorId && (
               <Button danger onClick={showDeleteWarningHandler}>

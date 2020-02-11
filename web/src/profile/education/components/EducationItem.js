@@ -88,12 +88,11 @@ const EducationItem = props => {
                 <p>{props.description}</p>
           </div>
           <div className="place-item__actions">
-            {auth.userId === props.creatorId && (
+            {/* {auth.userId === props.creatorId && (
               <Button to={`/education/${props.id}`}>EDIT</Button>
-            )}
-
+            )} */}
             {auth.userId === props.creatorId && (
-              <Button danger onClick={showDeleteWarningHandler}>
+              <Button  danger onClick={showDeleteWarningHandler}>
                 DELETE
               </Button>
             )}
