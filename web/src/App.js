@@ -92,16 +92,6 @@ const App = () => {
         <Route path="/auth">
           <Auth />
         </Route>
-        <Route path="/image" exact>
-          <FileUpload/>
-        </Route>
-        <Route path="/api/document/upload" exact>
-          <NewFileUpload />
-        </Route>
-        <Route path="/api/document/edit/:id" exact>
-            <FileDescriptionEdit />
-        </Route>
-
         <Redirect to="/auth" />
       </Switch>
     );
