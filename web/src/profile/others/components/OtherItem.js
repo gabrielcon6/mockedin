@@ -101,9 +101,9 @@ const OtherItem = props => {
             </div>
           </div>
           <div className="place-item__actions">
-            {/* {auth.userId === props.creatorId && (
-              <Button to={`/other/${props.id}`}>EDIT</Button>
-            )} */}
+            {auth.userId === props.creatorId && (
+              <Button to={`/others/${props.id}`}>EDIT</Button>
+            )}
 
             {auth.userId === props.creatorId && (
               <Button danger onClick={showDeleteWarningHandler}>

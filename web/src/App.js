@@ -20,20 +20,34 @@ import NewEducation from './profile/education/pages/NewEducation';
 import UpdateEducation from './profile/education/pages/UpdateEducation';
 import NewOther from './profile/others/pages/NewOther';
 import UpdateOther from './profile/others/pages/UpdateOther';
+import FileUpload from './profile/image/FileUpload';
+import FileDescriptionEdit from './profile/image/FileDescriptionEdit';
+import NewFileUpload from './profile/image/NewFileUpload';
 
 const App = () => {
-  const { token, login, logout, userId } = useAuth();
+  const { token, login, logout, userId, isAdmin } = useAuth();
 
   let routes;
-
-  if (token) {
+  if (token && isAdmin) {
     routes = (
       <Switch>
         <Route path="/" exact>
           <Users />
         </Route>
         <Route path="/:userId/profile" exact>
-          <ProfilePage />
+          <ProfilePage userId={userId}/>
+        </Route>
+
+        <Redirect to="/" />
+      </Switch>
+    );
+  }
+
+  else if (token && !isAdmin) {
+    routes = (
+      <Switch>
+        <Route path="/:userId/profile" exact>
+          <ProfilePage userId={userId}/>
         </Route>
         {/* HEADERS */}
         <Route path="/header/new" exact>
@@ -67,7 +81,9 @@ const App = () => {
         <Redirect to="/" />
       </Switch>
     );
-  } else {
+  } 
+  
+  else {
     routes = (
       <Switch>
         <Route path="/:userId/page" exact>
@@ -76,6 +92,16 @@ const App = () => {
         <Route path="/auth">
           <Auth />
         </Route>
+        <Route path="/image" exact>
+          <FileUpload/>
+        </Route>
+        <Route path="/api/document/upload" exact>
+          <NewFileUpload />
+        </Route>
+        <Route path="/api/document/edit/:id" exact>
+            <FileDescriptionEdit />
+        </Route>
+
         <Redirect to="/auth" />
       </Switch>
     );
@@ -87,6 +113,7 @@ const App = () => {
         isLoggedIn: !!token,
         token: token,
         userId: userId,
+        isAdmin: isAdmin,
         login: login,
         logout: logout
       }}

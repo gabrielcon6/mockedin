@@ -5,8 +5,15 @@ import Button from '../../../shared/components/FormElements/Button';
 import '../../../places/components/PlaceList.css';
 import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
 import HeaderItem from './HeaderItem';
+import Comments from '../../../user/admin/Comments'
+
+
 
 const HeaderList = props => {
+  const storedData = JSON.parse(localStorage.getItem('userData'));
+  console.log(storedData)
+  const admin = storedData.isAdmin
+  console.log(admin)
   if (props.items.length === 0) {
     return (
       <div className="place-list center">
@@ -34,6 +41,9 @@ const HeaderList = props => {
           onDelete={props.onDeleteHeader}
         />
       ))}
+      {admin &&
+        <Comments/>
+      }
     </CardMockedin>
   );
 };

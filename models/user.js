@@ -11,6 +11,9 @@ const userSchema = new Schema({
   experiences: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Experience' }],
   education: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Education' }],
   others: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Other' }]
+},
+{
+  timestamps: true
 });
 
 userSchema.plugin(uniqueValidator);

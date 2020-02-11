@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
 import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
@@ -7,8 +7,11 @@ import ExperienceItem from './ExperienceItem';
 import '../../../places/components/Experience.scss'
 import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../shared/context/auth-context';
 
 const ExperienceList = props => {
+  const auth = useContext(AuthContext);
+
   if (props.items.length === 0) {
     return (
       <div className="place-list center">
@@ -25,8 +28,8 @@ const ExperienceList = props => {
      <div className='card-title__experience'>
       <div className='card-title__experience__position'>
         <h4 >Experience</h4>
-      </div> 
-      <Link to="/experiences/new"><FaPlus className='plus-icon-size'/> </Link>       
+      </div>
+      {auth.userId === props.userId && ( <Link to="/experiences/new"><FaPlus className='plus-icon-size'/> </Link> )}      
        </div>
       {props.items.map(experience => (
         <ExperienceItem

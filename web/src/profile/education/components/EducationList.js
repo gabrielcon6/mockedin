@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
 import Card from '../../../shared/components/UIElements/Card';
@@ -7,9 +7,12 @@ import '../../../places/components/PlaceList.css';
 import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
 import EducationItem from './EducationItem';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../shared/context/auth-context';
+
 
 
 const EducationList = props => {
+  const auth = useContext(AuthContext);
 
   if (props.items.education.length === 0) {
     return (
@@ -28,7 +31,7 @@ const EducationList = props => {
         <div className='card-title__experience__position'>
           <h4 >Education</h4>
         </div> 
-        <Link to="/education/new"><FaPlus className='plus-icon-size'/></Link>
+        {auth.userId === props.userId && ( <Link to="/education/new"><FaPlus className='plus-icon-size'/> </Link> )}      
        </div>
         {props.items.education.map(education => (
           <EducationItem

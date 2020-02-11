@@ -12,6 +12,9 @@ const headerSchema = new Schema({
   adminComments: { type: String },
   isOk: { type: Boolean },
   creator: { type: mongoose.Types.ObjectId, required: true, unique: true,  ref: 'User' }
+},
+{
+  timestamps: true
 });
 
 headerSchema.plugin(uniqueValidator);

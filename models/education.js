@@ -11,6 +11,9 @@ const educationSchema = new Schema({
   adminComments: { type: String },
   isOk: { type: Boolean },
   creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' }
+},
+{
+  timestamps: true
 });
 
 module.exports = mongoose.model('Education', educationSchema);

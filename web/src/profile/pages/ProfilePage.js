@@ -26,13 +26,13 @@ const ProfilePage = (props) => {
         <HeaderPage />
       )}
       {!isLoading && (
-        <ExperiencePage userId={props.id}/>
+        <ExperiencePage userId={props.userId}/>
       )}
       {!isLoading && (
-        <EducationPage userId={props.id}/>
+        <EducationPage userId={props.userId}/>
       )}
       {!isLoading && (
-        <OtherPage userId={props.id}/>
+        <OtherPage userId={props.userId}/>
       )}
     </React.Fragment>
   );

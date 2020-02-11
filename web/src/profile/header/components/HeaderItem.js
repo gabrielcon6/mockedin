@@ -14,6 +14,7 @@ import '../../../places/components/About.scss'
 import { FaPencilAlt } from 'react-icons/fa';
 import Background from '../../../shared/components/UIElements/Background'
 import { Link } from 'react-router-dom';
+import StrenghtBar from './StrenghtBar'
 const HeaderItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
@@ -108,6 +109,8 @@ const HeaderItem = props => {
              </div>
           </div>     
           </div>
+          {/* paulo por favor chamar o component da strenght bara aqui :) */}
+          {/* <StrenghtBar/> */}
           <>
         <div>
           <div className='about-title'>

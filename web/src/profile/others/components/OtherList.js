@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 
 import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
@@ -8,8 +8,11 @@ import '../../../places/components/PlaceList.css';
 import OtherItem from './OtherItem';
 import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../shared/context/auth-context';
 
 const OtherList = props => {
+  const auth = useContext(AuthContext);
+
   if (props.items.length === 0) {
     return (
       <div className="place-list center">
@@ -27,7 +30,7 @@ const OtherList = props => {
       <div className='card-title__experience__position'>
         <h4 >Accomplishments</h4>
       </div> 
-      <Link to="/others/new"><FaPlus className='plus-icon-size'/> </Link>       
+      {auth.userId === props.userId && ( <Link to="/others/new"><FaPlus className='plus-icon-size'/> </Link> )}      
        </div>
       {props.items.map(other => (
         <OtherItem

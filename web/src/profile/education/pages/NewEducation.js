@@ -107,7 +107,7 @@ const NewEducation = () => {
         />
            <Input
           id="description"
-          element="textarea"
+          element="text"
           type="text"
           label="Description"
           validators={[VALIDATOR_REQUIRE()]}

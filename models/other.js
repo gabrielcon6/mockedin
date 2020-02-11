@@ -11,6 +11,9 @@ const otherSchema = new Schema({
   adminComments: { type: String },
   isOk: { type: Boolean },
   creator: { type: mongoose.Types.ObjectId, required: true, ref: 'Other' }
+},
+{
+  timestamps: true
 });
 
 module.exports = mongoose.model('Other', otherSchema);

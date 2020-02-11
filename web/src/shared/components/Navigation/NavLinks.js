@@ -9,21 +9,23 @@ const NavLinks = props => {
 
   return (
     <ul className="nav-links">
-      <li>
-        <NavLink to="/" exact>
-          ALL USERS
-        </NavLink>
-      </li>
-      {auth.isLoggedIn && (
+      {auth.isAdmin && (
+        <li>
+          <NavLink to="/" exact>
+                SEARCH USERS
+          </NavLink>
+        </li>
+      )}
+      {auth.isLoggedIn && !auth.isAdmin  && (
         <li>
           <NavLink to={`/${auth.userId}/profile`}>MY PROFILE</NavLink>
         </li>
       )}
-      {auth.isLoggedIn && (
+      {/* {auth.isLoggedIn && (
         <li>
           <NavLink to="/header/new">+ HEADER</NavLink>
         </li>
-      )}
+      )} */}
       {/* {auth.isLoggedIn && (
         <li>
           <NavLink to="/experiences/new">+ EXPERIENCE</NavLink>
@@ -34,21 +36,24 @@ const NavLinks = props => {
           <NavLink to="/education/new">+ EDUCATION </NavLink>
         </li>
       )} */}
-      {auth.isLoggedIn && (
+      {/* {auth.isLoggedIn && (
         <li>
           <NavLink to="/others/new">+ OTHER </NavLink>
         </li>
-      )}
-      {!auth.isLoggedIn && (
+      )} */}
+      {/* {!auth.isLoggedIn && (
         <li>
           <NavLink to="/auth">AUTHENTICATE</NavLink>
         </li>
-      )}
+      )} */}
       {auth.isLoggedIn && (
         <li>
           <button onClick={auth.logout}>LOGOUT</button>
         </li>
       )}
+        <li>
+          <NavLink to="/image">IMAGE UPLOAD (PROVISORY)</NavLink>
+        </li>
     </ul>
   );
 };

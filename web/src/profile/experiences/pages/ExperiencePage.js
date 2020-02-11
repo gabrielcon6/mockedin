@@ -6,7 +6,7 @@ import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import ExperienceList from '../components/ExperienceList';
 
-const ExperiencePage = () => {
+const ExperiencePage = (props) => {
     const [loadedExperience, setLoadedExperience] = useState();
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
   
@@ -38,7 +38,7 @@ const ExperiencePage = () => {
             </div>
           )}
           {!isLoading && loadedExperience && (
-            <ExperienceList items={loadedExperience} onDeleteExperience={experienceDeletedHandler} />
+            <ExperienceList userId={userId} items={loadedExperience} onDeleteExperience={experienceDeletedHandler} />
           )}
         </React.Fragment>
       );
