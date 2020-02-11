@@ -110,8 +110,6 @@ const createOther = async (req, res, next) => {
     return next(error);
   }
 
-  console.log('line 116', user);
-
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
@@ -150,7 +148,6 @@ const updateOther = async (req, res, next) => {
 
   const { type, title, startDate, endDate } = req.body;
   const otherId = req.params.oid;
-  console.log('82482348932984723894798327942', otherId);
 
   let other;
   try {
@@ -191,11 +188,9 @@ const updateOther = async (req, res, next) => {
 const deleteOther = async (req, res, next) => {
   const otherId = req.params.oid;
 
-  console.log('line 194', otherId)
   let other;
   try {
     other = await Other.findById(otherId);
-    console.log('line 198', other)
   } catch (err) {
     const error = new HttpError(
       '201 - Something went wrong, could not delete other.',

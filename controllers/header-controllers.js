@@ -86,9 +86,6 @@ const createHeader = async (req, res, next) => {
   }
 
   const { name, jobTitle, location, about } = req.body;
-  // console.log(name);
-
-
 
   //************************** */
 
@@ -109,10 +106,6 @@ const createHeader = async (req, res, next) => {
     ACL: "public-read"
   };
 
-  // let createdHeader;
-
-
-
   const createdHeader = new Header({
     id: uuid(), 
     name,
@@ -125,12 +118,6 @@ const createHeader = async (req, res, next) => {
     isOk: false,
     creator: req.userData.userId
   });
-
-  console.log('line 136 HEADER', s3FileURL + file.originalname)
-  //************************** */
-
-
-
 
   let user;
   try {
@@ -147,8 +134,6 @@ const createHeader = async (req, res, next) => {
     const error = new HttpError('Could not find user for provided id.', 404);
     return next(error);
   }
-
-  console.log(user);
 
   try {
     s3bucket.upload(params, function(err, data) {
@@ -202,15 +187,41 @@ const updateHeader = async (req, res, next) => {
     return next(error);
   }
 
+  const file = req.file;
+  const s3FileURL = "https://s3-ap-southeast-2.amazonaws.com/mockedin-images/"
+
+  const s3bucket = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: "ap-southeast-2"
+  });
+
+  const params = {
+    Bucket: "mockedin-images",
+    Key: file.originalname,
+    Body: file.buffer,
+    ContentType: file.mimetype,
+    ACL: "public-read"
+  };
+
   header.name = name;
   header.jobTitle = jobTitle;
   header.location = location;
   header.about = about;
-  // header.image = req.file.path;
+  header.fileLink = s3FileURL + file.originalname;
+  header.s3_key = params.Key;
 
   // header.adminComments = adminComments;
 
   try {
+    s3bucket.upload(params, function(err, data) {
+      if (err) {
+        res.status(500).json({ error: true, Message: err });
+      } else {
+        // res.send({ data });
+        console.log('HELLLOOOOOO 117', data)
+      }
+    });
     await header.save();
   } catch (err) {
     const error = new HttpError(

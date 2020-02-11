@@ -52,7 +52,7 @@ const UpdateHeader = () => {
         value: '',
         isValid: false
       },
-      image: {
+      file: {
         value: null,
         isValid: false
       }
@@ -85,8 +85,8 @@ const UpdateHeader = () => {
               value: responseData.header.about,
               isValid: true
             },
-            image: {
-              value: responseData.header.image,
+            file: {
+              value: responseData.header.fileLink,
               isValid: true
             }
           },
@@ -121,7 +121,7 @@ const UpdateHeader = () => {
   try {
     const formData = new FormData();
     formData.append('name', formState.inputs.name.value);
-    formData.append('image', formState.inputs.image.value);
+    formData.append('file', formState.inputs.file.value);
     formData.append('jobTitle', formState.inputs.jobTitle.value);
     formData.append('location', address);
     formData.append('about', formState.inputs.about.value);
@@ -170,9 +170,9 @@ const UpdateHeader = () => {
             initialValid={true}
           />
           <ImageUpload
-            id="image"
+            id="file"
             onInput={inputHandler}
-            initialValue={loadedHeader.image}
+            initialValue={loadedHeader.fileLink}
             errorText="Please provide a photo."
           />
           <Input
