@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const HttpError = require('../models/http-error');
 const Education = require('../models/education');
 const User = require('../models/user');
+
 const getEducationById = async (req, res, next) => {
   const educationId = req.params.edid;
   let education;
@@ -25,11 +26,12 @@ const getEducationById = async (req, res, next) => {
   }
   res.json({ education: education.toObject({ getters: true }) });
 };
+
 const getEducationByUserId = async (req, res, next) => {
   const userId = req.params.uid;
   let userWithEducation;
   try {
-    userWithEducation = await User.findById(userId).populate('education');
+    userWithEducation = await User.findById(userId).populate({path: 'education', options: { sort: { 'startDate': 'desc' } }});;
   } catch (err) {
     const error = new HttpError(
       'Fetching education failed, please try again later.',

@@ -37,7 +37,7 @@ const getOtherByUserId = async (req, res, next) => {
   const userId = req.params.uid;
   let userWithOther;
   try {
-    userWithOther = await User.findById(userId).populate('others');
+    userWithOther = await User.findById(userId).populate({path: 'others', options: { sort: { 'startDate': 'desc' } }});;
   } catch (err) {
     const error = new HttpError(
       'Fetching others failed, please try again later.',

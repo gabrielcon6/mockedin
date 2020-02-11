@@ -37,7 +37,8 @@ const getExperienceByUserId = async (req, res, next) => {
   const userId = req.params.uid;
   let userWithExperience;
   try {
-    userWithExperience = await User.findById(userId).populate('experiences');
+    userWithExperience = await User.findById(userId).populate({path: 'experiences', options: { sort: { 'startDate': 'desc' } }});
+    console.log('line41', userWithExperience )
   } catch (err) {
     const error = new HttpError(
       'Fetching experiences failed, please try again later.',
