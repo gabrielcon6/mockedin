@@ -93,19 +93,7 @@ const HeaderItem = props => {
               <p>Job Title: {props.jobTitle}</p>
               <p className='card-user__sub'>Location: {props.location}</p>
               <p className='card-user__sub'></p>
-              {/* <p className='headline__location'>About</p> */}
-            {/* <div className="place-item__actions"> */}
-            {/* <div className='card-action'>
-              {auth.userId === props.creatorId && (
-                <Button to={`/header/${props.id}`}>EDIT</Button>
-              )}
 
-              {auth.userId === props.creatorId && (
-                <Button className='button-header' danger onClick={showDeleteWarningHandler}>
-                  DELETE
-                </Button>
-              )}
-              </div> */}
              </div>
           </div>     
           </div>
@@ -119,11 +107,16 @@ const HeaderItem = props => {
             {auth.userId === props.creatorId && (
                 <Link to={`/header/${props.id}`}><FaPencilAlt/></Link>
               )}
+              {auth.isAdmin && (
+                <Link to={`/header/${props.id}`}><FaPencilAlt/> Leave feedback </Link>
+              )}
             </span>
           </div>
             <div className='about-text__box'>
                 <div className='about-text__content'>
                     <p className='about-text__content-element'>{props.about}</p>
+
+                    <br/>Comments:<br/>{props.adminComments}
                 </div>
             </div>
             </div>

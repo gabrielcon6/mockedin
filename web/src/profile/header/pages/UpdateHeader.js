@@ -28,6 +28,9 @@ const UpdateHeader = () => {
   const headerId = useParams().headerId;
   const history = useHistory();
 
+  const storedData = JSON.parse(localStorage.getItem('userData'));
+  const isAdmin = storedData.isAdmin
+
   const searchOptions = {
     types: ['(cities)'],
     componentRestrictions: {country: "au"}
@@ -176,7 +179,7 @@ const UpdateHeader = () => {
       <ErrorModal error={error} onClear={clearError} />
       {!isLoading && loadedHeader && (
         <form className="place-form" onSubmit={headerUpdateSubmitHandler}>
-          <Input
+          {!isAdmin && <div><Input
             id="name"
             element="input"
             type="text"
@@ -245,17 +248,21 @@ const UpdateHeader = () => {
             initialValue={loadedHeader.about}
             initialValid={true}
           />
-          <Input
-            id="adminComments"
-            element="textarea"
-            label="Comments"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter cmments."
-            onInput={inputHandler}
-            initialValue={loadedHeader.adminComments}
-            initialValid={true}
-          />
-          <Checkbox type="checkbox" onChange={handleCheck} hasError={!check} isChecked={check}>Mark as done!</Checkbox>
+      </div>}
+          {isAdmin &&
+          <div>
+            <Input
+              id="adminComments"
+              element="textarea"
+              label="Comments"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Please enter cmments."
+              onInput={inputHandler}
+              initialValue={loadedHeader.adminComments}
+              initialValid={true}
+            />
+            <Checkbox type="checkbox" onChange={handleCheck} hasError={!check} isChecked={check}>{check ? 'Session marked as done!' : 'Mark session as done.'}</Checkbox>
+            </div>}
           <Button type="submit" disabled={!formState.isValid}>
             UPDATE HEADER
           </Button>
