@@ -53,7 +53,6 @@ export const useAuth = () => {
       new Date(storedData.expiration) > new Date()
     ) {
       login(storedData.userId, storedData.token, storedData.isAdmin, new Date(storedData.expiration));
-      console.log('line 54 auth-hook is admin', storedData.isAdmin)
     }
   }, [login]);
 
