@@ -50,7 +50,7 @@ const getExperienceByUserId = async (req, res, next) => {
   //   userWithExperience = await Experience.find( { creator: userId } );
   // } catch (err) {
   //   const error = new HttpError(
-  //     'Fetching places failed, please try again later.',
+  //     'Fetching experiences failed, please try again later.',
   //     500
   //   );
   //   return next(error);
