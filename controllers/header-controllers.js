@@ -161,6 +161,8 @@ const createHeader = async (req, res, next) => {
 };
 
 const updateHeader = async (req, res, next) => {
+
+  console.log('UPDATE HEADE CALLED')
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -168,7 +170,7 @@ const updateHeader = async (req, res, next) => {
     );
   }
 
-  const { name, jobTitle, location, about } = req.body;
+  const { name, jobTitle, location, about, adminComments, isOk} = req.body;
   const headerId = req.params.hid;
 
   let header;
@@ -176,14 +178,15 @@ const updateHeader = async (req, res, next) => {
     header = await Header.findById(headerId);
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not update place.',
+      'Something went wrong, could not update header.',
       500
     );
     return next(error);
   }
 
-  if (header.creator.toString() !== req.userData.userId) {
-    const error = new HttpError('You are not allowed to edit this header.', 401);
+  if (header.creator.toString() !== req.userData.userId && !req.userData.isAdmin) {
+    console.log(req.userData.isAdmin)
+    const error = new HttpError('401-You are not allowed to edit this header.', 401);
     return next(error);
   }
 
@@ -196,32 +199,31 @@ const updateHeader = async (req, res, next) => {
     region: "ap-southeast-2"
   });
 
-  const params = {
-    Bucket: "mockedin-images",
-    Key: file.originalname,
-    Body: file.buffer,
-    ContentType: file.mimetype,
-    ACL: "public-read"
-  };
+  // const params = {
+  //   Bucket: "mockedin-images",
+  //   Key: file.originalFilename,
+  //   Body: file.buffer,
+  //   ContentType: file.mimetype,
+  //   ACL: "public-read"
+  // };
 
   header.name = name;
   header.jobTitle = jobTitle;
   header.location = location;
   header.about = about;
-  header.fileLink = s3FileURL + file.originalname;
-  header.s3_key = params.Key;
-
-  // header.adminComments = adminComments;
+  // header.fileLink = s3FileURL + file.originalname;
+  // header.s3_key = params.Key;
+  header.adminComments = adminComments;
+  header.isOk = isOk;
 
   try {
-    s3bucket.upload(params, function(err, data) {
-      if (err) {
-        res.status(500).json({ error: true, Message: err });
-      } else {
-        // res.send({ data });
-        console.log('HELLLOOOOOO 117', data)
-      }
-    });
+    // s3bucket.upload(params, function(err, data) {
+    //   if (err) {
+    //     res.status(500).json({ error: true, Message: err });
+    //   } else {
+    //     // res.send({ data });
+    //   }
+    // });
     await header.save();
   } catch (err) {
     const error = new HttpError(
