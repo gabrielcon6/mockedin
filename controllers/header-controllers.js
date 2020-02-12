@@ -176,6 +176,7 @@ const updateHeader = async (req, res, next) => {
   let header;
   try {
     header = await Header.findById(headerId);
+    user = await User.findById(req.userData.userId);
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not update header.',
@@ -184,7 +185,7 @@ const updateHeader = async (req, res, next) => {
     return next(error);
   }
 
-  if (header.creator.toString() !== req.userData.userId && !req.userData.isAdmin) {
+  if (header.creator.toString() !== req.userData.userId && !user.isAdmin) {
     console.log(req.userData.isAdmin)
     const error = new HttpError('401-You are not allowed to edit this header.', 401);
     return next(error);
