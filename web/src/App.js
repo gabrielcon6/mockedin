@@ -34,7 +34,9 @@ const App = () => {
         <Route path="/:userId/profile" exact>
           <ProfilePage userId={userId}/>
         </Route>
-
+        <Route path="/header/:headerId">
+          <UpdateHeader />
+        </Route>
         <Redirect to="/" />
       </Switch>
     );
