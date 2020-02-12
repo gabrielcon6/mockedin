@@ -162,7 +162,6 @@ const createHeader = async (req, res, next) => {
 
 const updateHeader = async (req, res, next) => {
 
-  console.log('UPDATE HEADE CALLED')
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
