@@ -12,14 +12,20 @@ const HeaderList = props => {
   if (props.items.length === 0) {
     return (
       <div className="place-list center">
-        <Card>
-          <h2>No header found. Maybe create one?</h2>
-          <Button to="/header/new">Share Header</Button>
+        <Card style={{width:'53vw'}}>
+          <div className='' style={{width:'100%'}}>
+            <h2>No header found</h2>
+            <div style={{paddingBottom:'10px'}}>
+              <Button  to="/header/new">Add Header</Button>
+            </div>
+          </div>
         </Card>
       </div>
     );
   }
   return (
+    <>
+    <Comments/>
     <CardMockedin className="cardMocke">
       {props.items.map(header => (
         <HeaderItem
@@ -37,7 +43,14 @@ const HeaderList = props => {
           isAdmin={isAdmin}
         />
       ))}
+<<<<<<< HEAD
+     
+      
+=======
+>>>>>>> 30301c2dc30f717f8732c5d3d9b045a738dd67c5
     </CardMockedin>
+        
+    </>
   );
 };
 

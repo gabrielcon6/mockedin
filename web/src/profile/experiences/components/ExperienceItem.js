@@ -78,7 +78,7 @@ const ExperienceItem = props => {
           <span className='edit-job' >
             <p className='card-items__job-title'>{props.title}</p>
               {auth.userId === props.creatorId && (
-                <div >
+                <div className='icons-elements' >
                   <Link to={`/experience/${props.id}`}> 
                     <FaPencilAlt className='edit-job-icon'/>
                   </Link>
@@ -91,12 +91,12 @@ const ExperienceItem = props => {
           {isLoading && <LoadingSpinner asOverlay />}
             <div className="place-item__info">
             <p className='card-items__title'>{props.company}</p>
-            <p className='card-items__date '>Start Date: &nbsp;	
-          <Moment format="MMMM YYYY">
+            <p className='card-items__date '> &nbsp;	
+          <Moment format="MMM YYYY">
               {props.startDate}
           </Moment> |
-            End Date: &nbsp;	
-          <Moment format="MMMM YYYY">
+            &nbsp;	
+          <Moment format="MMM YYYY">
             {props.endDate}
           </Moment>
             </p>

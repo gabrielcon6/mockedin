@@ -15,9 +15,9 @@ const ExperienceList = props => {
   if (props.items.length === 0) {
     return (
       <div className="place-list center">
-        <Card>
-          <h2>No experience found. Maybe create one?</h2>
-          <Button to="/experiences/new">Share Experience</Button>
+        <Card style={{width:'53vw'}}>
+          <h2>No experience found</h2>
+          <Button to="/experiences/new">Add Experience</Button>
         </Card>
       </div>
     );

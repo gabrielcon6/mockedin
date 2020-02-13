@@ -223,6 +223,7 @@ const deleteExperience = async (req, res, next) => {
   } catch (err) {
     const error = new HttpError(
       'line 231 Something went wrong, could not delete experience. But works',
+      // 'Experience successfully deleted',
       500
     );
     return next(error);
