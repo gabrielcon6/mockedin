@@ -107,17 +107,6 @@ const createFeedback = async (req, res, next) => {
     );
     return next(error);
   }
-
-  //BELOW IS IF WE WANT TO CREATE feedback MANUALLY VIA POSTMAN
-  // try {
-  //   await createdFeedback.save();
-  // } catch (err) {
-  //   const error = new HttpError(
-  //     'Signing up failed, please try again later.',
-  //     500
-  //   );
-  //   return next(error);
-  // }
   res.status(201).json({ feedback: createdFeedback });
 };
 
@@ -129,7 +118,7 @@ const updateFeedback = async (req, res, next) => {
     );
   }
 
-  const { type, title, startDate, endDate } = req.body;
+  const { aboutFeedback, educationFeedback, experienceFeedback, strength} = req.body;
   const FeedbackId = req.params.fid;
 
   let feedback;
@@ -148,12 +137,10 @@ const updateFeedback = async (req, res, next) => {
     return next(error);
   }
 
-  feedback.type = type;
-  feedback.title = title;
-  feedback.startDate = startDate;
-  feedback.endDate = endDate;
-
-  // feedback.adminComments = adminComments;
+  feedback.aboutFeedback = aboutFeedback;
+  feedback.educationFeedback = educationFeedback;
+  feedback.experienceFeedback = experienceFeedback;
+  feedback.strength = strength;
 
   try {
     await feedback.save();
@@ -199,7 +186,7 @@ const deleteFeedback = async (req, res, next) => {
     await feedback.remove();
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    feedback.creator.Feedbacks.pull(feedback); //feedback OR FeedbacksS????
+    feedback.creator.feedbacks.pull(feedback); //feedback OR FeedbacksS????
     await feedback.creator.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
