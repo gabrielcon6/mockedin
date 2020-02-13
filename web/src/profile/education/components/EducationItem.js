@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Moment from 'react-moment';
 
-
 import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
 import Modal from '../../../shared/components/UIElements/Modal';
@@ -94,17 +93,23 @@ const EducationItem = props => {
           <div className="place-item__info">
                 <p className='card-items__title'>{props.degree}</p>
                 <p className='card-items__date '> &nbsp;	
+                {props.startDate && (
                 <Moment format="MMM YYYY">
                     {props.startDate}
-                </Moment> |
-                  &nbsp;	
+                </Moment> 
+                )}
+                {!props.startDate && (
+                    'Present'
+                )} |&nbsp;	
+                {props.endDate && (
                 <Moment format="MMM YYYY">
-                  {props.endDate}
-                </Moment>
+                    {props.endDate}
+                </Moment> 
+                )}
+                {!props.endDate && (
+                    'Present'
+                )}
                 <br/>
-                {/* <Moment to={props.startDate}>
-                  {props.startDate}
-                </Moment> */}
                </p>
                <div className='card-items-description'>
                 <p className='card-items-description'>{props.description}</p>
@@ -114,7 +119,6 @@ const EducationItem = props => {
             {/* {auth.userId === props.creatorId && (
               <Button to={`/education/${props.id}`}>EDIT</Button>
             )} */}
-          
           </div>
           </div>
         </div>

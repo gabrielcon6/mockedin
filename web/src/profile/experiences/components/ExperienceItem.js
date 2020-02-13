@@ -96,13 +96,22 @@ const ExperienceItem = props => {
             <div className="place-item__info">
             <p className='card-items__title'>{props.company}</p>
             <p className='card-items__date '> &nbsp;	
-          <Moment format="MMM YYYY">
-              {props.startDate}
-          </Moment> |
-            &nbsp;	
-          <Moment format="MMM YYYY">
-            {props.endDate}
-          </Moment>
+            {props.startDate && (
+                <Moment format="MMM YYYY">
+                    {props.startDate}
+                </Moment> 
+                )}
+                {!props.startDate && (
+                    'Present'
+                )} |&nbsp;	
+                {props.endDate && (
+                <Moment format="MMM YYYY">
+                    {props.endDate}
+                </Moment> 
+                )}
+                {!props.endDate && (
+                    'Present'
+                )}
             </p>
             <div className='card-items-description'>
             <p className='card-items-description'>{props.description}</p>
