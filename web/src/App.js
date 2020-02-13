@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -23,6 +23,7 @@ import UpdateOther from './profile/others/pages/UpdateOther';
 
 const App = () => {
   const { token, login, logout, userId, isAdmin } = useAuth();
+
 
   let routes;
   if (token && isAdmin) {
@@ -78,8 +79,10 @@ const App = () => {
         <Route path="/others/:otherId">
           <UpdateOther />
         </Route>
-
-        <Redirect to="/" />
+        
+        {/* <Redirect to={`/`} exact>
+          <ProfileRedirect userId={userId}/>
+        </Redirect> */}
       </Switch>
     );
   } 
@@ -87,9 +90,9 @@ const App = () => {
   else {
     routes = (
       <Switch>
-        <Route path="/:userId/page" exact>
+        {/* <Route path="/:userId/page" exact>
           <ProfilePage />
-        </Route>
+        </Route> */}
         <Route path="/auth">
           <Auth />
         </Route>
@@ -110,7 +113,7 @@ const App = () => {
       }}
     >
       <Router>
-        <MainNavigation />
+        <MainNavigation userId={userId}/>
         <main>{routes}</main>
       </Router>
     </AuthContext.Provider>

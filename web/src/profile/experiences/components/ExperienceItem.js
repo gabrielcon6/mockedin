@@ -11,7 +11,7 @@ import { useHttpClient } from '../../../shared/hooks/http-hook';
 // import '../../../places/components/PlaceItem.css';
 import '../../../places/components/Experience.scss'
 import { FaRegBuilding, FaPlus,FaPencilAlt, FaTrash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const ExperienceItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -27,6 +27,8 @@ const ExperienceItem = props => {
   };
 
   const experienceId = props.id;
+  const history = useHistory();
+
 
   const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);
@@ -41,6 +43,8 @@ const ExperienceItem = props => {
       );
       props.onDelete();
     } catch (err) {}
+    history.push('/');
+    history.push('/' + auth.userId + '/profile');
   };
 
   // let endDate = Moment(`${props.endDate}`).format("MMMM D, YYYY");
