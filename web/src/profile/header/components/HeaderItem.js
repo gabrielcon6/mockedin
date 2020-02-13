@@ -89,9 +89,17 @@ const HeaderItem = props => {
           }
           <div className='card-content__subcontainer'>
             <div className='card-headline'>
+<<<<<<< HEAD
               <p className='card-user__name'>{props.name}</p>
               <p className='card-user__sub-job-title'>{props.jobTitle}</p>
               <p className='card-user__sub'>{props.location}</p>
+=======
+              <p className='card-user__name'>Name:{props.name}</p>
+              <p>Job Title: {props.jobTitle}</p>
+              <p className='card-user__sub'>Location: {props.location}</p>
+              <p className='card-user__sub'></p>
+
+>>>>>>> 30301c2dc30f717f8732c5d3d9b045a738dd67c5
              </div>
           </div>     
           </div>
@@ -106,11 +114,16 @@ const HeaderItem = props => {
             {auth.userId === props.creatorId && (
                 <Link className='link-style' to={`/header/${props.id}`}><FaPencilAlt/></Link>
               )}
+              {auth.isAdmin && (
+                <Link to={`/header/${props.id}`}><FaPencilAlt/> Leave feedback </Link>
+              )}
             </span>
           </div>
             <div className='about-text__box'>
                 <div className='about-text__content'>
                     <p className='about-text__content-element'>{props.about}</p>
+
+                    <br/>Comments:<br/>{props.adminComments}
                 </div>
             </div>
             </div>

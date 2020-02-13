@@ -20,9 +20,6 @@ import NewEducation from './profile/education/pages/NewEducation';
 import UpdateEducation from './profile/education/pages/UpdateEducation';
 import NewOther from './profile/others/pages/NewOther';
 import UpdateOther from './profile/others/pages/UpdateOther';
-import FileUpload from './profile/image/FileUpload';
-import FileDescriptionEdit from './profile/image/FileDescriptionEdit';
-import NewFileUpload from './profile/image/NewFileUpload';
 
 const App = () => {
   const { token, login, logout, userId, isAdmin } = useAuth();
@@ -37,8 +34,12 @@ const App = () => {
         <Route path="/:userId/profile" exact>
           <ProfilePage userId={userId}/>
         </Route>
-
-        <Redirect to="/" />
+        <Route path="/header/:headerId">
+          <UpdateHeader />
+        </Route>
+        <Redirect to="/">
+          <Users />
+        </Redirect>
       </Switch>
     );
   }
@@ -92,16 +93,6 @@ const App = () => {
         <Route path="/auth">
           <Auth />
         </Route>
-        <Route path="/image" exact>
-          <FileUpload/>
-        </Route>
-        <Route path="/api/document/upload" exact>
-          <NewFileUpload />
-        </Route>
-        <Route path="/api/document/edit/:id" exact>
-            <FileDescriptionEdit />
-        </Route>
-
         <Redirect to="/auth" />
       </Switch>
     );

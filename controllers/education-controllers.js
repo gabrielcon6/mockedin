@@ -44,7 +44,7 @@ const getEducationByUserId = async (req, res, next) => {
   //   userWithEducation = await Education.find( { creator: userId } );
   // } catch (err) {
   //   const error = new HttpError(
-  //     'Fetching places failed, please try again later.',
+  //     'Fetching education failed, please try again later.',
   //     500
   //   );
   //   return next(error);
