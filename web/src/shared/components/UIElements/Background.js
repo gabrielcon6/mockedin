@@ -1,7 +1,8 @@
 import React from 'react'
 import Particles from 'react-particles-js';
-export default class Background extends React.Component{
-    render(){
+
+
+const Background = () => {
         return (
             <Particles 
               params={{
@@ -25,4 +26,5 @@ export default class Background extends React.Component{
             </Particles>
         );
     };
-}
+
+export default Background;
