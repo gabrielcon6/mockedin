@@ -17,9 +17,9 @@ const EducationList = props => {
   if (props.items.education.length === 0) {
     return (
       <div className="place-list center">
-        <Card>
-          <h2>No education found. Maybe create one?</h2>
-          <Button to="/education/new">Share Education</Button>
+        <Card style={{width:'53vw' }}>
+          <h2>No education found</h2>
+          <Button to="/education/new">Add Education</Button>
         </Card>
       </div>
     );

@@ -9,7 +9,7 @@ import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import '../../../places/components/PlaceItem.css';
-import { FaTrophy, FaPlus,FaPencilAlt } from 'react-icons/fa';
+import { FaTrophy, FaPlus,FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import '../../../places/components/Experience.scss'
 
@@ -76,42 +76,27 @@ const OtherItem = props => {
         <div className="sub__card">
         <div className="job-description">
         <span className='edit-job' >
-        <p className='card-items__job-title'>{props.title}</p>
+          <p className='card-items__job-title'>{props.title}</p>
         {auth.userId === props.creatorId && (
-              <Link to={`/other/${props.id}`}>
-                <FaPencilAlt className='edit-job-icon'/>
-              </Link>
+              <div className='icons-elements'>
+                <Link  to={`/other/${props.id}`}>
+                  <FaPencilAlt className='edit-job-icon'/>
+                </Link>
+                <Link danger onClick={showDeleteWarningHandler}>
+                  <FaTrash className='edit-job-icon'/>
+                </Link>
+              </div>
             )}
         </span>
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__info">
-            <p className='card-items__title'>Title: {props.title}</p>
-            <p className='card-items__title'>Company: {props.company}</p>
-            {/* <p className='card-items__date '>Start Date: &nbsp;	
-              <Moment format="MMMM YYYY">
-                  {props.startDate}
-              </Moment> |
-            End Date: &nbsp;	
-              <Moment format="MMMM YYYY">
-                  {props.endDate}
-              </Moment>
-            </p> */}
+            <p className='card-items__title'> {props.title}</p>
+            <p className='card-items__title'>{props.company}</p>
             <div className='card-items-description'>
               <p className='card-items-description'>{props.description}</p>
             </div>
           </div>
-          <div className="place-item__actions">
-            {auth.userId === props.creatorId && (
-              <Button to={`/others/${props.id}`}>EDIT</Button>
-            )}
-
-            {auth.userId === props.creatorId && (
-              <Button danger onClick={showDeleteWarningHandler}>
-                DELETE
-              </Button>
-            )}
-            </div>
-            </div>
+         </div>
         </div>
       </div>
     </React.Fragment>

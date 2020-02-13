@@ -83,6 +83,7 @@ const App = () => {
         {/* <Redirect to={`/`} exact>
           <ProfileRedirect userId={userId}/>
         </Redirect> */}
+
       </Switch>
     );
   } 
@@ -113,8 +114,8 @@ const App = () => {
       }}
     >
       <Router>
-        <MainNavigation userId={userId}/>
-        <main>{routes}</main>
+        <MainNavigation />
+        <main style={{display:'flex', flexDirection:'column'}}>{routes}</main>
       </Router>
     </AuthContext.Provider>
   );

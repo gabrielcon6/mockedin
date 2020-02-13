@@ -21,6 +21,11 @@ const NewHeader = () => {
     lat: null,
     lng: null
   });
+
+  const searchOptions = {
+    types: ['(cities)'],
+    componentRestrictions: {country: "au"}
+   }
   
   const [formState, inputHandler] = useForm(
     {
@@ -104,6 +109,7 @@ const NewHeader = () => {
           value={address}
           onChange={setAddress}
           onSelect={handleSelect}
+          searchOptions={searchOptions}
         >
           {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
             <div>

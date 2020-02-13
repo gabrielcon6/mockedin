@@ -1,7 +1,7 @@
 .cardMocke {
-    width:90vh;
+    width:53vw;
     // height: 65vh;
-    margin: 10px auto;
+    margin: 10px 12%;
     border: 1px solid lightgray;
     border-radius: 2px;
     background-color: #fff;
@@ -13,7 +13,7 @@
     
     .card-headline{
       position: relative;
-      margin-top: 3%;
+      margin-top: 4%;
       margin-left: 3%;
     }
     .card-content-container{
@@ -26,10 +26,17 @@
     .card-user__name{
       font-size: 25px;
       font-weight: 700;
+      margin-bottom: 4px;
     }
     .card-user__sub{
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 400;
+      margin-bottom: 0;
+    }
+    .card-user__sub-job-title{
+      font-size: 18px;
+      font-weight: 400;
+      margin: 0 auto;
     }
     .icon-edit{
       // display: flex;
@@ -61,7 +68,7 @@
     .button-header{
     background-color: rgb(65,115,173);
     }
-   
+  
     .card-avatar{
      
       .avatar {
@@ -76,11 +83,22 @@
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
-        -webkit-filter: grayscale(100%);
-        filter: grayscale(100%);
+        // -webkit-filter: grayscale(100%);
+        // filter: grayscale(100%);
       }
     }
 
-    
+    .link-style{
+      color:rgb(65,115,173)!important;
+    }
+   
+
    
   }
+
+  // @media (max-width: 768px) {
+  //   .cardMocke {
+  //     width: 80vw;
+  //     display: flex;
+  //   } 
+  // }

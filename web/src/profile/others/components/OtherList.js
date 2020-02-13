@@ -16,9 +16,9 @@ const OtherList = props => {
   if (props.items.length === 0) {
     return (
       <div className="place-list center">
-        <Card>
-          <h2>No other found. Maybe create one?</h2>
-          <Button to="/others/new">Share Other</Button>
+        <Card style={{width:'53vw'}}>
+          <h2>No accomplishments found</h2>
+          <Button to="/others/new">Add Accomplishments</Button>
         </Card>
       </div>
     );

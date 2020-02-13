@@ -215,6 +215,7 @@ const deleteExperience = async (req, res, next) => {
 
   // try {
     await experience.remove();
+<<<<<<< HEAD
     // const sess = await mongoose.startSession();
     // sess.startTransaction();
     // experience.creator.experiences.pull(experience); //experience OR ExperiencesS????
@@ -227,6 +228,21 @@ const deleteExperience = async (req, res, next) => {
   //   );
   //   return next(error);
   // }
+=======
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    experience.creator.experiences.pull(experience); //experience OR ExperiencesS????
+    await experience.creator.save({ session: sess });
+    await sess.commitTransaction();
+  } catch (err) {
+    const error = new HttpError(
+      'line 231 Something went wrong, could not delete experience. But works',
+      // 'Experience successfully deleted',
+      500
+    );
+    return next(error);
+  }
+>>>>>>> 592ca315471d0a04a42d85483aec5e6c921472d4
 
   res.status(200).json({ message: 'Deleted experience.' });
 
