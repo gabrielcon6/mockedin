@@ -42,15 +42,12 @@ const NewExperience = () => {
     false
   );
 
-    //   vvvvvv Admin is OK checkbox logic here
     useEffect(() => {
       setCheck(check)
       }, [check])
-    const handleCheck = (e) =>{
+      const handleCheck = (e) =>{
       setCheck(!check)
-    }
-  //   ^^^^^^^ Admin is OK checkbox logic up here
-  
+    }  
 
   const history = useHistory();
 
@@ -109,7 +106,6 @@ const NewExperience = () => {
           onInput={inputHandler}
         />
         { !check &&(
-
           <Input
             id="endDate"
             element="input"
@@ -119,19 +115,18 @@ const NewExperience = () => {
             errorText="Comment by the recruiter."
             onInput={inputHandler}
           />
-        )
-        }
+        )}
           <div className='text-area-check'>
-              <Checkbox  type="checkbox" onChange={handleCheck}  isChecked={check}>
-                <div>
-                  {check ? <span style={{color:'grey', fontSize:'18px'}}>
-                    I am currently working in this role</span> 
-                  : 
-                  <span style={{color:'black', fontSize:'18px'}}>
-                  I am currently working in this role.</span>}
-                </div>
-              </Checkbox>
-            </div>
+            <Checkbox  type="checkbox" onChange={handleCheck}  isChecked={check}>
+              <div>
+                {check ? <span style={{color:'grey', fontSize:'18px'}}>
+                  I am currently working in this role</span> 
+                : 
+                <span style={{color:'black', fontSize:'18px'}}>
+                I am currently working in this role.</span>}
+              </div>
+            </Checkbox>
+          </div>
          <Input
           id="description"
           element="textarea"
