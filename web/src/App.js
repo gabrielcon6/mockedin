@@ -76,14 +76,12 @@ const App = () => {
         <Route path="/others/new" exact>
           <NewOther />
         </Route>
-        <Route path="/others/:otherId">
+        <Route path="/other/:otherId">
           <UpdateOther />
         </Route>
-        
-        {/* <Redirect to={`/`} exact>
-          <ProfileRedirect userId={userId}/>
+        {/* <Redirect to="/:userId/profile" exact>
+          <ProfilePage userId={userId}/>
         </Redirect> */}
-
       </Switch>
     );
   } 
@@ -91,9 +89,9 @@ const App = () => {
   else {
     routes = (
       <Switch>
-        {/* <Route path="/:userId/page" exact>
+        <Route path="/:userId/page" exact>
           <ProfilePage />
-        </Route> */}
+        </Route>
         <Route path="/auth">
           <Auth />
         </Route>
@@ -114,7 +112,7 @@ const App = () => {
       }}
     >
       <Router>
-        <MainNavigation />
+        <MainNavigation userId={userId} />
         <main style={{display:'flex', flexDirection:'column'}}>{routes}</main>
       </Router>
     </AuthContext.Provider>

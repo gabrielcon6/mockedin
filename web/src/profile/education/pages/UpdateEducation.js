@@ -103,7 +103,7 @@ const UpdateEducation = () => {
           Authorization: 'Bearer ' + auth.token
         }
       );
-      history.push('/' + auth.userId + '/education');
+      history.push('/' + auth.userId + '/profile');
     } catch (err) {}
   };
 

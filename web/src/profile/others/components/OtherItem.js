@@ -10,7 +10,7 @@ import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import '../../../places/components/PlaceItem.css';
 import { FaTrophy, FaPlus,FaPencilAlt, FaTrash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import '../../../places/components/Experience.scss'
 
 const OtherItem = props => {
@@ -28,6 +28,8 @@ const OtherItem = props => {
 
   const otherId = props.id;
 
+  const history = useHistory();
+
   const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);
     try {
@@ -41,6 +43,8 @@ const OtherItem = props => {
       );
       props.onDelete();
     } catch (err) {}
+    history.push('/');
+    history.push('/' + auth.userId + '/profile');
   };
 
   // let endDate = Moment(`${props.endDate}`).format("MMMM D, YYYY");

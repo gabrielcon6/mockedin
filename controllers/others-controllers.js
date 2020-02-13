@@ -212,20 +212,20 @@ const deleteOther = async (req, res, next) => {
     return next(error);
   }
 
-  try {
+  // try {
     await other.remove();
-    const sess = await mongoose.startSession();
-    sess.startTransaction();
-    other.creator.others.pull(other); //other OR othersS????
-    await other.creator.save({ session: sess });
-    await sess.commitTransaction();
-  } catch (err) {
-    const error = new HttpError(
-      '229 - Something went wrong, could not delete other.',
-      500
-    );
-    return next(error);
-  }
+  //   const sess = await mongoose.startSession();
+  //   sess.startTransaction();
+  //   other.creator.others.pull(other); //other OR othersS????
+  //   await other.creator.save({ session: sess });
+  //   await sess.commitTransaction();
+  // } catch (err) {
+  //   const error = new HttpError(
+  //     '229 - Something went wrong, could not delete other.',
+  //     500
+  //   );
+  //   return next(error);
+  // }
 
   res.status(200).json({ message: 'Deleted other.' });
 

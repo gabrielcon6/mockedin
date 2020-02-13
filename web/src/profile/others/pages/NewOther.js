@@ -55,7 +55,7 @@ const NewOther = () => {
       Authorization: 'Bearer ' + auth.token
      }
     );
-    history.push('/');
+    history.push('/' + auth.userId + '/profile');
   } catch (err) {}
 };
 

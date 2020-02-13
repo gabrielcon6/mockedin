@@ -187,22 +187,24 @@ const deleteEducation = async (req, res, next) => {
     );
     return next(error);
   }
-  try {
+  
+  // try {
     await education.remove();
-    const sess = await mongoose.startSession();
-    sess.startTransaction();
-    education.creator.education.pull(education); 
-    await education.creator.save({ session: sess });
-    await sess.commitTransaction();
-  } catch (err) {
-    const error = new HttpError(
-      '197 - Something went wrong, could not delete education.',
-      500
-    );
-    return next(error);
-  }
+    // const sess = await mongoose.startSession();
+    // sess.startTransaction();
+    // education.creator.education.pull(education); 
+    // await education.creator.save();
+    // await sess.commitTransaction();
+  // } catch (err) {
+  //   const error = new HttpError(
+  //     '197 - Something went wrong, could not delete education.',
+  //     500
+  //   );
+  //   return next(error);
+  // }
   res.status(200).json({ message: 'Deleted education.' });
 };
+
 exports.getEducationById = getEducationById;
 exports.getEducationByUserId = getEducationByUserId;
 exports.createEducation = createEducation;

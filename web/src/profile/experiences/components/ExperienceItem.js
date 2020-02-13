@@ -27,8 +27,8 @@ const ExperienceItem = props => {
   };
 
   const experienceId = props.id;
-  const history = useHistory();
 
+  const history = useHistory();
 
   const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);

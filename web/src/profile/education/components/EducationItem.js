@@ -10,7 +10,7 @@ import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import { FaRegBuilding, FaPencilAlt,FaUniversity, FaTrash} from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import '../../../places/components/Experience.scss'
 import '../../../places/components/PlaceItem.css';
 
@@ -29,6 +29,8 @@ const EducationItem = props => {
 
   let educationId = props.id;
 
+  const history = useHistory();
+
   const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);
     try {
@@ -42,6 +44,8 @@ const EducationItem = props => {
       );
       props.onDelete(props.id);
     } catch (err) {}
+    history.push('/');
+    history.push('/' + auth.userId + '/profile');
   };
 
   return (

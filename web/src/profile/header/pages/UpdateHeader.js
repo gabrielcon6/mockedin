@@ -152,7 +152,8 @@ const UpdateHeader = () => {
       formData, {
       Authorization: 'Bearer ' + auth.token
     });
-    history.push('/' + auth.userId + '/header');
+    history.push('/');
+    history.push('/' + auth.userId + '/profile');
   } catch (err) {}
 };
 
