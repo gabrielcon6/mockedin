@@ -37,7 +37,9 @@ const App = () => {
         <Route path="/header/:headerId">
           <UpdateHeader />
         </Route>
-        <Redirect to="/" />
+        <Redirect to="/">
+          <Users />
+        </Redirect>
       </Switch>
     );
   }
