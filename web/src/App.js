@@ -78,7 +78,7 @@ const App = () => {
           <UpdateOther />
         </Route>
 
-        <Redirect to="/" />
+        <Redirect to='/' />
       </Switch>
     );
   } 
@@ -120,7 +120,7 @@ const App = () => {
     >
       <Router>
         <MainNavigation />
-        <main>{routes}</main>
+        <main style={{display:'flex', flexDirection:'column'}}>{routes}</main>
       </Router>
     </AuthContext.Provider>
   );

@@ -76,7 +76,7 @@ const HeaderItem = props => {
           <div className='icon-edit'>
               <div className='icon-test'>
               {auth.userId === props.creatorId && (
-                <Link to={`/header/${props.id}`}><FaPencilAlt/></Link>
+                <Link className='link-style' to={`/header/${props.id}`}><FaPencilAlt/></Link>
               )}
                </div>
           </div>
@@ -89,35 +89,22 @@ const HeaderItem = props => {
           }
           <div className='card-content__subcontainer'>
             <div className='card-headline'>
-              <p className='card-user__name'>Name:{props.name}</p>
-              <p>Job Title: {props.jobTitle}</p>
-              <p className='card-user__sub'>Location: {props.location}</p>
-              <p className='card-user__sub'></p>
-              {/* <p className='headline__location'>About</p> */}
-            {/* <div className="place-item__actions"> */}
-            {/* <div className='card-action'>
-              {auth.userId === props.creatorId && (
-                <Button to={`/header/${props.id}`}>EDIT</Button>
-              )}
-
-              {auth.userId === props.creatorId && (
-                <Button className='button-header' danger onClick={showDeleteWarningHandler}>
-                  DELETE
-                </Button>
-              )}
-              </div> */}
+              <p className='card-user__name'>{props.name}</p>
+              <p className='card-user__sub-job-title'>{props.jobTitle}</p>
+              <p className='card-user__sub'>{props.location}</p>
              </div>
           </div>     
           </div>
           {/* paulo por favor chamar o component da strenght bara aqui :) */}
           {/* <StrenghtBar/> */}
+          {/* About components comeca aqui */}
           <>
         <div>
           <div className='about-title'>
             <h4 className='about-title__box'>About</h4> 
             <span className='about-icon'>
             {auth.userId === props.creatorId && (
-                <Link to={`/header/${props.id}`}><FaPencilAlt/></Link>
+                <Link className='link-style' to={`/header/${props.id}`}><FaPencilAlt/></Link>
               )}
             </span>
           </div>

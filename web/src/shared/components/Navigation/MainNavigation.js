@@ -5,6 +5,7 @@ import MainHeader from './MainHeader';
 import NavLinks from './NavLinks';
 import SideDrawer from './SideDrawer';
 import Backdrop from '../UIElements/Backdrop';
+import Logo from '../../../profile/image/mockedim.png'
 import './MainNavigation.css';
 
 const MainNavigation = props => {
@@ -37,7 +38,12 @@ const MainNavigation = props => {
           <span />
         </button>
         <h1 className="main-navigation__title">
-          <Link to="/">MockedIn</Link>
+          <Link to="/">MockedIn
+            {/* <div style={{maxHeight:'10%'}}>
+              <img style={{height:'10%'}} src={Logo}/>
+            </div> */}
+          </Link>
+           
         </h1>
         <nav className="main-navigation__header-nav">
           <NavLinks />
