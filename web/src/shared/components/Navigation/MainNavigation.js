@@ -38,7 +38,7 @@ const MainNavigation = props => {
           <span />
         </button>
         <h1 className="main-navigation__title">
-          <Link to="/">MockedIn</Link>
+          {/* <Link to="/">MockedIn</Link> */}
            
           <Link to={`/${props.userId}/profile`}>MockedIn</Link>
         </h1>
