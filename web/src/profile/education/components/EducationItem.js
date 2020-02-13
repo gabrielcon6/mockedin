@@ -93,22 +93,13 @@ const EducationItem = props => {
           <div className="place-item__info">
                 <p className='card-items__title'>{props.degree}</p>
                 <p className='card-items__date '> &nbsp;	
-                {props.startDate && (
                 <Moment format="MMM YYYY">
                     {props.startDate}
                 </Moment> 
-                )}
-                {!props.startDate && (
-                    'Present'
-                )} |&nbsp;	
-                {props.endDate && (
+                |&nbsp;	
                 <Moment format="MMM YYYY">
                     {props.endDate}
                 </Moment> 
-                )}
-                {!props.endDate && (
-                    'Present'
-                )}
                 <br/>
                </p>
                <div className='card-items-description'>
