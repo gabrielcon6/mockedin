@@ -60,8 +60,9 @@ const NewExperience = () => {
       Authorization: 'Bearer ' + auth.token
      }
     );
-    history.push('/');
   } catch (err) {}
+  history.push('/');
+  history.push('/' + auth.userId + '/profile');
 };
 
   return (

@@ -38,12 +38,11 @@ const MainNavigation = props => {
           <span />
         </button>
         <h1 className="main-navigation__title">
-<<<<<<< HEAD
-          <Link to="/">MockedIn
+          {/* <Link to="/">MockedIn */}
             {/* <div style={{maxHeight:'10%'}}>
               <img style={{height:'10%'}} src={Logo}/>
             </div> */}
-          </Link>
+          {/* </Link> */}
            
           <Link to={`/${props.userId}/profile`}>MockedIn</Link>
         </h1>

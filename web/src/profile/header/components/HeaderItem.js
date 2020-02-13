@@ -89,17 +89,11 @@ const HeaderItem = props => {
           }
           <div className='card-content__subcontainer'>
             <div className='card-headline'>
-<<<<<<< HEAD
-              <p className='card-user__name'>{props.name}</p>
-              <p className='card-user__sub-job-title'>{props.jobTitle}</p>
-              <p className='card-user__sub'>{props.location}</p>
-=======
               <p className='card-user__name'>Name:{props.name}</p>
               <p>Job Title: {props.jobTitle}</p>
               <p className='card-user__sub'>Location: {props.location}</p>
               <p className='card-user__sub'></p>
 
->>>>>>> 30301c2dc30f717f8732c5d3d9b045a738dd67c5
              </div>
           </div>     
           </div>

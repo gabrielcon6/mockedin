@@ -14,11 +14,15 @@ import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
 import './Auth.css';
+import { Link, useHistory } from 'react-router-dom';
+
 
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  const history = useHistory();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -75,6 +79,8 @@ const Auth = () => {
           }
         );
         auth.login(responseData.userId, responseData.token, responseData.isAdmin);
+        history.push('/' + responseData.userId + '/profile');
+
       } catch (err) {}
     } else {
       try {
@@ -92,11 +98,17 @@ const Auth = () => {
         );
 
         auth.login(responseData.userId, responseData.token, responseData.isAdmin);
+        // history.push('/');
+        history.push('/' + auth.userId + '/profile');
       } catch (err) {}
+      // history.push('/');
     }
+    
   };
 
   return (
+  //   {this.state.userLoggedIn ? <Redirect to='/askasalska/profile'
+  // : 
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <Card className="authentication">

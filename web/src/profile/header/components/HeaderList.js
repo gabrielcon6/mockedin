@@ -5,6 +5,7 @@ import Button from '../../../shared/components/FormElements/Button';
 import '../../../places/components/PlaceList.css';
 import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
 import HeaderItem from './HeaderItem';
+import Comments from "../../../user/admin/Comments";
 
 const HeaderList = props => {
   const storedData = JSON.parse(localStorage.getItem('userData'));
@@ -43,11 +44,6 @@ const HeaderList = props => {
           isAdmin={isAdmin}
         />
       ))}
-<<<<<<< HEAD
-     
-      
-=======
->>>>>>> 30301c2dc30f717f8732c5d3d9b045a738dd67c5
     </CardMockedin>
         
     </>
