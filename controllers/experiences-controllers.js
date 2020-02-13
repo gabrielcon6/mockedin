@@ -36,6 +36,7 @@ const getExperienceById = async (req, res, next) => {
 const getExperienceByUserId = async (req, res, next) => {
   const userId = req.params.uid;
   let userWithExperience;
+
   try {
     userWithExperience = await User.findById(userId).populate({path: 'experiences', options: { sort: { 'startDate': 'desc' } }});
   } catch (err) {
@@ -45,18 +46,7 @@ const getExperienceByUserId = async (req, res, next) => {
     );
     return next(error);
   }
-  // let userWithExperience;
-  // try {
-  //   userWithExperience = await Experience.find( { creator: userId } );
-  // } catch (err) {
-  //   const error = new HttpError(
-  //     'Fetching experiences failed, please try again later.',
-  //     500
-  //   );
-  //   return next(error);
-  // }
 
-  // if (!userWithExperience || userWithExperience.experience.length === 0) {
   if (!userWithExperience) {
     return next(
       new HttpError('Could not find experiences for the provided user id.', 404)
@@ -64,12 +54,7 @@ const getExperienceByUserId = async (req, res, next) => {
   }
 
   res.json({
-    // experience: userWithExperience.experience.map(experience =>
-    //   experience.toObject({ getters: true })
-    // )
-
     experience: userWithExperience
-    
   });
 };
 
@@ -125,16 +110,6 @@ const createExperience = async (req, res, next) => {
     return next(error);
   }
 
-  //BELOW IS IF WE WANT TO CREATE experience MANUALLY VIA POSTMAN
-  // try {
-  //   await createdExperience.save();
-  // } catch (err) {
-  //   const error = new HttpError(
-  //     'Signing up failed, please try again later.',
-  //     500
-  //   );
-  //   return next(error);
-  // }
   res.status(201).json({ experience: createdExperience });
 };
 
@@ -160,7 +135,7 @@ const updateExperience = async (req, res, next) => {
     return next(error);
   }
 
-  if (experience.creator.toString() !== req.userData.userId) {
+  if (experience.creator._id.toString() !== req.userData.userId) {
     const error = new HttpError('You are not allowed to edit this experience.', 401);
     return next(error);
   }
@@ -191,7 +166,7 @@ const deleteExperience = async (req, res, next) => {
   
   let experience;
   try {
-    experience = await Experience.findById(experienceId);
+    experience = await Experience.findById(experienceId).populate('creator');
   } catch (err) {
     const error = new HttpError(
       'line 202 Something went wrong, could not delete experience.',
@@ -205,7 +180,7 @@ const deleteExperience = async (req, res, next) => {
     return next(error);
   }
 
-  if (experience.creator.toString() !== req.userData.userId) {
+  if (experience.creator._id.toString() !== req.userData.userId) {
     const error = new HttpError(
       `You are not allowed to delete this experience.`,
       401
@@ -213,20 +188,20 @@ const deleteExperience = async (req, res, next) => {
     return next(error);
   }
 
-  // try {
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
     await experience.remove();
-    // const sess = await mongoose.startSession();
-    // sess.startTransaction();
-    // experience.creator.experiences.pull(experience); //experience OR ExperiencesS????
-    // await experience.creator.save({ session: sess });
-    // await sess.commitTransaction();
-  // } catch (err) {
-  //   const error = new HttpError(
-  //     'line 231 Something went wrong, could not delete experience. But works',
-  //     500
-  //   );
-  //   return next(error);
-  // }
+    experience.creator.experiences.pull(experience); //experience OR ExperiencesS????
+    await experience.creator.save({ session: sess });
+    await sess.commitTransaction();
+  } catch (err) {
+    const error = new HttpError(
+      'line 231 Something went wrong, could not delete experience. But works',
+      500
+    );
+    return next(error);
+  }
 
   res.status(200).json({ message: 'Deleted experience.' });
 
