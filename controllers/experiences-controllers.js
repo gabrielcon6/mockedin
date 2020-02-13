@@ -1,5 +1,4 @@
 const fs = require('fs');
-const uuid = require('uuid/v4');
 
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
@@ -69,7 +68,6 @@ const createExperience = async (req, res, next) => {
   const { title, company, startDate, endDate, description } = req.body;
 
   const createdExperience = new Experience({
-    id: uuid(), 
     title,
     company,
     startDate,

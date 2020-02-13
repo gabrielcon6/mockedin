@@ -1,5 +1,4 @@
 const fs = require('fs');
-const uuid = require('uuid/v4');
 
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
@@ -45,18 +44,7 @@ const getOtherByUserId = async (req, res, next) => {
     );
     return next(error);
   }
-  // let userWithOther;
-  // try {
-  //   userWithOther = await Other.find( { creator: userId } );
-  // } catch (err) {
-  //   const error = new HttpError(
-  //     'Fetching others failed, please try again later.',
-  //     500
-  //   );
-  //   return next(error);
-  // }
-
-  // if (!userWithOther || userWithOther.other.length === 0) {
+  
   if (!userWithOther) {
     return next(
       new HttpError('Could not find others for the provided user id.', 404)
@@ -64,12 +52,7 @@ const getOtherByUserId = async (req, res, next) => {
   }
 
   res.json({
-    // other: userWithOther.other.map(other =>
-    //   other.toObject({ getters: true })
-    // )
-
     other: userWithOther
-    
   });
 };
 
@@ -84,7 +67,6 @@ const createOther = async (req, res, next) => {
   const { type, title, startDate, endDate } = req.body;
 
   const createdOther = new Other({
-    id: uuid(), 
     type,
     title,
     startDate,
@@ -125,16 +107,6 @@ const createOther = async (req, res, next) => {
     return next(error);
   }
 
-  //BELOW IS IF WE WANT TO CREATE Other MANUALLY VIA POSTMAN
-  // try {
-  //   await createdOther.save();
-  // } catch (err) {
-  //   const error = new HttpError(
-  //     'Signing up failed, please try again later.',
-  //     500
-  //   );
-  //   return next(error);
-  // }
   res.status(201).json({ other: createdOther });
 };
 
@@ -160,7 +132,7 @@ const updateOther = async (req, res, next) => {
     return next(error);
   }
 
-  if (other.creator.toString() !== req.userData.userId) {
+  if (other.creator._id.toString() !== req.userData.userId) {
     const error = new HttpError('You are not allowed to edit this other.', 401);
     return next(error);
   }
@@ -190,7 +162,7 @@ const deleteOther = async (req, res, next) => {
 
   let other;
   try {
-    other = await Other.findById(otherId);
+    other = await Other.findById(otherId).populate('creator');
   } catch (err) {
     const error = new HttpError(
       '201 - Something went wrong, could not delete other.',
@@ -204,7 +176,7 @@ const deleteOther = async (req, res, next) => {
     return next(error);
   }
 
-  if (other.creator.toString() !== req.userData.userId) {
+  if (other.creator._id.toString() !== req.userData.userId) {
     const error = new HttpError(
       `You are not allowed to delete this other.`,
       401
@@ -212,20 +184,20 @@ const deleteOther = async (req, res, next) => {
     return next(error);
   }
 
-  // try {
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
     await other.remove();
-  //   const sess = await mongoose.startSession();
-  //   sess.startTransaction();
-  //   other.creator.others.pull(other); //other OR othersS????
-  //   await other.creator.save({ session: sess });
-  //   await sess.commitTransaction();
-  // } catch (err) {
-  //   const error = new HttpError(
-  //     '229 - Something went wrong, could not delete other.',
-  //     500
-  //   );
-  //   return next(error);
-  // }
+    other.creator.others.pull(other); 
+    await other.creator.save({ session: sess });
+    await sess.commitTransaction();
+  } catch (err) {
+    const error = new HttpError(
+      '229 - Something went wrong, could not delete other.',
+      500
+    );
+    return next(error);
+  }
 
   res.status(200).json({ message: 'Deleted other.' });
 
