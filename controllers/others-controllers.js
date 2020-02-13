@@ -50,7 +50,7 @@ const getOtherByUserId = async (req, res, next) => {
   //   userWithOther = await Other.find( { creator: userId } );
   // } catch (err) {
   //   const error = new HttpError(
-  //     'Fetching places failed, please try again later.',
+  //     'Fetching others failed, please try again later.',
   //     500
   //   );
   //   return next(error);

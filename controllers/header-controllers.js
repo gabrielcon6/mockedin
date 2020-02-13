@@ -43,7 +43,7 @@ const getHeaderByUserId = async (req, res, next) => {
   //   userWithHeader = await User.findById(userId).populate('header');
   // } catch (err) {
   //   const error = new HttpError(
-  //     'Fetching places failed, please try again later.',
+  //     'Fetching header failed, please try again later.',
   //     500
   //   );
   //   return next(error);
@@ -53,7 +53,7 @@ const getHeaderByUserId = async (req, res, next) => {
     userWithHeader = await Header.find( { creator: userId } );
   } catch (err) {
     const error = new HttpError(
-      'Fetching places failed, please try again later.',
+      'Fetching header failed, please try again later.',
       500
     );
     return next(error);
@@ -62,7 +62,7 @@ const getHeaderByUserId = async (req, res, next) => {
   // if (!userWithHeader || userWithHeader.header.length === 0) {
   if (!userWithHeader) {
     return next(
-      new HttpError('Could not find places for the provided user id.', 404)
+      new HttpError('Could not find header for the provided user id.', 404)
     );
   }
 
