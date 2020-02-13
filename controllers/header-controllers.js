@@ -87,8 +87,6 @@ const createHeader = async (req, res, next) => {
 
   const { name, jobTitle, location, about } = req.body;
 
-  //************************** */
-
   const file = req.file;
   const s3FileURL = "https://s3-ap-southeast-2.amazonaws.com/mockedin-images/"
 
@@ -141,15 +139,11 @@ const createHeader = async (req, res, next) => {
         res.status(500).json({ error: true, Message: err });
       } else {
         // res.send({ data });
-        console.log('HELLLOOOOOO 117', data)
       }
     });
-    const sess = await mongoose.startSession();
-    sess.startTransaction();
-    await createdHeader.save({ session: sess });
-    // user.header.push(createdHeader);
-    // await user.save({ session: sess });
-    await sess.commitTransaction();
+
+    await createdHeader.save();
+
   } catch (err) {
     const error = new HttpError(
       'Creating header failed, please try again.',
