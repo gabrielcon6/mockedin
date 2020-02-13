@@ -13,9 +13,8 @@ const Background = () => {
                       enable: true,
                       value_area: 50
                     }
-                  }
-                  
-            		}
+                  } 
+                }
             	}}
               style={{
                   width: '100%',
