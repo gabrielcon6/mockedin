@@ -142,7 +142,7 @@ const UpdateHeader = () => {
     formData.append('name', formState.inputs.name.value);
     // formData.append('file', formState.inputs.file.value);
     formData.append('jobTitle', formState.inputs.jobTitle.value);
-    formData.append('location', address);
+    formData.append('location', address ? address : loadedHeader.location);
     formData.append('about', formState.inputs.about.value);
     formData.append('adminComments', formState.inputs.adminComments.value);
     formData.append('isOk', check);
@@ -214,6 +214,7 @@ const UpdateHeader = () => {
             onChange={setAddress}
             onSelect={handleSelect}
             searchOptions={searchOptions}
+            initialValue={loadedHeader.location}
           >
             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
               <div>
