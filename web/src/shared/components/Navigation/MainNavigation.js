@@ -38,7 +38,6 @@ const MainNavigation = props => {
           <span />
         </button>
         <h1 className="main-navigation__title">
-<<<<<<< HEAD
           <Link to="/">MockedIn
             {/* <div style={{maxHeight:'10%'}}>
               <img style={{height:'10%'}} src={Logo}/>
