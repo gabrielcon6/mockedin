@@ -9,14 +9,14 @@ const Feedback = require('../models/feedback');
 const User = require('../models/user');
 
 const getFeedbackById = async (req, res, next) => {
-  const otherId = req.params.oid;
+  const FeedbackId = req.params.fid;
 
   let feedback;
   try {
-    feedback = await feedback.findById(otherId);
+    feedback = await feedback.findById(FeedbackId);
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not find a place.',
+      'Something went wrong, could not find a feedback.',
       500
     );
     return next(error);
@@ -24,7 +24,7 @@ const getFeedbackById = async (req, res, next) => {
 
   if (!feedback) {
     const feedback = new HttpError(
-      'Could not find other for the provided id.',
+      'Could not find feedback for the provided id.',
       404
     );
     return next(feedback);
@@ -33,21 +33,21 @@ const getFeedbackById = async (req, res, next) => {
   res.json({ feedback: feedback.toObject({ getters: true }) });
 };
 
-const getOtherByUserId = async (req, res, next) => {
+const getFeedbackByUserId = async (req, res, next) => {
   const userId = req.params.uid;
   let userWithFeedback;
   try {
     userWithFeedback = await User.findById(userId).populate({path: 'feedback'});;
   } catch (err) {
     const error = new HttpError(
-      'Fetching others failed, please try again later.',
+      'Fetching Feedbacks failed, please try again later.',
       500
     );
     return next(error);
   }
   if (!userWithFeedback) {
     return next(
-      new HttpError('Could not find others for the provided user id.', 404)
+      new HttpError('Could not find Feedbacks for the provided user id.', 404)
     );
   }
 
@@ -58,7 +58,7 @@ const getOtherByUserId = async (req, res, next) => {
   });
 };
 
-const createOther = async (req, res, next) => {
+const createFeedback = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -82,7 +82,7 @@ const createOther = async (req, res, next) => {
     user = await User.findById(req.userData.userId);
   } catch (err) {
     const error = new HttpError(
-      'Creating place failed, please try again.',
+      'Creating feedback failed, please try again.',
       500
     );
     return next(error);
@@ -96,21 +96,21 @@ const createOther = async (req, res, next) => {
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    await createdOther.save({ session: sess });
-    user.others.push(createdOther);
+    await createdFeedback.save({ session: sess });
+    user.Feedbacks.push(createdFeedback);
     await user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
-      'Creating place failed, please try again.',
+      'Creating feedback failed, please try again.',
       500
     );
     return next(error);
   }
 
-  //BELOW IS IF WE WANT TO CREATE Other MANUALLY VIA POSTMAN
+  //BELOW IS IF WE WANT TO CREATE feedback MANUALLY VIA POSTMAN
   // try {
-  //   await createdOther.save();
+  //   await createdFeedback.save();
   // } catch (err) {
   //   const error = new HttpError(
   //     'Signing up failed, please try again later.',
@@ -118,10 +118,10 @@ const createOther = async (req, res, next) => {
   //   );
   //   return next(error);
   // }
-  res.status(201).json({ other: createdOther });
+  res.status(201).json({ feedback: createdFeedback });
 };
 
-const updateOther = async (req, res, next) => {
+const updateFeedback = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -130,92 +130,92 @@ const updateOther = async (req, res, next) => {
   }
 
   const { type, title, startDate, endDate } = req.body;
-  const otherId = req.params.oid;
+  const FeedbackId = req.params.fid;
 
-  let other;
+  let feedback;
   try {
-    other = await Other.findById(otherId);
+    feedback = await feedback.findById(FeedbackId);
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not update place.',
+      'Something went wrong, could not update feedback.',
       500
     );
     return next(error);
   }
 
-  if (other.creator.toString() !== req.userData.userId) {
-    const error = new HttpError('You are not allowed to edit this other.', 401);
+  if (feedback.creator.toString() !== req.userData.userId) {
+    const error = new HttpError('You are not allowed to edit this feedback.', 401);
     return next(error);
   }
 
-  other.type = type;
-  other.title = title;
-  other.startDate = startDate;
-  other.endDate = endDate;
+  feedback.type = type;
+  feedback.title = title;
+  feedback.startDate = startDate;
+  feedback.endDate = endDate;
 
-  // other.adminComments = adminComments;
+  // feedback.adminComments = adminComments;
 
   try {
-    await other.save();
+    await feedback.save();
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not update other.',
+      'Something went wrong, could not update feedback.',
       500
     );
     return next(error);
   }
 
-  res.status(200).json({ other: other.toObject({ getters: true }) });
+  res.status(200).json({ feedback: feedback.toObject({ getters: true }) });
 };
 
-const deleteOther = async (req, res, next) => {
-  const otherId = req.params.oid;
+const deleteFeedback = async (req, res, next) => {
+  const FeedbackId = req.params.fid;
 
-  let other;
+  let feedback;
   try {
-    other = await Other.findById(otherId);
+    feedback = await feedback.findById(FeedbackId);
   } catch (err) {
     const error = new HttpError(
-      '201 - Something went wrong, could not delete other.',
+      '201 - Something went wrong, could not delete feedback.',
       500
     );
     return next(error);
   }
 
-  if (!other) {
-    const error = new HttpError('Could not find other for this id.', 404);
+  if (!feedback) {
+    const error = new HttpError('Could not find feedback for this id.', 404);
     return next(error);
   }
 
-  if (other.creator.toString() !== req.userData.userId) {
+  if (feedback.creator.toString() !== req.userData.userId) {
     const error = new HttpError(
-      `You are not allowed to delete this other.`,
+      `You are not allowed to delete this feedback.`,
       401
     );
     return next(error);
   }
 
   try {
-    await other.remove();
+    await feedback.remove();
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    other.creator.others.pull(other); //other OR othersS????
-    await other.creator.save({ session: sess });
+    feedback.creator.Feedbacks.pull(feedback); //feedback OR FeedbacksS????
+    await feedback.creator.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
-      '229 - Something went wrong, could not delete other.',
+      '229 - Something went wrong, could not delete feedback.',
       500
     );
     return next(error);
   }
 
-  res.status(200).json({ message: 'Deleted other.' });
+  res.status(200).json({ message: 'Deleted feedback.' });
 
 };
 
-exports.getOtherById = getOtherById;
-exports.getOtherByUserId = getOtherByUserId;
-exports.createOther = createOther;
-exports.updateOther = updateOther;
-exports.deleteOther = deleteOther;
+exports.getFeedbackById = getFeedbackById;
+exports.getFeedbackByUserId = getFeedbackByUserId;
+exports.createFeedback = createFeedback;
+exports.updateFeedback = updateFeedback;
+exports.deleteFeedback = deleteFeedback;
