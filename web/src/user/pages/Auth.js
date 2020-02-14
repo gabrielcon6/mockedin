@@ -79,8 +79,12 @@ const Auth = () => {
           }
         );
         auth.login(responseData.userId, responseData.token, responseData.isAdmin);
-        // history.push('/');
-        history.push('/' + responseData.userId + '/profile');
+        {responseData.isAdmin && (
+          history.push('/')
+        )}
+        {!responseData.isAdmin && (
+          history.push('/' + responseData.userId + '/profile')
+        )}
 
       } catch (err) {}
     } else {

@@ -10,7 +10,6 @@ router.get('/', usersController.getUsers);
 
 router.post(
   '/signup',
-  // fileUpload.single('image'),
   [
     check('name')
       .not()
@@ -24,5 +23,7 @@ router.post(
 );
 
 router.post('/login', usersController.login);
+router.post('/:uid/send-to-admin', usersController.sendAdminEmail);
+router.post('/:uid/send-to-user', usersController.sendAdminEmail);
 
 module.exports = router;

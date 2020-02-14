@@ -11,11 +11,9 @@ import { AuthContext } from '../../shared/context/auth-context';
 import Input from '../../shared/components/FormElements/Input';
 import { VALIDATOR_REQUIRE } from '../../shared/util/validators';
 
+import './Feedback.scss'
 
-
-import './Comments.scss'
-
-const Comments = () =>{
+const Feedback = () => {
 
     const auth = useContext(AuthContext);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -28,6 +26,16 @@ const Comments = () =>{
     const storedData = JSON.parse(localStorage.getItem('userData'));
     const isAdmin = storedData.isAdmin
     
+    const sendUserEmail = async () => {
+      try {
+        await sendRequest(
+          '/api/users/' + auth.userId + '/send-to-user',
+          'POST',
+        );
+      } catch (err) {}
+      history.push('/');
+      history.push('/' + auth.userId + '/profile');
+    };
   
     const [formState, inputHandler, setFormData] = useForm(
       {
@@ -86,15 +94,15 @@ const Comments = () =>{
       fetchFeedback();
     }, [sendRequest, userId, setFormData]);
   
-      //   vvvvvv Admin is OK checkbox logic here
-      useEffect(() => {
-        setCheck(check)
-        }, [check])
-    
-      const handleCheck = (e) =>{
-        setCheck(!check)
-      }
-    //   ^^^^^^^ Admin is OK checkbox logic up here
+    //   vvvvvv Admin is OK checkbox logic here
+    useEffect(() => {
+      setCheck(check)
+      }, [check])
+  
+    const handleCheck = (e) =>{
+      setCheck(!check)
+    }
+  //   ^^^^^^^ Admin is OK checkbox logic up here
 
   const feedbackUpdateSubmitHandler = async event => {
     event.preventDefault();
@@ -137,8 +145,6 @@ const Comments = () =>{
       );
     }
   
-    console.log('aaaaaaa',loadedFeedback)
-
     return(
         <div className='comments-main-container'>
             <div className='comments__container' >
@@ -201,7 +207,7 @@ const Comments = () =>{
                         initialValid={true}/>
                     </div>
                     <div className='comments-button'>
-                        <Button type="submit" disabled={!formState.isValid}>Send Review</Button>
+                        <Button type="submit" disabled={!formState.isValid} onClick={sendUserEmail}>Send Review</Button>
                     </div>
                 </form>
 
@@ -210,4 +216,4 @@ const Comments = () =>{
     )
 }
 
-export default Comments ;
+export default Feedback ;

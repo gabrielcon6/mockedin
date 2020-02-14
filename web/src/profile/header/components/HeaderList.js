@@ -5,7 +5,7 @@ import Button from '../../../shared/components/FormElements/Button';
 import '../../../places/components/PlaceList.css';
 import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
 import HeaderItem from './HeaderItem';
-import Comments from '../../../user/admin/Comments';
+import Feedback from '../../../user/admin/Feedback';
 
 const HeaderList = props => {
   const storedData = JSON.parse(localStorage.getItem('userData'));
@@ -26,7 +26,7 @@ const HeaderList = props => {
   }
   return (
     <>
-    <Comments/>
+    <Feedback/>
     <CardMockedin className="cardMocke">
       {props.items.map(header => (
         <HeaderItem
