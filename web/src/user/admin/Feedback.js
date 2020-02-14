@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Button from '../../shared/components/FormElements/Button';
-import { Checkbox } from '@thumbtack/thumbprint-react';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Card from '../../shared/components/UIElements/Card';
@@ -35,8 +34,6 @@ const Feedback = () => {
           userId
         );
       } catch (err) {}
-      history.push('/');
-      history.push('/' + auth.userId + '/profile');
     };
   
     const [formState, inputHandler, setFormData] = useForm(
@@ -89,22 +86,12 @@ const Feedback = () => {
             },
             true
           );
-          console.log('aaaaaaa',loadedFeedback)
         } catch (err) {}
 
       };
       fetchFeedback();
     }, [sendRequest, userId, setFormData]);
   
-    //   vvvvvv Admin is OK checkbox logic here
-    useEffect(() => {
-      setCheck(check)
-      }, [check])
-  
-    const handleCheck = (e) =>{
-      setCheck(!check)
-    }
-  //   ^^^^^^^ Admin is OK checkbox logic up here
 
   const feedbackUpdateSubmitHandler = async event => {
     event.preventDefault();
@@ -125,6 +112,7 @@ const Feedback = () => {
         }
       );
     } catch (err) {}
+    sendUserEmail();
     history.push('/');
   };
   
@@ -214,7 +202,6 @@ const Feedback = () => {
                     <div className='comments-button'>
                       {isAdmin && (
                         <Button type="submit" disabled={!formState.isValid} 
-                        onClick={sendUserEmail}
                         >Send Review</Button>
                       )}
                       <br/>
