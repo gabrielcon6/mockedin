@@ -27,10 +27,14 @@ const Feedback = () => {
     const isAdmin = storedData.isAdmin
     
     const sendUserEmail = async () => {
+      // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
       try {
         await sendRequest(
-          '/api/users/' + auth.userId + '/send-to-user',
+          '/api/users/' + auth.userId + '/send-to-user'
+                // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
+,
           'POST',
+          userId
         );
       } catch (err) {}
       history.push('/');
