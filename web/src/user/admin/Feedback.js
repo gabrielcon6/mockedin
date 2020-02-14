@@ -27,20 +27,18 @@ const Feedback = () => {
 
     const editRights = !isAdmin ? "disabled" : ''
     
-//     const sendUserEmail = async () => {
-//       // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
-//       try {
-//         await sendRequest(
-//           '/api/users/' + auth.userId + '/send-to-user'
-//                 // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
-// ,
-//           'POST',
-//           userId
-//         );
-//       } catch (err) {}
-//       history.push('/');
-//       history.push('/' + auth.userId + '/profile');
-//     };
+    const sendUserEmail = async () => {
+      // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
+      try {
+        await sendRequest(
+          '/api/users/' + auth.userId + '/send-to-user/' + loadedFeedback.creator,
+          'POST',
+          userId
+        );
+      } catch (err) {}
+      history.push('/');
+      history.push('/' + auth.userId + '/profile');
+    };
   
     const [formState, inputHandler, setFormData] = useForm(
       {
@@ -217,7 +215,7 @@ const Feedback = () => {
                     <div className='comments-button'>
                       {isAdmin && (
                         <Button type="submit" disabled={!formState.isValid} 
-                        // onClick={sendUserEmail}
+                        onClick={sendUserEmail}
                         >Send Review</Button>
                       )}
                       <br/>
