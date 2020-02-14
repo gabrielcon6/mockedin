@@ -7,6 +7,7 @@ import HeaderPage from '../header/pages/HeaderPage';
 import ExperiencePage from '../experiences/pages/ExperiencePage';
 import EducationPage from '../education/pages/EducationPage';
 import OtherPage from '../others/pages/OtherPage';
+import ProgressBar from '../../shared/components/UIElements/ProgressBar'
 
 const ProfilePage = (props) => {
 
@@ -24,6 +25,9 @@ const ProfilePage = (props) => {
 
       {!isLoading && (
         <HeaderPage />
+      )}
+      {!isLoading && (
+        <ProgressBar/>
       )}
       {!isLoading && (
         <ExperiencePage userId={props.userId}/>
