@@ -23,6 +23,7 @@ router.post(
 );
 
 router.post('/login', usersController.login);
-router.post('/:uid/email', usersController.sendEmail);
+router.post('/:uid/send-to-admin', usersController.sendAdminEmail);
+router.post('/:uid/send-to-user', usersController.sendAdminEmail);
 
 module.exports = router;
