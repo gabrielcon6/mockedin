@@ -10,6 +10,7 @@ import OtherPage from '../others/pages/OtherPage';
 import ProgressBar from '../../shared/components/UIElements/ProgressBar'
 import { AuthContext } from '../../shared/context/auth-context';
 import Feedback from '../../user/admin/Feedback'
+
 const ProfilePage = (props) => {
   const auth = useContext(AuthContext);
 
@@ -17,11 +18,10 @@ const ProfilePage = (props) => {
 
   const [color,setColor]=useState('rgb(68, 148, 240)');
   const [textColor,setTextColor]=useState('white');
-  const [textMessage,settextMessage]=useState(`Send Profile to Review`);
+  const [textMessage,settextMessage]=useState(`Send Profile for Review`);
   const [active,setDisabled]=useState('');
 
   const colorHanlder = () => {
-    console.log('ta funcionando')
     setColor("rgb(244, 246, 248");
     setTextColor('green')
     settextMessage(`Your Profile has been submitted ✓`)
@@ -64,7 +64,7 @@ const ProfilePage = (props) => {
       {!isLoading && (
         <OtherPage userId={props.userId}/>
       )}
-      
+      {!auth.isAdmin && (
         <div style={{display:'flex', justifyContent:'flex-start', margin:'3% 0 3% 12%'}}>
         <div>
           <button onClick={onClickCall} disabled={active} style={{ backgroundColor: color ,color:textColor, width:'53vw', padding:'20px', fontSize:'17px'}}>
@@ -78,6 +78,7 @@ const ProfilePage = (props) => {
           </div>
         )}
         </div>
+      )}
     </React.Fragment>
   );
 };
