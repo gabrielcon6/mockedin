@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 const Feedback = require('../models/feedback');
+const { sendAdminEmail } = require('../account')
+
 
 const getUsers = async (req, res, next) => {
   let users;
@@ -176,6 +178,29 @@ const login = async (req, res, next) => {
   });
 };
 
+const sendEmail = async (req, res, next) => {
+  userId = req.params.uid;
+
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching users failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+
+  console.log('hey', user.email)
+  console.log('hey', user.name)
+  sendAdminEmail(user.email, user.name);
+
+
+  res.status(200).json({ message: 'Email sent.' });
+
+};
+
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
+exports.sendEmail = sendEmail;

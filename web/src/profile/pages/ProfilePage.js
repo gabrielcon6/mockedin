@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
@@ -7,14 +8,32 @@ import HeaderPage from '../header/pages/HeaderPage';
 import ExperiencePage from '../experiences/pages/ExperiencePage';
 import EducationPage from '../education/pages/EducationPage';
 import OtherPage from '../others/pages/OtherPage';
+import Button from '../../shared/components/FormElements/Button';
+import { AuthContext } from '../../shared/context/auth-context';
+
 
 const ProfilePage = (props) => {
+  const auth = useContext(AuthContext);
 
-  const { isLoading, error, clearError } = useHttpClient();
+  const { isLoading, error, clearError, sendRequest } = useHttpClient();
+  const history = useHistory();
 
+
+  //USE EFFECT
+  const sendEmail = async () => {
+  try {
+    await sendRequest(
+      '/api/users/' + auth.userId + '/email',
+      'POST',
+    );
+  } catch (err) {}
+  history.push('/');
+  history.push('/' + auth.userId + '/profile');
+};
 
   return (
     <React.Fragment>
+      <Button onClick={sendEmail}>Send Email</Button>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
         <div className="center">
