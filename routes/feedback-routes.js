@@ -5,14 +5,10 @@ const router = express.Router();
 
 router.get('/:fid', feedbackControllers.getFeedbackById);
 
-router.get('/user/:fid', feedbackControllers.getFeedbackByUserId);
+router.get('/user/:uid', feedbackControllers.getFeedbackByUserId);
 
 router.use(checkAuth);
 
-router.post('/', feedbackControllers.createFeedback);
-
 router.patch('/:fid', feedbackControllers.updateFeedback);
-
-router.delete('/:fid', feedbackControllers.deleteFeedback);
 
 module.exports = router;
