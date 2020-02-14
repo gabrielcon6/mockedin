@@ -142,8 +142,6 @@ const updateOther = async (req, res, next) => {
   other.startDate = startDate;
   other.endDate = endDate;
 
-  // other.adminComments = adminComments;
-
   try {
     await other.save();
   } catch (err) {

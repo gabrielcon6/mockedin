@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import PlacesAutocomplete from "react-places-autocomplete";
 
 import Input from '../../../shared/components/FormElements/Input';
 import Button from '../../../shared/components/FormElements/Button';
@@ -17,10 +17,6 @@ const NewHeader = () => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [address, setAddress] = useState("");
-  const [coordinates, setCoordinates] = useState({
-    lat: null,
-    lng: null
-  });
 
   const searchOptions = {
     types: ['(cities)'],
@@ -54,10 +50,7 @@ const NewHeader = () => {
   );
 
   const handleSelect = async value => {
-    const results = await geocodeByAddress(value);
-    const latLng = await getLatLng(results[0]);
     setAddress(value);
-    setCoordinates(latLng);
   };
 
   const history = useHistory();

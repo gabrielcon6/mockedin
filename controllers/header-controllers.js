@@ -117,7 +117,6 @@ const createHeader = async (req, res, next) => {
       if (err) {
         res.status(500).json({ error: true, Message: err });
       } else {
-        // res.send({ data });
       }
     });
 
@@ -191,7 +190,6 @@ const updateHeader = async (req, res, next) => {
       if (err) {
         res.status(500).json({ error: true, Message: err });
       } else {
-        // res.send({ data });
       }
     });
     await header.save();

@@ -1,11 +1,9 @@
 import React from 'react';
 
-import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
 import '../../../places/components/PlaceList.css';
 import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
 import HeaderItem from './HeaderItem';
-// import Comments from '../../../user/admin/Comments'
 import Feedback from '../../../user/admin/Feedback';
 
 const HeaderList = props => {

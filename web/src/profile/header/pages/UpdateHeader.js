@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { Checkbox } from '@thumbtack/thumbprint-react';
+import PlacesAutocomplete from "react-places-autocomplete";
 
 import Input from '../../../shared/components/FormElements/Input';
 import Button from '../../../shared/components/FormElements/Button';
@@ -20,11 +19,7 @@ const UpdateHeader = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedHeader, setLoadedHeader] = useState();
   const [address, setAddress] = React.useState("");
-  const [check, setCheck] = useState(false);
-  const [coordinates, setCoordinates] = React.useState({
-    lat: null,
-    lng: null
-  });
+
   const headerId = useParams().headerId;
   const history = useHistory();
 
@@ -37,12 +32,8 @@ const UpdateHeader = () => {
    }
 
   const handleSelect = async value => {
-    const results = await geocodeByAddress(value);
-    const latLng = await getLatLng(results[0]);
     setAddress(value);
-    setCoordinates(latLng);
   };
-
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -63,14 +54,6 @@ const UpdateHeader = () => {
         isValid: false
       },
       file: {
-        value: null,
-        isValid: false
-      },
-      adminComments: {
-        value: null,
-        isValid: false
-      },
-      isOk: {
         value: null,
         isValid: false
       }
@@ -106,33 +89,14 @@ const UpdateHeader = () => {
             file: {
               value: responseData.header.fileLink,
               isValid: true
-            },
-            adminComments: {
-              value: responseData.header.adminComments,
-              isValid: true
-            },
-            isOk: {
-              value: responseData.header.isOk,
-              isValid: true
             }
           },
           true
         );
-        setCheck(responseData.header.isOk);
       } catch (err) {}
     };
     fetchHeader();
   }, [sendRequest, headerId, setFormData]);
-
-    //   vvvvvv Admin is OK checkbox logic here
-    useEffect(() => {
-      setCheck(check)
-      }, [check])
-  
-    const handleCheck = (e) =>{
-      setCheck(!check)
-    }
-  //   ^^^^^^^ Admin is OK checkbox logic up here
 
   const headerUpdateSubmitHandler = async event => {
     event.preventDefault();
@@ -148,7 +112,6 @@ const UpdateHeader = () => {
       `/api/header/${headerId}`,
       'PATCH', 
       formData, {
-      // 'Content-Type': 'application/json',
       Authorization: 'Bearer ' + auth.token
     });
     history.push('/');
@@ -249,21 +212,7 @@ const UpdateHeader = () => {
             initialValue={loadedHeader.about}
             initialValid={true}
           />
-      </div>}
-          {isAdmin &&
-          <div>
-            <Input
-              id="adminComments"
-              element="textarea"
-              label="Comments"
-              validators={[VALIDATOR_REQUIRE()]}
-              errorText="Please enter cmments."
-              onInput={inputHandler}
-              initialValue={loadedHeader.adminComments}
-              initialValid={true}
-            />
-            <Checkbox type="checkbox" onChange={handleCheck} hasError={!check} isChecked={check}>{check ? 'Session marked as done!' : 'Mark session as done.'}</Checkbox>
-            </div>}
+      </div>} 
           <Button type="submit" disabled={!formState.isValid}>
             UPDATE HEADER
           </Button>

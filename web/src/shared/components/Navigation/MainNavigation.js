@@ -5,7 +5,6 @@ import MainHeader from './MainHeader';
 import NavLinks from './NavLinks';
 import SideDrawer from './SideDrawer';
 import Backdrop from '../UIElements/Backdrop';
-import Logo from '../../../profile/image/mockedim.png'
 import './MainNavigation.css';
 import { AuthContext } from '../../../shared/context/auth-context';
 

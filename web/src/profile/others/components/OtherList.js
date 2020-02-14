@@ -2,11 +2,10 @@ import React, {useContext} from 'react';
 
 
 import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
-import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
 import '../../../places/components/PlaceList.css';
 import OtherItem from './OtherItem';
-import { FaRegBuilding, FaPlus,FaPencilAlt } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../shared/context/auth-context';
 

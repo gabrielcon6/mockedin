@@ -1,7 +1,5 @@
 import React, { useState, useContext } from 'react';
 
-import CardMockedin from '../../../shared/components/UIElements/CardMockedin'
-import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
 import Modal from '../../../shared/components/UIElements/Modal';
 import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
@@ -14,15 +12,10 @@ import '../../../places/components/About.scss'
 import { FaPencilAlt } from 'react-icons/fa';
 import Background from '../../../shared/components/UIElements/Background'
 import { Link } from 'react-router-dom';
-import StrenghtBar from './StrenghtBar'
 const HeaderItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-
-  const showDeleteWarningHandler = () => {
-    setShowConfirmModal(true);
-  };
 
   const cancelDeleteHandler = () => {
     setShowConfirmModal(false);

@@ -12,14 +12,5 @@ const sendAdminEmail = (email, name) => {
     })
 }
 
-// const sendCancelationEmail = (email, name) => {
-//     sgMail.send({
-//         to: email,
-//         from: 'andrew@mead.io',
-//         subject: 'Sorry to see you go!',
-//         text: `Goodbye, ${name}. I hope to see you back sometime soon.`
-//     })
-// }
-
 module.exports = {
     sendAdminEmail }

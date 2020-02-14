@@ -126,7 +126,7 @@ const updateEducation = async (req, res, next) => {
   education.startDate = startDate;
   education.endDate = endDate;
   education.description = description;
-  // education.adminComments = adminComments;
+  
   try {
     await education.save();
   } catch (err) {

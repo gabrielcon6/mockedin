@@ -1,7 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
 
-import { AuthContext } from '../../shared/context/auth-context';
-
 let logoutTimer;
 
 export const useAuth = () => {

@@ -13,7 +13,7 @@ const othersRoutes = require('./routes/others-routes');
 const feedbackRoutes = require('./routes/feedback-routes');
 
 const app = express();
-app.use(express.static('public')); // the React app will be bundled and placed in the public folder
+app.use(express.static('public'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: "false" }));

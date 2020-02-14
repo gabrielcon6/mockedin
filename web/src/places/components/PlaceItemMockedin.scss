@@ -1,6 +1,5 @@
 .cardMocke {
     width:53vw;
-    // height: 65vh;
     margin: 10px 12%;
     border: 1px solid lightgray;
     border-radius: 2px;
@@ -39,7 +38,6 @@
       margin: 0 auto;
     }
     .icon-edit{
-      // display: flex;
     position: relative;
      width: 100%;
      font-size: 23px;
@@ -60,7 +58,6 @@
       height: 200px;
       width: 100%;
       margin: 0;
-      // background-color:rgb(84, 148, 180);
       background: rgb(0,145,190);
       background: linear-gradient(139deg, rgba(0,145,190,1) 36%, rgba(0,156,171,1) 80%);
     }
@@ -85,8 +82,6 @@
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
-        // -webkit-filter: grayscale(100%);
-        // filter: grayscale(100%);
       }
     }
 
@@ -98,9 +93,3 @@
    
   }
 
-  // @media (max-width: 768px) {
-  //   .cardMocke {
-  //     width: 80vw;
-  //     display: flex;
-  //   } 
-  // }

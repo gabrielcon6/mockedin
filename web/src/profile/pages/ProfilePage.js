@@ -40,8 +40,6 @@ const ProfilePage = (props) => {
       'POST',
     );
   } catch (err) {}
-  // history.push('/');
-  // history.push('/' + auth.userId + '/profile');
 };
 
   return (

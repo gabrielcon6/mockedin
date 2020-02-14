@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Button from '../../shared/components/FormElements/Button';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
-import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Card from '../../shared/components/UIElements/Card';
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -15,9 +14,8 @@ import './Feedback.scss'
 const Feedback = () => {
 
     const auth = useContext(AuthContext);
-    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    const { isLoading, error, sendRequest} = useHttpClient();
     const [loadedFeedback, setLoadedFeedback] = useState();
-    const [check, setCheck] = useState(false);
     const userId = useParams().userId;
     const history = useHistory();
   
@@ -104,7 +102,6 @@ const Feedback = () => {
             educationFeedback: formState.inputs.educationFeedback.value,
             experienceFeedback: formState.inputs.experienceFeedback.value,
             strength: formState.inputs.strength.value
-            // feedbackId: formState.inputs.description.value
         }),
         {
           'Content-Type': 'application/json',
@@ -157,7 +154,6 @@ const Feedback = () => {
                         style={{width:'100%',height:'100%',
                         display:'flex', 
                         border: '1px solid black', fontSize:'15px'}} 
-                        // type='text'
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter feedback."
                         onInput={inputHandler}
@@ -174,7 +170,6 @@ const Feedback = () => {
                         style={{width:'100%',height:'100%',
                         display:'flex', 
                         border: '1px solid black', fontSize:'15px'}} 
-                        // type='text'
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter feedback."
                         onInput={inputHandler}
@@ -191,7 +186,6 @@ const Feedback = () => {
                         style={{width:'100%',height:'100%',
                         display:'flex', 
                         border: '1px solid black', fontSize:'15px'}} 
-                        // type='text'
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter feedback."
                         onInput={inputHandler}

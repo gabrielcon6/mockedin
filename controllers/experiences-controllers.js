@@ -144,8 +144,6 @@ const updateExperience = async (req, res, next) => {
   experience.endDate = endDate;
   experience.description = description;
 
-  // experience.adminComments = adminComments;
-
   try {
     await experience.save();
   } catch (err) {

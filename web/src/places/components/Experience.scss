@@ -1,9 +1,7 @@
 .card-title__experience{
-    // width: 95%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // justify-items: flex-end;
     margin: 3% 3% 1% 3%;
 }
 
@@ -16,7 +14,6 @@
 }
 
 .card-items{
-    // width: 95%;
     margin: 3%;
     display: flex;
    flex-direction: row;
@@ -24,17 +21,14 @@
 }
 .sub__card{
    width: 84%;
-//    border: 1px solid black;
    margin-left: 3%;
    text-align: left;
    border-bottom: 0.2px solid rgb(216, 216, 216);
-//    padding: 1%;
 }
 .place-item__info{
     padding: 0;
 }
 .card-items__icon-experience{
-    // border: 1px solid black;
     width: 13%;
     height: 90px;
     display: flex;
@@ -45,7 +39,6 @@
     
 }
 .icont-element{
-    // border: 1px solid black;
     font-size: 50px;
     color: white;
 }
@@ -83,7 +76,6 @@
 .icons-elements{
     width: 10%;
     font-size: 18px;
-    // border: 1px solid black;
     display: flex;
     justify-content: space-around;
     color:rgb(65,115,173)!important;
