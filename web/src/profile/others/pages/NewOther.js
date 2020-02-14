@@ -20,7 +20,7 @@ const NewOther = () => {
         value: '',
         isValid: false
       },
-      company: {
+      description: {
         value: '',
         isValid: false
       },
@@ -46,7 +46,7 @@ const NewOther = () => {
       'POST',
       JSON.stringify({
         title: formState.inputs.title.value,
-        company: formState.inputs.company.value,
+        description: formState.inputs.description.value,
         startDate: formState.inputs.startDate.value,
         endDate: formState.inputs.endDate.value,
       }),
@@ -74,29 +74,12 @@ const NewOther = () => {
           onInput={inputHandler}
         />
         <Input
-          id="company"
-          element="input"
-          label="Company"
+          id="description"
+          element="textarea"
+          type="text"
+          label="Description"
           validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid Job Title."
-          onInput={inputHandler}
-        />
-        <Input
-          id="startDate"
-          element="input"
-          type="date"
-          label="Start Date"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter something about yourself."
-          onInput={inputHandler}
-        />
-        <Input
-          id="endDate"
-          element="input"
-          type="date"
-          label="End Date"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Comment by the recruiter."
+          errorText="Please enter a valid description."
           onInput={inputHandler}
         />
         {/* <Button type="submit" disabled={!formState.isValid}> */}

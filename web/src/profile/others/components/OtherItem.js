@@ -92,11 +92,7 @@ const OtherItem = props => {
         </span>
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__info">
-            <p className='card-items__title'> {props.title}</p>
-            <p className='card-items__title'>{props.company}</p>
-            <div className='card-items-description'>
-              <p className='card-items-description'>{props.description}</p>
-            </div>
+            <p className='card-items__title'>{props.description}</p>
           </div>
          </div>
         </div>
