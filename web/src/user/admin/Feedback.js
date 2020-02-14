@@ -26,6 +26,16 @@ const Feedback = () => {
     const storedData = JSON.parse(localStorage.getItem('userData'));
     const isAdmin = storedData.isAdmin
     
+    const sendUserEmail = async () => {
+      try {
+        await sendRequest(
+          '/api/users/' + auth.userId + '/send-to-user',
+          'POST',
+        );
+      } catch (err) {}
+      history.push('/');
+      history.push('/' + auth.userId + '/profile');
+    };
   
     const [formState, inputHandler, setFormData] = useForm(
       {
@@ -84,15 +94,15 @@ const Feedback = () => {
       fetchFeedback();
     }, [sendRequest, userId, setFormData]);
   
-      //   vvvvvv Admin is OK checkbox logic here
-      useEffect(() => {
-        setCheck(check)
-        }, [check])
-    
-      const handleCheck = (e) =>{
-        setCheck(!check)
-      }
-    //   ^^^^^^^ Admin is OK checkbox logic up here
+    //   vvvvvv Admin is OK checkbox logic here
+    useEffect(() => {
+      setCheck(check)
+      }, [check])
+  
+    const handleCheck = (e) =>{
+      setCheck(!check)
+    }
+  //   ^^^^^^^ Admin is OK checkbox logic up here
 
   const feedbackUpdateSubmitHandler = async event => {
     event.preventDefault();
@@ -197,7 +207,7 @@ const Feedback = () => {
                         initialValid={true}/>
                     </div>
                     <div className='comments-button'>
-                        <Button type="submit" disabled={!formState.isValid}>Send Review</Button>
+                        <Button type="submit" disabled={!formState.isValid} onClick={sendUserEmail}>Send Review</Button>
                     </div>
                 </form>
 
