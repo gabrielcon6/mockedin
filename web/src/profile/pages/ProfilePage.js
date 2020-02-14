@@ -19,11 +19,10 @@ const ProfilePage = (props) => {
   const history = useHistory();
 
 
-  //USE EFFECT
-  const sendEmail = async () => {
+  const sendAdminEmail = async () => {
   try {
     await sendRequest(
-      '/api/users/' + auth.userId + '/email',
+      '/api/users/' + auth.userId + '/send-to-admin',
       'POST',
     );
   } catch (err) {}
@@ -33,7 +32,7 @@ const ProfilePage = (props) => {
 
   return (
     <React.Fragment>
-      <Button onClick={sendEmail}>Send Email</Button>
+      <Button onClick={sendAdminEmail}>Send Email</Button>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
         <div className="center">
