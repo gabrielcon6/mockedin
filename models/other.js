@@ -10,7 +10,7 @@ const otherSchema = new Schema({
   description: { type: String },
   adminComments: { type: String },
   isOk: { type: Boolean },
-  creator: { type: mongoose.Types.ObjectId, required: true, ref: 'Other' }
+  creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' }
 },
 {
   timestamps: true

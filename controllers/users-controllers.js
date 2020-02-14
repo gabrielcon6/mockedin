@@ -1,9 +1,13 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const sgMail = require('@sendgrid/mail')
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
+const Feedback = require('../models/feedback');
+
+sgMail.setApiKey(process.env.sendgridAPIKey)
 
 const getUsers = async (req, res, next) => {
   let users;
@@ -71,6 +75,17 @@ const signup = async (req, res, next) => {
 
   try {
     await createdUser.save();
+
+    const createdFeedback= new Feedback({
+      aboutFeedback: " ",
+      educationFeedback: " ",
+      experienceFeedback: " ",
+      strength: " ",
+      creator: createdUser.id
+    });
+
+    await createdFeedback.save();
+
   } catch (err) {
     const error = new HttpError(
       'Signing up failed, please try again later.',
@@ -164,6 +179,65 @@ const login = async (req, res, next) => {
   });
 };
 
+const sendAdminEmail = async (req, res, next) => {
+  userId = req.params.uid;
+
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching users failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+
+  sgMail.send({
+    to: 'gabrielcon6cao@gmail.com',
+    from: user.email,
+    subject: 'I have updated my profile!',
+    text: `Hello! I have now updated my MockedIn profile. Thanks, ${user.name}.`
+})
+
+  res.status(200).json({ message: 'Email sent.' });
+};
+
+const sendUserEmail = async (req, res, next) => {
+  userId = req.params.uid;
+  adminId = req.params.aid;
+
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching users failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+
+  try {
+    admin = await User.findById(adminId);
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching users failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+
+  sgMail.send({
+    to: user.email,
+    from: admin.email,
+    subject: 'I have updated my profile!',
+    text: `Hello! I have now updated my MockedIn profile. Thanks, ${user.name}.`
+})
+
+  res.status(200).json({ message: 'Email sent.' });
+};
+
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
+exports.sendAdminEmail = sendAdminEmail;
+exports.sendUserEmail = sendUserEmail;

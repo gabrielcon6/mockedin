@@ -14,6 +14,4 @@ router.post('/', fileUpload.single('file'),headerControllers.createHeader);
 
 router.patch('/:hid', fileUpload.single('file'), headerControllers.updateHeader);
 
-router.delete('/:hid', headerControllers.deleteHeader);
-
 module.exports = router;

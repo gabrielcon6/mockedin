@@ -15,11 +15,14 @@ const OtherList = props => {
 
   if (props.items.length === 0) {
     return (
-      <div className="place-list center">
-        <Card style={{width:'53vw'}}>
+      <div >
+        <CardMockedin>
           <h2>No accomplishments found</h2>
-          <Button to="/others/new">Add Accomplishments</Button>
-        </Card>
+          <div style={{margin:'3%'}}>
+            <Button to="/others/new">Add Accomplishments</Button>
+          </div>
+         
+        </CardMockedin>
       </div>
     );
   }

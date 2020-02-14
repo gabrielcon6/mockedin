@@ -11,7 +11,7 @@ import { useHttpClient } from '../../../shared/hooks/http-hook';
 // import '../../../places/components/PlaceItem.css';
 import '../../../places/components/Experience.scss'
 import { FaRegBuilding, FaPlus,FaPencilAlt, FaTrash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const ExperienceItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -28,6 +28,8 @@ const ExperienceItem = props => {
 
   const experienceId = props.id;
 
+  const history = useHistory();
+
   const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);
     try {
@@ -41,6 +43,8 @@ const ExperienceItem = props => {
       );
       props.onDelete();
     } catch (err) {}
+    history.push('/');
+    history.push('/' + auth.userId + '/profile');
   };
 
   // let endDate = Moment(`${props.endDate}`).format("MMMM D, YYYY");
@@ -92,13 +96,22 @@ const ExperienceItem = props => {
             <div className="place-item__info">
             <p className='card-items__title'>{props.company}</p>
             <p className='card-items__date '> &nbsp;	
-          <Moment format="MMM YYYY">
-              {props.startDate}
-          </Moment> |
-            &nbsp;	
-          <Moment format="MMM YYYY">
-            {props.endDate}
-          </Moment>
+            {props.startDate && (
+                <Moment format="MMM YYYY">
+                    {props.startDate}
+                </Moment> 
+                )}
+                {!props.startDate && (
+                    'Present'
+                )} |&nbsp;	
+                {props.endDate && (
+                <Moment format="MMM YYYY">
+                    {props.endDate}
+                </Moment> 
+                )}
+                {!props.endDate && (
+                    'Present'
+                )}
             </p>
             <div className='card-items-description'>
             <p className='card-items-description'>{props.description}</p>

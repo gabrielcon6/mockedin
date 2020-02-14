@@ -61,6 +61,7 @@ const NewEducation = () => {
      }
     );
     history.push('/');
+    history.push('/' + auth.userId + '/profile');
   } catch (err) {}
 };
 

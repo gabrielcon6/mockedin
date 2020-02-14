@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -23,6 +23,7 @@ import UpdateOther from './profile/others/pages/UpdateOther';
 
 const App = () => {
   const { token, login, logout, userId, isAdmin } = useAuth();
+
 
   let routes;
   if (token && isAdmin) {
@@ -75,11 +76,12 @@ const App = () => {
         <Route path="/others/new" exact>
           <NewOther />
         </Route>
-        <Route path="/others/:otherId">
+        <Route path="/other/:otherId">
           <UpdateOther />
         </Route>
-
-        <Redirect to='/' />
+        {/* <Redirect to="/:userId/profile" exact>
+          <ProfilePage userId={userId}/>
+        </Redirect> */}
       </Switch>
     );
   } 
@@ -110,7 +112,7 @@ const App = () => {
       }}
     >
       <Router>
-        <MainNavigation />
+        <MainNavigation userId={userId} />
         <main style={{display:'flex', flexDirection:'column'}}>{routes}</main>
       </Router>
     </AuthContext.Provider>

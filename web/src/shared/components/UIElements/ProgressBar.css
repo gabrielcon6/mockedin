@@ -1,0 +1,53 @@
+
+.strenght-bar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.progress-bar-title{
+    display: flex;
+    justify-content: flex-start;
+    margin: 3%;
+}
+
+.strengh-bar__element{
+    width: 90%;
+    /* height: 100%; */
+    /* border: 1px solid black; */
+
+}
+.progress {
+    width: 100%;
+    height: 15px;
+
+}
+  
+  .progress-wrap {
+    /* margin: 2%; */
+    background: linear-gradient(139deg, rgb(84,85,189) 36%,rgb(95, 152, 137)   80%);;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progress-bar {
+    background: rgb(227, 233,238);
+    overflow: hidden;
+    /* left: 70%; */
+    position: absolute;
+    top: 0;
+
+  }
+  .strenght-bar-star{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1%;
+  }
+
+
+
+  .select-element{
+      margin: 3%;
+      display: flex;
+      justify-content:  center;
+      align-items: center;
+  }

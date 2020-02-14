@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { Checkbox } from '@thumbtack/thumbprint-react';
 
 import Input from '../../../shared/components/FormElements/Input';
 import Button from '../../../shared/components/FormElements/Button';
@@ -17,6 +18,7 @@ const UpdateExperience = () => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedExperience, setLoadedExperience] = useState();
+  const [check, setCheck] = useState(false);
   const experienceId = useParams().experienceId;
   const history = useHistory();
 
@@ -84,6 +86,13 @@ const UpdateExperience = () => {
     fetchExperience();
   }, [sendRequest, experienceId, setFormData]);
 
+  useEffect(() => {
+    setCheck(check)
+    }, [check])
+    const handleCheck = (e) =>{
+    setCheck(!check)
+  }  
+
   const experienceUpdateSubmitHandler = async event => {
     event.preventDefault();
     try {
@@ -103,8 +112,10 @@ const UpdateExperience = () => {
           Authorization: 'Bearer ' + auth.token
         }
       );
-      history.push('/' + auth.userId + '/experiences');
+
     } catch (err) {}
+    history.push('/');
+    history.push('/' + auth.userId + '/profile');
   };
 
   if (isLoading) {
@@ -163,6 +174,7 @@ const UpdateExperience = () => {
             initialValue={loadedExperience.startDate}
             initialValid={true}
           />
+          { !check &&(
           <Input
             id="endDate"
             element="input"
@@ -174,6 +186,18 @@ const UpdateExperience = () => {
             initialValue={loadedExperience.endDate}
             initialValid={true}
           />
+          )}
+          <div className='text-area-check'>
+            <Checkbox  type="checkbox" onChange={handleCheck}  isChecked={check}>
+              <div>
+                {check ? <span style={{color:'grey', fontSize:'18px'}}>
+                  I am currently working in this role</span> 
+                : 
+                <span style={{color:'black', fontSize:'18px'}}>
+                I am currently working in this role.</span>}
+              </div>
+            </Checkbox>
+          </div>
            <Input
             id="description"
             element="textarea"

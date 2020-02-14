@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
@@ -16,11 +16,16 @@ import '../../../places/pages/PlaceForm.css';
 const NewHeader = () => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [address, setAddress] = React.useState("");
-  const [coordinates, setCoordinates] = React.useState({
+  const [address, setAddress] = useState("");
+  const [coordinates, setCoordinates] = useState({
     lat: null,
     lng: null
   });
+
+  const searchOptions = {
+    types: ['(cities)'],
+    componentRestrictions: {country: "au"}
+   }
   
   const [formState, inputHandler] = useForm(
     {
@@ -58,6 +63,7 @@ const NewHeader = () => {
   const history = useHistory();
 
   const headerSubmitHandler = async (event, value) => {
+    event.preventDefault();
     try {
       const formData = new FormData();
       formData.append('name', formState.inputs.name.value);
@@ -68,8 +74,9 @@ const NewHeader = () => {
       await sendRequest('/api/header', 'POST', formData, {
         Authorization: 'Bearer ' + auth.token
       });
-      history.push('/');
     } catch (err) {}
+    history.push('/');
+    history.push('/' + auth.userId + '/profile');
   };
 
   return (
@@ -104,6 +111,7 @@ const NewHeader = () => {
           value={address}
           onChange={setAddress}
           onSelect={handleSelect}
+          searchOptions={searchOptions}
         >
           {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
             <div>

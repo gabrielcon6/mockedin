@@ -60,7 +60,9 @@
       height: 200px;
       width: 100%;
       margin: 0;
-      background-color:rgb(84, 148, 180);
+      // background-color:rgb(84, 148, 180);
+      background: rgb(0,145,190);
+      background: linear-gradient(139deg, rgba(0,145,190,1) 36%, rgba(0,156,171,1) 80%);
     }
     .about-text__content-element{
       margin: 0;

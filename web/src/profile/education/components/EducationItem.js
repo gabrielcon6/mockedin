@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Moment from 'react-moment';
 
-
 import Card from '../../../shared/components/UIElements/Card';
 import Button from '../../../shared/components/FormElements/Button';
 import Modal from '../../../shared/components/UIElements/Modal';
@@ -10,7 +9,7 @@ import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import { FaRegBuilding, FaPencilAlt,FaUniversity, FaTrash} from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import '../../../places/components/Experience.scss'
 import '../../../places/components/PlaceItem.css';
 
@@ -29,6 +28,8 @@ const EducationItem = props => {
 
   let educationId = props.id;
 
+  const history = useHistory();
+
   const confirmDeleteHandler = async (props) => {
     setShowConfirmModal(false);
     try {
@@ -42,6 +43,8 @@ const EducationItem = props => {
       );
       props.onDelete(props.id);
     } catch (err) {}
+    history.push('/');
+    history.push('/' + auth.userId + '/profile');
   };
 
   return (
@@ -92,15 +95,12 @@ const EducationItem = props => {
                 <p className='card-items__date '> &nbsp;	
                 <Moment format="MMM YYYY">
                     {props.startDate}
-                </Moment> |
-                  &nbsp;	
+                </Moment> 
+                |&nbsp;	
                 <Moment format="MMM YYYY">
-                  {props.endDate}
-                </Moment>
+                    {props.endDate}
+                </Moment> 
                 <br/>
-                {/* <Moment to={props.startDate}>
-                  {props.startDate}
-                </Moment> */}
                </p>
                <div className='card-items-description'>
                 <p className='card-items-description'>{props.description}</p>
@@ -110,7 +110,6 @@ const EducationItem = props => {
             {/* {auth.userId === props.creatorId && (
               <Button to={`/education/${props.id}`}>EDIT</Button>
             )} */}
-          
           </div>
           </div>
         </div>

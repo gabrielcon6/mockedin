@@ -16,11 +16,13 @@ const EducationList = props => {
 
   if (props.items.education.length === 0) {
     return (
-      <div className="place-list center">
-        <Card style={{width:'53vw' }}>
+      <div>
+        <CardMockedin>
           <h2>No education found</h2>
+          <div style={{margin:'3%'}}>
           <Button to="/education/new">Add Education</Button>
-        </Card>
+          </div>
+        </CardMockedin>
       </div>
     );
   }

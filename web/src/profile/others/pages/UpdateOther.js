@@ -93,7 +93,7 @@ const UpdateOther = () => {
           Authorization: 'Bearer ' + auth.token
         }
       );
-      history.push('/' + auth.userId + '/others');
+      history.push('/' + auth.userId + '/profile');
     } catch (err) {}
   };
 
