@@ -15,7 +15,7 @@ import { VALIDATOR_REQUIRE } from '../../shared/util/validators';
 
 import './Feedback.scss'
 
-const Comments = () =>{
+const Feedback = () =>{
 
     const auth = useContext(AuthContext);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -210,4 +210,4 @@ const Comments = () =>{
     )
 }
 
-export default Comments ;
+export default Feedback ;
