@@ -47,8 +47,6 @@ const OtherItem = props => {
     history.push('/' + auth.userId + '/profile');
   };
 
-  // let endDate = Moment(`${props.endDate}`).format("MMMM D, YYYY");
-
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />

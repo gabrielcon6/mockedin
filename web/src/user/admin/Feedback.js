@@ -20,7 +20,6 @@ const Feedback = () => {
     const [loadedFeedback, setLoadedFeedback] = useState();
     const [check, setCheck] = useState(false);
     const userId = useParams().userId;
-    // const feedbackId = useParams().feedbackId;
     const history = useHistory();
   
     const storedData = JSON.parse(localStorage.getItem('userData'));

@@ -8,7 +8,6 @@ import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
-// import '../../../places/components/PlaceItem.css';
 import '../../../places/components/Experience.scss'
 import { FaRegBuilding, FaPlus,FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { Link, useHistory } from 'react-router-dom';
@@ -46,8 +45,6 @@ const ExperienceItem = props => {
     history.push('/');
     history.push('/' + auth.userId + '/profile');
   };
-
-  // let endDate = Moment(`${props.endDate}`).format("MMMM D, YYYY");
 
   return (
     <React.Fragment>

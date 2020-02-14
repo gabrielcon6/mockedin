@@ -49,14 +49,6 @@ router.post("/upload", upload.single("file"), function(req, res) {
     region: "ap-southeast-2"
   });
 
-//   console.log(process.env.AWS_ACCESS_KEY_ID);
-//   console.log(process.env.AWS_SECRET_ACCESS_KEY);
-//   console.log(process.env.AWS_REGION);
-//   console.log(process.env.AWS_BUCKET_NAME);
-//   console.log(process.env.AWS_Uploaded_File_URL_LINK);
-
-  //Where you want to store your file
-
   var params = {
     Bucket: "mockedin-images",
     Key: file.originalname,
