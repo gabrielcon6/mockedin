@@ -34,6 +34,10 @@ import './ProgressBar.css';
 // make_loop(60, 2000);
 
 const ProgressBar = props => {
+
+const storedData = JSON.parse(localStorage.getItem('userData'));
+const isAdmin = storedData.isAdmin
+
   return (
     <CardMockedin className="cardMocke">
 
@@ -53,6 +57,7 @@ const ProgressBar = props => {
                 
             </div>
         </div>
+        {isAdmin && (
         <div className='select-element'>
             <div class="select">
             <select name="slct" id="slct">
@@ -64,6 +69,8 @@ const ProgressBar = props => {
             </select>
             </div>
         </div>
+        )}
+        <br />
     </CardMockedin>
   );
 };

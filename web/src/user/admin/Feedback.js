@@ -24,21 +24,23 @@ const Feedback = () => {
   
     const storedData = JSON.parse(localStorage.getItem('userData'));
     const isAdmin = storedData.isAdmin
+
+    const editRights = !isAdmin ? "disabled" : ''
     
-    const sendUserEmail = async () => {
-      // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
-      try {
-        await sendRequest(
-          '/api/users/' + auth.userId + '/send-to-user'
-                // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
-,
-          'POST',
-          userId
-        );
-      } catch (err) {}
-      history.push('/');
-      history.push('/' + auth.userId + '/profile');
-    };
+//     const sendUserEmail = async () => {
+//       // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
+//       try {
+//         await sendRequest(
+//           '/api/users/' + auth.userId + '/send-to-user'
+//                 // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
+// ,
+//           'POST',
+//           userId
+//         );
+//       } catch (err) {}
+//       history.push('/');
+//       history.push('/' + auth.userId + '/profile');
+//     };
   
     const [formState, inputHandler, setFormData] = useForm(
       {
@@ -164,6 +166,7 @@ const Feedback = () => {
                     marginBottom:'3%'}}>
                         <h4>About</h4>
                         <Input
+                        disabled={editRights}
                         id="aboutFeedback"
                         element="textarea"
                         className='comments__area-element' 
@@ -180,6 +183,7 @@ const Feedback = () => {
                     <div className='comments__area' style={{display:'flex',flexDirection:'column', width:'80%', height:'20vh', margin:'0 auto', marginBottom:'3%'}}>
                         <h4>Experience</h4>
                         <Input
+                        disabled={editRights}
                         id="experienceFeedback"
                         element="textarea"
                         className='comments__area-element' 
@@ -196,6 +200,7 @@ const Feedback = () => {
                     <div className='comments__area' style={{display:'flex',flexDirection:'column', width:'80%', height:'20vh', margin:'0 auto', marginBottom:'3%'}}>
                         <h4>Education</h4>
                         <Input
+                        disabled={editRights}
                         id="educationFeedback"
                         element="textarea"
                         className='comments__area-element' 
@@ -210,7 +215,12 @@ const Feedback = () => {
                         initialValid={true}/>
                     </div>
                     <div className='comments-button'>
-                        <Button type="submit" disabled={!formState.isValid} onClick={sendUserEmail}>Send Review</Button>
+                      {isAdmin && (
+                        <Button type="submit" disabled={!formState.isValid} 
+                        // onClick={sendUserEmail}
+                        >Send Review</Button>
+                      )}
+                      <br/>
                     </div>
                 </form>
 
