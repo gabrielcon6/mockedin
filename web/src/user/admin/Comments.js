@@ -95,27 +95,28 @@ const Comments = () =>{
         setCheck(!check)
       }
     //   ^^^^^^^ Admin is OK checkbox logic up here
-  
-    const feedbackUpdateSubmitHandler = async event => {
-      event.preventDefault();
-  
-    try {
-      console.log('IDDD', loadedFeedback._id)
-      const formData = new FormData();
-      formData.append('aboutFeedback', formState.inputs.aboutFeedback.value);
-      formData.append('educationFeedback', formState.inputs.educationFeedback.value);
-      formData.append('experienceFeedback', formState.inputs.experienceFeedback.value);
-      formData.append('strength', formState.inputs.strength.value);
-      formData.append('feedbackId', loadedFeedback._id);
 
+  const feedbackUpdateSubmitHandler = async event => {
+    event.preventDefault();
+    try {
       await sendRequest(
         `/api/feedback/${loadedFeedback._id}`,
-        'PATCH', 
-        formData, {
-        Authorization: 'Bearer ' + auth.token
-      });
-      history.push('/' + auth.userId + '/feedback');
+        'PATCH',
+        JSON.stringify({
+            aboutFeedback: formState.inputs.aboutFeedback.value,
+            educationFeedback: formState.inputs.educationFeedback.value,
+            experienceFeedback: formState.inputs.experienceFeedback.value,
+            strength: formState.inputs.strength.value
+            // feedbackId: formState.inputs.description.value
+        }),
+        {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.token
+        }
+      );
     } catch (err) {}
+    history.push('/');
+    history.push('/' + auth.userId + '/profile');
   };
   
     if (isLoading) {

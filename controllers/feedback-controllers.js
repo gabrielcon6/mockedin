@@ -65,14 +65,16 @@ const updateFeedback = async (req, res, next) => {
     );
   }
 
-  const { aboutFeedback, educationFeedback, experienceFeedback, strength, feedbackId} = req.body;
-  // const feedbackId = req.params.fid;
+  const { aboutFeedback, educationFeedback, experienceFeedback, strength } = req.body;
+  const feedbackId = req.params.fid;
 
   console.log('PARAMS', feedbackId)
+  console.log('PARAMS', aboutFeedback)
 
   let feedback;
   try {
-    feedback = await feedback.findById(feedbackId);
+    feedback = await Feedback.findById(feedbackId);
+    console.log('PARAMS', feedback)
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not update feedback.',
