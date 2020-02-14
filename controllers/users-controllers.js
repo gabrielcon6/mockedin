@@ -229,8 +229,8 @@ const sendUserEmail = async (req, res, next) => {
   sgMail.send({
     to: user.email,
     from: admin.email,
-    subject: 'I have updated my profile!',
-    text: `Hello! I have now updated my MockedIn profile. Thanks, ${user.name}.`
+    subject: 'I have reviewed your profile!',
+    text: `Hello, ${user.name}! Your MockedIn profile has been reviewed. Thanks, ${admin.name}.`
 })
 
   res.status(200).json({ message: 'Email sent.' });

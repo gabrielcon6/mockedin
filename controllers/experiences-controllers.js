@@ -190,7 +190,7 @@ const deleteExperience = async (req, res, next) => {
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await experience.remove();
-    experience.creator.experiences.pull(experience); //experience OR ExperiencesS????
+    experience.creator.experiences.pull(experience);
     await experience.creator.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {

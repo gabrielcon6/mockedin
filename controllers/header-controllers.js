@@ -158,7 +158,6 @@ const updateHeader = async (req, res, next) => {
   }
 
   if (header.creator.toString() !== req.userData.userId && !user.isAdmin) {
-    console.log(req.userData.isAdmin)
     const error = new HttpError('401-You are not allowed to edit this header.', 401);
     return next(error);
   }
@@ -172,31 +171,31 @@ const updateHeader = async (req, res, next) => {
     region: "ap-southeast-2"
   });
 
-  // const params = {
-  //   Bucket: "mockedin-images",
-  //   Key: file.originalFilename,
-  //   Body: file.buffer,
-  //   ContentType: file.mimetype,
-  //   ACL: "public-read"
-  // };
+  const params = {
+    Bucket: "mockedin-images",
+    Key: file.originalFilename,
+    Body: file.buffer,
+    ContentType: file.mimetype,
+    ACL: "public-read"
+  };
 
   header.name = name;
   header.jobTitle = jobTitle;
   header.location = location;
   header.about = about;
-  // header.fileLink = s3FileURL + file.originalname;
-  // header.s3_key = params.Key;
+  header.fileLink = s3FileURL + file.originalname;
+  header.s3_key = params.Key;
   header.adminComments = adminComments;
   header.isOk = isOk;
 
   try {
-    // s3bucket.upload(params, function(err, data) {
-    //   if (err) {
-    //     res.status(500).json({ error: true, Message: err });
-    //   } else {
-    //     // res.send({ data });
-    //   }
-    // });
+    s3bucket.upload(params, function(err, data) {
+      if (err) {
+        res.status(500).json({ error: true, Message: err });
+      } else {
+        // res.send({ data });
+      }
+    });
     await header.save();
   } catch (err) {
     const error = new HttpError(

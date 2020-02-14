@@ -95,9 +95,6 @@ const HeaderItem = props => {
              </div>
           </div>     
           </div>
-          {/* paulo por favor chamar o component da strenght bara aqui :) */}
-          {/* <StrenghtBar/> */}
-          {/* About components comeca aqui */}
           <>
         <div>
           <div className='about-title'>
@@ -105,9 +102,6 @@ const HeaderItem = props => {
             <span className='about-icon'>
             {auth.userId === props.creatorId && (
                 <Link className='link-style' to={`/header/${props.id}`}><FaPencilAlt/></Link>
-              )}
-              {auth.isAdmin && (
-                <Link to={`/header/${props.id}`}><FaPencilAlt/> Leave feedback </Link>
               )}
             </span>
           </div>

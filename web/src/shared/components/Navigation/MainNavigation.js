@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import MainHeader from './MainHeader';
@@ -7,9 +7,13 @@ import SideDrawer from './SideDrawer';
 import Backdrop from '../UIElements/Backdrop';
 import Logo from '../../../profile/image/mockedim.png'
 import './MainNavigation.css';
+import { AuthContext } from '../../../shared/context/auth-context';
+
 
 const MainNavigation = props => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+
+  const auth = useContext(AuthContext);
 
   const openDrawerHandler = () => {
     setDrawerIsOpen(true);
@@ -38,9 +42,12 @@ const MainNavigation = props => {
           <span />
         </button>
         <h1 className="main-navigation__title">
-          {/* <Link to="/">MockedIn</Link> */}
-           
+        {auth.isAdmin && (
+          <Link to={`/`}>MockedIn</Link>
+        )}
+        {!auth.isAdmin && (
           <Link to={`/${props.userId}/profile`}>MockedIn</Link>
+        )}
         </h1>
         <nav className="main-navigation__header-nav">
           <NavLinks />

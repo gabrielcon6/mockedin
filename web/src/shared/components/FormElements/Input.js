@@ -62,6 +62,7 @@ const Input = props => {
       />
     ) : (
       <textarea
+        disabled={props.disabled}
         id={props.id}
         rows={props.rows || 3}
         onChange={changeHandler}

@@ -103,7 +103,6 @@ const Auth = () => {
         );
 
         auth.login(responseData.userId, responseData.token, responseData.isAdmin);
-        // history.push('/');
         history.push('/' + responseData.userId + '/profile');
       } catch (err) {}
     }
@@ -111,8 +110,6 @@ const Auth = () => {
   };
 
   return (
-  //   {this.state.userLoggedIn ? <Redirect to='/askasalska/profile'
-  // : 
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <Card className="authentication">

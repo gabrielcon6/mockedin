@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Button from '../../shared/components/FormElements/Button';
-import { Checkbox } from '@thumbtack/thumbprint-react';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Card from '../../shared/components/UIElements/Card';
@@ -20,25 +19,21 @@ const Feedback = () => {
     const [loadedFeedback, setLoadedFeedback] = useState();
     const [check, setCheck] = useState(false);
     const userId = useParams().userId;
-    // const feedbackId = useParams().feedbackId;
     const history = useHistory();
   
     const storedData = JSON.parse(localStorage.getItem('userData'));
     const isAdmin = storedData.isAdmin
+
+    const editRights = !isAdmin ? "disabled" : ''
     
     const sendUserEmail = async () => {
-      // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
       try {
         await sendRequest(
-          '/api/users/' + auth.userId + '/send-to-user'
-                // userId = USERID - COLOCAR O ID DO USAR QUE O ADMIN TAH ACESSANDO NO MOMENTO
-,
+          '/api/users/' + auth.userId + '/send-to-user/' + loadedFeedback.creator,
           'POST',
           userId
         );
       } catch (err) {}
-      history.push('/');
-      history.push('/' + auth.userId + '/profile');
     };
   
     const [formState, inputHandler, setFormData] = useForm(
@@ -91,22 +86,12 @@ const Feedback = () => {
             },
             true
           );
-          console.log('aaaaaaa',loadedFeedback)
         } catch (err) {}
 
       };
       fetchFeedback();
     }, [sendRequest, userId, setFormData]);
   
-    //   vvvvvv Admin is OK checkbox logic here
-    useEffect(() => {
-      setCheck(check)
-      }, [check])
-  
-    const handleCheck = (e) =>{
-      setCheck(!check)
-    }
-  //   ^^^^^^^ Admin is OK checkbox logic up here
 
   const feedbackUpdateSubmitHandler = async event => {
     event.preventDefault();
@@ -127,8 +112,8 @@ const Feedback = () => {
         }
       );
     } catch (err) {}
+    sendUserEmail();
     history.push('/');
-    history.push('/' + auth.userId + '/profile');
   };
   
     if (isLoading) {
@@ -165,6 +150,7 @@ const Feedback = () => {
                     marginBottom:'3%'}}>
                         <h4>About</h4>
                         <Input
+                        disabled={editRights}
                         id="aboutFeedback"
                         element="textarea"
                         className='comments__area-element' 
@@ -181,6 +167,7 @@ const Feedback = () => {
                     <div className='comments__area' style={{display:'flex',flexDirection:'column', width:'80%', height:'20vh', margin:'0 auto', marginBottom:'3%'}}>
                         <h4>Experience</h4>
                         <Input
+                        disabled={editRights}
                         id="experienceFeedback"
                         element="textarea"
                         className='comments__area-element' 
@@ -197,6 +184,7 @@ const Feedback = () => {
                     <div className='comments__area' style={{display:'flex',flexDirection:'column', width:'80%', height:'20vh', margin:'0 auto', marginBottom:'3%'}}>
                         <h4>Education</h4>
                         <Input
+                        disabled={editRights}
                         id="educationFeedback"
                         element="textarea"
                         className='comments__area-element' 
@@ -210,8 +198,13 @@ const Feedback = () => {
                         initialValue={loadedFeedback.educationFeedback}
                         initialValid={true}/>
                     </div>
+                    <br />
                     <div className='comments-button'>
-                        <Button type="submit" disabled={!formState.isValid} onClick={sendUserEmail}>Send Review</Button>
+                      {isAdmin && (
+                        <Button type="submit" disabled={!formState.isValid} 
+                        >Send Review</Button>
+                      )}
+                      <br/>
                     </div>
                 </form>
 
