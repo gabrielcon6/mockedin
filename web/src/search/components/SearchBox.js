@@ -6,7 +6,7 @@ import '../../places/pages/PlaceForm.css';
 const SearchBox = (props) => {
   const [searchInput, setSearchInput] = useState('');
 
-  useEffect((props) => {
+  useEffect(() => {
   props.filterUsers(searchInput)}, [searchInput]
   )
 
