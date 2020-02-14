@@ -140,16 +140,15 @@ const UpdateHeader = () => {
   try {
     const formData = new FormData();
     formData.append('name', formState.inputs.name.value);
-    // formData.append('file', formState.inputs.file.value);
+    formData.append('file', formState.inputs.file.value);
     formData.append('jobTitle', formState.inputs.jobTitle.value);
     formData.append('location', address ? address : loadedHeader.location);
     formData.append('about', formState.inputs.about.value);
-    formData.append('adminComments', formState.inputs.adminComments.value);
-    formData.append('isOk', check);
     await sendRequest(
       `/api/header/${headerId}`,
       'PATCH', 
       formData, {
+      // 'Content-Type': 'application/json',
       Authorization: 'Bearer ' + auth.token
     });
     history.push('/');

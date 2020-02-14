@@ -142,7 +142,7 @@ const updateHeader = async (req, res, next) => {
     );
   }
 
-  const { name, jobTitle, location, about, adminComments, isOk} = req.body;
+  const { name, jobTitle, location, about } = req.body;
   const headerId = req.params.hid;
 
   let header;
@@ -173,7 +173,7 @@ const updateHeader = async (req, res, next) => {
 
   const params = {
     Bucket: "mockedin-images",
-    Key: file.originalFilename,
+    Key: file.originalname,
     Body: file.buffer,
     ContentType: file.mimetype,
     ACL: "public-read"
@@ -185,8 +185,6 @@ const updateHeader = async (req, res, next) => {
   header.about = about;
   header.fileLink = s3FileURL + file.originalname;
   header.s3_key = params.Key;
-  header.adminComments = adminComments;
-  header.isOk = isOk;
 
   try {
     s3bucket.upload(params, function(err, data) {
