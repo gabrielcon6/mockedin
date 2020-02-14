@@ -24,6 +24,6 @@ router.post(
 
 router.post('/login', usersController.login);
 router.post('/:uid/send-to-admin', usersController.sendAdminEmail);
-router.post('/:uid/send-to-user', usersController.sendAdminEmail);
+router.post('/:aid/send-to-user/:uid', usersController.sendUserEmail);
 
 module.exports = router;

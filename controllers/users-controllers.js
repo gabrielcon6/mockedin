@@ -204,6 +204,7 @@ const sendAdminEmail = async (req, res, next) => {
 
 const sendUserEmail = async (req, res, next) => {
   userId = req.params.uid;
+  adminId = req.params.aid;
 
   try {
     user = await User.findById(userId);
@@ -215,9 +216,19 @@ const sendUserEmail = async (req, res, next) => {
     return next(error);
   }
 
+  try {
+    admin = await User.findById(adminId);
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching users failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+
   sgMail.send({
-    to: 'gabrielcon6cao@gmail.com',
-    from: user.email,
+    to: user.email,
+    from: admin.email,
     subject: 'I have updated my profile!',
     text: `Hello! I have now updated my MockedIn profile. Thanks, ${user.name}.`
 })
