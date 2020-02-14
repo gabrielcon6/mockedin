@@ -10,8 +10,6 @@ const headerSchema = new Schema({
   jobTitle: { type: String },
   location: { type: String },
   about: { type: String },
-  adminComments: { type: String },
-  isOk: { type: Boolean },
   creator: { type: mongoose.Types.ObjectId, required: true, unique: true,  ref: 'User' }
 },
 {

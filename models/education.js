@@ -8,8 +8,6 @@ const educationSchema = new Schema({
   startDate: { type: Date },
   endDate: { type: Date },
   description: { type: String },
-  adminComments: { type: String },
-  isOk: { type: Boolean },
   creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' }
 },
 {
