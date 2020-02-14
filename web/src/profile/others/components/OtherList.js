@@ -39,7 +39,7 @@ const OtherList = props => {
           key={other._id}
           id={other._id}
           title={other.title}
-          company={other.company}
+          description={other.description}
           startDate={other.startDate}
           endDate={other.endDate}
           adminComments={other.adminComments}

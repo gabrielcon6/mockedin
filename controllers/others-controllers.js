@@ -64,15 +64,13 @@ const createOther = async (req, res, next) => {
     );
   }
 
-  const { type, title, startDate, endDate } = req.body;
+  const { title, description, startDate, endDate } = req.body;
 
   const createdOther = new Other({
-    type,
     title,
+    description,
     startDate,
     endDate,
-    description: '*to be reviewed*',
-    isOk: false,
     creator: req.userData.userId
   });
 
@@ -118,7 +116,7 @@ const updateOther = async (req, res, next) => {
     );
   }
 
-  const { type, title, startDate, endDate } = req.body;
+  const { title, description, startDate, endDate } = req.body;
   const otherId = req.params.oid;
 
   let other;
@@ -137,7 +135,7 @@ const updateOther = async (req, res, next) => {
     return next(error);
   }
 
-  other.type = type;
+  other.description = description;
   other.title = title;
   other.startDate = startDate;
   other.endDate = endDate;
