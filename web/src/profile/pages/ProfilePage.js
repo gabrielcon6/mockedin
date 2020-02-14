@@ -8,6 +8,7 @@ import HeaderPage from '../header/pages/HeaderPage';
 import ExperiencePage from '../experiences/pages/ExperiencePage';
 import EducationPage from '../education/pages/EducationPage';
 import OtherPage from '../others/pages/OtherPage';
+import ProgressBar from '../../shared/components/UIElements/ProgressBar'
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext } from '../../shared/context/auth-context';
 
@@ -42,6 +43,9 @@ const ProfilePage = (props) => {
 
       {!isLoading && (
         <HeaderPage />
+      )}
+      {!isLoading && (
+        <ProgressBar/>
       )}
       {!isLoading && (
         <ExperiencePage userId={props.userId}/>
