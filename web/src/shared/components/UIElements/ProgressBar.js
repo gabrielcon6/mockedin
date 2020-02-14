@@ -33,28 +33,6 @@ import './ProgressBar.css';
 
 // make_loop(60, 2000);
 
-// const barStyle = {
-
-// .progress {
-//     width: 100%;
-//     height: 20px;
-//   }
-  
-//   .progress-wrap {
-//     background: #f80;
-//     overflow: hidden;
-//     position: relative;
-//   }
-  
-//   .progress-bar {
-//     background: blue;
-//     overflow: hidden;
-//     left: 0;
-//     position: absolute;
-//     top: 0;
-//   }
-// }
-
 const ProgressBar = props => {
   return (
     <CardMockedin className="cardMocke">
@@ -79,9 +57,10 @@ const ProgressBar = props => {
             <div class="select">
             <select name="slct" id="slct">
                 <option selected disabled>Rate this profile</option>
-                <option value="1">Pure CSS</option>
-                <option value="2">No JS</option>
-                <option value="3">Nice!</option>
+                <option value="1">Bad</option>
+                <option value="2">Meh...</option>
+                <option value="3">Good.</option>
+                <option value="4">Great!!</option>
             </select>
             </div>
         </div>
