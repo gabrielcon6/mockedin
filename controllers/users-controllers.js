@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
+const Feedback = require('../models/feedback');
 
 const getUsers = async (req, res, next) => {
   let users;
@@ -71,6 +72,17 @@ const signup = async (req, res, next) => {
 
   try {
     await createdUser.save();
+
+    const createdFeedback= new Feedback({
+      aboutFeedback: " ",
+      educationFeedback: " ",
+      experienceFeedback: " ",
+      strength: " ",
+      creator: createdUser.id
+    });
+
+    await createdFeedback.save();
+
   } catch (err) {
     const error = new HttpError(
       'Signing up failed, please try again later.',

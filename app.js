@@ -10,7 +10,7 @@ const usersRoutes = require('./routes/users-routes');
 const experiencesRoutes = require('./routes/experiences-routes');
 const educationRoutes = require('./routes/education-routes');
 const othersRoutes = require('./routes/others-routes');
-const fileUploadRoutes = require('./routes/document-routes');
+const feedbackRoutes = require('./routes/feedback-routes');
 
 const app = express();
 app.use(express.static('public')); // the React app will be bundled and placed in the public folder
@@ -36,7 +36,7 @@ app.use('/api/users', usersRoutes);
 app.use('/api/experiences', experiencesRoutes);
 app.use('/api/education', educationRoutes);
 app.use('/api/others', othersRoutes);
-app.use('/api/document', fileUploadRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
 app.get('*', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
