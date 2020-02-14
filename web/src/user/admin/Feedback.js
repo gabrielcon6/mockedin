@@ -129,7 +129,6 @@ const Feedback = () => {
       );
     } catch (err) {}
     history.push('/');
-    history.push('/' + auth.userId + '/profile');
   };
   
     if (isLoading) {
@@ -214,6 +213,7 @@ const Feedback = () => {
                         initialValue={loadedFeedback.educationFeedback}
                         initialValid={true}/>
                     </div>
+                    <br />
                     <div className='comments-button'>
                       {isAdmin && (
                         <Button type="submit" disabled={!formState.isValid} 

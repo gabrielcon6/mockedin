@@ -79,11 +79,6 @@ const updateFeedback = async (req, res, next) => {
     return next(error);
   }
 
-  if (feedback.creator.toString() !== req.userData.userId) {
-    const error = new HttpError('You are not allowed to edit this feedback.', 401);
-    return next(error);
-  }
-
   feedback.aboutFeedback = aboutFeedback;
   feedback.educationFeedback = educationFeedback;
   feedback.experienceFeedback = experienceFeedback;
