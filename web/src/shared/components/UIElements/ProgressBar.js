@@ -24,8 +24,8 @@ const ProgressBar = props => {
             </div>
             <div className='strenght-bar'>
                 <div className='strengh-bar__element'>
-                    <div class="progress-wrap progress">
-                        <div class="progress-bar progress" style={{left: progress + '%'}}></div>
+                    <div className="progress-wrap progress">
+                        <div className="progress-bar progress" style={{left: progress + '%'}}></div>
                     
                     </div>
                     <div className='strenght-bar-star'>
