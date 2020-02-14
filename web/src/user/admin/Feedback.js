@@ -11,11 +11,9 @@ import { AuthContext } from '../../shared/context/auth-context';
 import Input from '../../shared/components/FormElements/Input';
 import { VALIDATOR_REQUIRE } from '../../shared/util/validators';
 
-
-
 import './Feedback.scss'
 
-const Feedback = () =>{
+const Feedback = () => {
 
     const auth = useContext(AuthContext);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -137,8 +135,6 @@ const Feedback = () =>{
       );
     }
   
-    console.log('aaaaaaa',loadedFeedback)
-
     return(
         <div className='comments-main-container'>
             <div className='comments__container' >
