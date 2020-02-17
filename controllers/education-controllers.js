@@ -63,8 +63,6 @@ const createEducation = async (req, res, next) => {
     startDate,
     endDate,
     description: description ,
-    adminComments: 'great!',
-    isOk: false,
     creator: req.userData.userId
   });
   let user;

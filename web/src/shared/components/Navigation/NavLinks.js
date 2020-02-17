@@ -16,36 +16,6 @@ const NavLinks = props => {
           </NavLink>
         </li>
       )}
-      {/* {auth.isLoggedIn && !auth.isAdmin  && (
-        <li>
-          <NavLink to={`/${auth.userId}/profile`}>MY PROFILE</NavLink>
-        </li>
-      )} */}
-      {/* {auth.isLoggedIn && (
-        <li>
-          <NavLink to="/header/new">+ HEADER</NavLink>
-        </li>
-      )} */}
-      {/* {auth.isLoggedIn && (
-        <li>
-          <NavLink to="/experiences/new">+ EXPERIENCE</NavLink>
-        </li>
-      )} */}
-      {/* {auth.isLoggedIn && (
-        <li>
-          <NavLink to="/education/new">+ EDUCATION </NavLink>
-        </li>
-      )} */}
-      {/* {auth.isLoggedIn && (
-        <li>
-          <NavLink to="/others/new">+ OTHER </NavLink>
-        </li>
-      )} */}
-      {/* {!auth.isLoggedIn && (
-        <li>
-          <NavLink to="/auth">AUTHENTICATE</NavLink>
-        </li>
-      )} */}
       {auth.isLoggedIn && (
         <li>
           <button onClick={auth.logout}>LOGOUT</button>

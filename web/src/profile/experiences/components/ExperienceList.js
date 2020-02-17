@@ -40,9 +40,7 @@ const ExperienceList = props => {
           company={experience.company}
           startDate={experience.startDate}
           endDate={experience.endDate}
-          adminComments={experience.adminComments}
           description={experience.description}
-          isOk={experience.isOk}
           creatorId={experience.creator}
           onDelete={props.onDeleteExperience}
         />

@@ -105,9 +105,6 @@ const EducationItem = props => {
               </div>
           </div>
           <div className="place-item__actions">
-            {/* {auth.userId === props.creatorId && (
-              <Button to={`/education/${props.id}`}>EDIT</Button>
-            )} */}
           </div>
           </div>
         </div>

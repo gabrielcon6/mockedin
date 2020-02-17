@@ -89,8 +89,6 @@ const createHeader = async (req, res, next) => {
     jobTitle,
     location,
     about,
-    adminComments: '*to be reviewed*',
-    isOk: false,
     creator: req.userData.userId
   });
 

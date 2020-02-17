@@ -82,7 +82,6 @@ const NewOther = () => {
           errorText="Please enter a valid description."
           onInput={inputHandler}
         />
-        {/* <Button type="submit" disabled={!formState.isValid}> */}
         <Button type="submit" >
           ADD Other
         </Button>

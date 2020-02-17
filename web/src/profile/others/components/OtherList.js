@@ -42,8 +42,6 @@ const OtherList = props => {
           description={other.description}
           startDate={other.startDate}
           endDate={other.endDate}
-          adminComments={other.adminComments}
-          isOk={other.isOk}
           creatorId={other.creator}
           onDelete={props.onDeleteOther}
         />

@@ -136,7 +136,6 @@ const NewExperience = () => {
           errorText="Comment by the recruiter."
           onInput={inputHandler}
         />
-        {/* <Button type="submit" disabled={!formState.isValid}> */}
         <Button type="submit" >
           ADD experience
         </Button>

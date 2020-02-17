@@ -110,14 +110,11 @@ const ExperienceItem = props => {
                 )}
             </p>
             <div className='card-items-description'>
-            <p className='card-items-description'>{props.description}</p>
+              <p className='card-items-description'>{props.description}</p>
             </div>
             
-          </div>
-        <div className="place-item__actions">
-            {/* {auth.userId === props.creatorId && (
-          <Button to={`/experience/${props.id}`}>EDIT</Button>
-          )} */}
+            </div>
+            <div className="place-item__actions">
 
           </div>
          </div>

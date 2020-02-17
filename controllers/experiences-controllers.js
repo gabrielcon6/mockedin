@@ -71,7 +71,6 @@ const createExperience = async (req, res, next) => {
     startDate,
     endDate,
     description: description,
-    isOk: false,
     creator: req.userData.userId
   });
 

@@ -36,8 +36,6 @@ const HeaderList = props => {
           jobTitle={header.jobTitle}
           location={header.location}
           about={header.about}
-          adminComments={header.adminComments}
-          isOk={header.isOk}
           creatorId={header.creator}
           onDelete={props.onDeleteHeader}
           isAdmin={isAdmin}

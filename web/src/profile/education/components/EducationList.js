@@ -41,8 +41,6 @@ const EducationList = props => {
             startDate={education.startDate}
             endDate={education.endDate}
             description={education.description}
-            adminComments={education.adminComments}
-            isOk={education.isOk}
             creatorId={education.creator}
             onDelete={props.onDeleteEducation}
           />

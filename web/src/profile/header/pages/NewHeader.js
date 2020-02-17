@@ -139,15 +139,6 @@ const NewHeader = () => {
           onInput={inputHandler}
         />
 
-        {/* <Input
-          id="adminComments"
-          element="input"
-          label="Comment"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Comment by the recruiter."
-          onInput={inputHandler}
-        /> */}
-        {/* <Button type="submit" disabled={!formState.isValid}> */}
         <Button type="submit" >
           ADD HEADER
         </Button>

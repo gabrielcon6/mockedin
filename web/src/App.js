@@ -79,9 +79,6 @@ const App = () => {
         <Route path="/other/:otherId">
           <UpdateOther />
         </Route>
-        {/* <Redirect to="/:userId/profile" exact>
-          <ProfilePage userId={userId}/>
-        </Redirect> */}
       </Switch>
     );
   } 
