@@ -41,12 +41,12 @@ ___
 
 #### App Screenshots:
 
-![User view 1][/public/screenshots/user1.png]
-![User view 2][/public/screenshots/user2.png]
-![User view 3][/public/screenshots/user3.png]
-![User view 4][/public/screenshots/user4.png]
-![User view 5][/public/screenshots/user5.png]
-![User view 6][/public/screenshots/user6.png]
+![User view 1](/public/screenshots/user1.png)
+![User view 2](/public/screenshots/user2.png)
+![User view 3](/public/screenshots/user3.png)
+![User view 4](/public/screenshots/user4.png)
+![User view 5](/public/screenshots/user5.png)
+![User view 6](/public/screenshots/user6.png)
 
-![Admin view 1][/public/screenshots/adm1.png]
-![Admin view 2][/public/screenshots/adm2.png]
+![Admin view 1](/public/screenshots/adm1.png)
+![Admin view 2](/public/screenshots/adm2.png)
