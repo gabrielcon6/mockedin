@@ -40,9 +40,9 @@ Once the fields are ok'ed by the admin, you are good to go (which means that you
 ___
 
 #### App Screenshots:
+---
+###### User views:
 
- - User views:
- 
 ![User view 1](/public/screenshots/user1.png)
 ![User view 2](/public/screenshots/user2.png)
 ![User view 3](/public/screenshots/user3.png)
@@ -50,8 +50,8 @@ ___
 ![User view 5](/public/screenshots/user5.png)
 ![User view 6](/public/screenshots/user6.png)
 
-
- - Admin views:
+---
+###### Admin views:
 
 ![Admin view 1](/public/screenshots/adm1.png)
 ![Admin view 2](/public/screenshots/adm2.png)
