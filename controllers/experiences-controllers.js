@@ -93,7 +93,7 @@ const createExperience = async (req, res, next) => {
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    await createdExperience.save({ session: sess });
+    await createdExperience.save();
     user.experiences.push(createdExperience);
     await user.save({ session: sess });
     await sess.commitTransaction();

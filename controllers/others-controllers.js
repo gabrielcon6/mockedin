@@ -91,7 +91,7 @@ const createOther = async (req, res, next) => {
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    await createdOther.save({ session: sess });
+    await createdOther.save();
     user.others.push(createdOther);
     await user.save({ session: sess });
     await sess.commitTransaction();
