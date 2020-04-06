@@ -5,7 +5,7 @@
 The code was written by Gabriel Conceicao, Paulo Amaral and Thiago Deiro.
 
 - The app intends to be a mock up version of LinkedIn, but with a little twist.
-It is supposed to be be used by people who want to update their LinkedIn profile, but they need some review from their HR/Career consultant first.
+It is supposed to be be used by people who want to update their LinkedIn profile, but they need some review from their HR/Career coach first.
 The logic is simple: you post the content you would like to have in your LinkedIn, but as it is a private account, only 2 users will be able to see it: you and your HR (the admin).
 - The admin can post comments saying whether they need some improvements in certain fields or they think it is already "Ok" to go public.
 Once the fields are ok'ed by the admin, you are good to go (which means that you can post that on your real LinkedIn page, so everyone can see it) and your profile strength bar will increase in our app :)
