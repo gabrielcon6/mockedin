@@ -34,7 +34,7 @@ Once the fields are ok'ed by the admin, you are good to go (which means that you
 # Thank you!
 
 #### Our contacts are:
-###### Gabriel Conceicao: gabrielcon6cao@gmail.com
+###### Gabriel Conceicao: hello@gabriel-dev.com
 ###### Paulo Amaral: paulo@amaral.com.au
 ###### Thiago Deiro: thdeiro@gmail.com
 ___
