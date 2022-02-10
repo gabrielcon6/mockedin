@@ -28,7 +28,7 @@
     "mongoose-sequence": "^5.2.2",
     "mongoose-unique-validator": "^2.0.3",
     "multer": "^1.4.2",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-icons": "^3.9.0",
     "react-particles-js": "^2.7.0",
